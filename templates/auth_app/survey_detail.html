@@ -1,0 +1,218 @@
+{% extends 'auth_app/base.html' %}
+
+{% block page_title %}{{ survey.title }}{% endblock %}
+
+{% block content_area %}
+<div class="max-w-3xl mx-auto">
+    <a href="{% url 'survey_list' %}" class="inline-flex items-center text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors mb-4 group">
+        <ion-icon name="arrow-back-outline" class="mr-2 text-lg group-hover:-translate-x-1 transition-transform"></ion-icon>
+        Barcha so'rovnomalarga qaytish
+    </a>
+    
+    <div id="survey-container">
+        <!-- SKELETON LOADER -->
+        <div class="bg-white rounded-xl shadow-soft p-6 sm:p-8 animate-pulse">
+            <div class="h-8 bg-slate-200 rounded w-3/4 mb-4"></div><div class="h-4 bg-slate-200 rounded w-full mb-2"></div><div class="h-4 bg-slate-200 rounded w-5/6 mb-6"></div><hr class="border-slate-100"><div class="h-12 bg-slate-100 rounded-lg my-6"></div><div class="space-y-6 mt-6"><div class="space-y-3"><div class="h-5 bg-slate-200 rounded w-1/2"></div><div class="h-12 bg-slate-100 rounded-lg"></div><div class="h-12 bg-slate-100 rounded-lg"></div></div><div class="space-y-3"><div class="h-5 bg-slate-200 rounded w-2/3"></div><div class="h-24 bg-slate-100 rounded-lg"></div></div></div>
+        </div>
+    </div>
+</div>
+{% endblock content_area %}
+
+
+{% block extra_js_scripts %}
+<style>
+    /* Stepper chiziqlari uchun maxsus stil */
+    .stepper-item:not(:last-child)::after { content: ''; position: absolute; left: 50%; top: 1.25rem; transform: translateY(-50%); height: 2px; width: 100%; background-color: #e2e8f0; z-index: 1; transition: background-color 0.3s ease; }
+    .stepper-item.is-answered:not(:last-child)::after { background-color: #0ea5e9; }
+</style>
+
+<script>
+    const surveyData = JSON.parse('{{ survey_data_json|escapejs }}');
+    const submitUrl = "{% url 'submit_survey_api' survey.pk %}";
+    const csrftoken = '{{ csrf_token }}';
+    
+    // --- Stil Klasslari Array (Massiv) Sifatida ---
+    const SELECTED_CLASSES = ['border-primary-500', 'bg-primary-50', 'ring-2', 'ring-primary-200'];
+    const UNSELECTED_CLASSES = ['border-slate-200', 'hover:border-primary-400'];
+    const STEPPER_BUTTON_DEFAULT = ['bg-slate-200', 'text-slate-500'];
+    const STEPPER_BUTTON_ANSWERED = ['bg-primary-500', 'text-white'];
+    const STEPPER_BUTTON_CURRENT = ['ring-4', 'ring-primary-200', 'shadow-lg'];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const surveyContainer = document.getElementById('survey-container');
+        if (!surveyContainer || !surveyData) return;
+        setTimeout(() => renderAll(surveyContainer), 200);
+    });
+
+    function renderAll(surveyContainer) {
+        renderSurvey(surveyContainer);
+        setupScrollObserver();
+    }
+
+    function renderSurvey(container) {
+        container.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl shadow-soft overflow-hidden';
+        card.innerHTML = `<div class="p-6 sm:p-8"><h1 class="text-2xl sm:text-3xl font-bold font-serif text-slate-800">${surveyData.title}</h1>${surveyData.description ? `<p class="mt-2 text-slate-500">${surveyData.description.replace(/\n/g, '<br>')}</p>` : ''}</div><div id="stepper-wrapper" class="sticky top-16 sm:top-20 bg-white/80 backdrop-blur-sm z-30 p-4 border-y border-slate-100">${createStepperHtml()}</div>`;
+        const form = document.createElement('form');
+        form.id = 'survey-form';
+        form.noValidate = true;
+        form.className = 'p-6 sm:p-8 space-y-8';
+        form.addEventListener('input', updateProgress);
+        form.addEventListener('click', handleOptionClick);
+        form.addEventListener('submit', handleFormSubmit);
+        surveyData.questions.forEach((q, i) => form.insertAdjacentHTML('beforeend', createQuestionHtml(q, i)));
+        form.insertAdjacentHTML('beforeend', `<div class="pt-6 border-t border-slate-100"><button id="submit-btn" type="submit" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 rounded-lg text-base font-semibold text-white bg-primary-600 hover:bg-primary-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 shadow-lg opacity-50 grayscale" disabled><ion-icon name="send-outline" class="mr-2 text-xl"></ion-icon>Javoblarni yuborish</button></div>`);
+        card.appendChild(form);
+        container.appendChild(card);
+        document.getElementById('progress-stepper').addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if(button) document.getElementById(button.dataset.target)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        surveyData.questions.forEach(q => syncQuestionVisuals(q.id));
+        updateProgress();
+    }
+
+    // --- JavaScript Xatoliklari Tuzatilgan Qism ---
+
+    function updateProgress() {
+        let answeredCount = 0; let allRequiredAnswered = true;
+        surveyData.questions.forEach(q => {
+            const card = document.getElementById(`question-card-${q.id}`);
+            const stepperButton = document.querySelector(`#stepper-item-${q.id} button`);
+            if (!card || !stepperButton) return;
+            const isAnswered = q.question_type === 'text' ? card.querySelector('textarea').value.trim() !== '' : !!card.querySelector('input:checked');
+            
+            // Yagona to'g'ri usul: avval eskilarni o'chirish, keyin yangilarini qo'shish
+            stepperButton.classList.remove(...STEPPER_BUTTON_ANSWERED, ...STEPPER_BUTTON_DEFAULT);
+            stepperButton.classList.add(...(isAnswered ? STEPPER_BUTTON_ANSWERED : STEPPER_BUTTON_DEFAULT));
+
+            stepperButton.querySelector('.step-number').classList.toggle('hidden', isAnswered);
+            stepperButton.querySelector('.step-check').classList.toggle('hidden', !isAnswered);
+            if (isAnswered) answeredCount++;
+            if (q.is_required && !isAnswered) allRequiredAnswered = false;
+        });
+        document.getElementById('progress-summary').textContent = `${answeredCount} / ${surveyData.questions.length} savolga javob berildi`;
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = !allRequiredAnswered;
+            submitBtn.classList.toggle('opacity-50', !allRequiredAnswered);
+            submitBtn.classList.toggle('grayscale', !allRequiredAnswered);
+        }
+    }
+    
+    function syncQuestionVisuals(questionId) {
+        const questionCard = document.getElementById(`question-card-${questionId}`);
+        if (!questionCard) return;
+        questionCard.querySelectorAll('.form-option').forEach(option => {
+            const input = option.querySelector('input');
+            const isSelected = input.checked;
+            option.classList.remove(...SELECTED_CLASSES, ...UNSELECTED_CLASSES);
+            option.classList.add(...(isSelected ? SELECTED_CLASSES : UNSELECTED_CLASSES));
+            option.querySelector('.icon-unselected').classList.toggle('hidden', isSelected);
+            option.querySelector('.icon-selected').classList.toggle('hidden', !isSelected);
+        });
+    }
+
+    function handleOptionClick(event) {
+        const option = event.target.closest('.form-option');
+        if (!option) return;
+        const input = option.querySelector('input');
+        if (!input) return;
+        if (input.type === 'radio') {
+            if (input.checked) return;
+            input.checked = true;
+        } else if (input.type === 'checkbox') {
+            input.checked = !input.checked;
+        }
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        const questionId = input.name.replace('question_', '');
+        syncQuestionVisuals(questionId);
+    }
+    
+    // --- Qolgan funksiyalar (deyarli o'zgarishsiz) ---
+    function createStepperHtml(){/*...*/} function createQuestionHtml(q,i){/*...*/} function setupScrollObserver(){/*...*/} async function handleFormSubmit(e){/*...*/} function validateForm(){/*...*/}
+    function createStepperHtml() {
+        const itemsHtml = surveyData.questions.map((q, i) => `<div class="stepper-item relative flex-1 flex justify-center" id="stepper-item-${q.id}"><button type="button" data-target="question-card-${q.id}" class="h-10 w-10 flex items-center justify-center rounded-full font-bold text-base transition-all duration-200 cursor-pointer z-10 ${STEPPER_BUTTON_DEFAULT.join(' ')}"><span class="step-number">${i + 1}</span><ion-icon name="checkmark-outline" class="step-check hidden text-xl"></ion-icon></button></div>`).join('');
+        return `<div class="overflow-x-auto custom-scrollbar -mx-4 px-4"><div id="progress-stepper" class="flex items-center min-w-[500px] px-2">${itemsHtml}</div></div><div id="progress-summary" class="text-center text-sm text-slate-500 mt-2 font-medium"></div>`;
+    }
+    function createQuestionHtml(question, index) {
+        const questionTitle = `<div class="mb-4"><label class="text-lg font-semibold text-slate-800">${index + 1}. ${question.text}${question.is_required ? '<span class="text-red-500 ml-1">*</span>' : ''}</label></div>`;
+        let answerHtml = '<div class="space-y-3">';
+        const type = question.question_type === 'single_choice' ? 'radio' : 'checkbox';
+        const iconUnselected = type === 'radio' ? 'radio-button-off-outline' : 'square-outline';
+        const iconSelected = type === 'radio' ? 'radio-button-on-outline' : 'checkbox';
+        switch (question.question_type) {
+            case 'single_choice': case 'multiple_choice':
+                question.choices.forEach(choice => {
+                    answerHtml += `<div role="button" tabindex="0" class="form-option flex items-center p-4 rounded-lg border-2 transition-all duration-200 ${UNSELECTED_CLASSES.join(' ')}" data-value="${choice.id}"><input type="${type}" name="question_${question.id}" value="${choice.id}" class="sr-only"><ion-icon name="${iconUnselected}" class="icon-unselected text-2xl text-slate-400"></ion-icon><ion-icon name="${iconSelected}" class="icon-selected text-2xl text-primary-600 hidden"></ion-icon><span class="ml-3 text-slate-700 font-medium">${choice.text}</span></div>`;
+                });
+                break;
+            case 'text':
+                answerHtml += `<textarea class="block w-full rounded-lg border-2 border-slate-200 shadow-sm focus:border-primary-500 focus:ring-primary-500 transition-colors p-4" name="question_${question.id}" rows="5" placeholder="Javobingizni shu yerga yozing..."></textarea>`;
+                break;
+        }
+        answerHtml += '<div class="invalid-feedback text-red-600 text-sm mt-2 font-medium hidden"></div></div>';
+        return `<div class="survey-question-card" id="question-card-${question.id}">${questionTitle}${answerHtml}</div>`;
+    }
+    function setupScrollObserver() {
+        const observer = new IntersectionObserver(entries => {
+            document.querySelectorAll(`.${STEPPER_BUTTON_CURRENT.join(',.')}`).forEach(el => el.classList.remove(...STEPPER_BUTTON_CURRENT));
+            const intersectingEntry = entries.find(entry => entry.isIntersecting);
+            if (intersectingEntry) {
+                const id = intersectingEntry.target.id.replace('question-card-', '');
+                document.querySelector(`#stepper-item-${id} button`)?.classList.add(...STEPPER_BUTTON_CURRENT);
+            }
+        }, { root: null, rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+        document.querySelectorAll('.survey-question-card').forEach(card => observer.observe(card));
+    }
+    async function handleFormSubmit(event) {
+        event.preventDefault(); if (!validateForm()) return;
+        const submitButton = event.target.querySelector('button[type="submit"]');
+        const originalButtonHtml = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = `<div class="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-3"></div> Yuborilmoqda...`;
+        const formData = new FormData(event.target);
+        const answers = {};
+        surveyData.questions.forEach(q => { answers[q.id] = (q.question_type === 'multiple_choice') ? formData.getAll(`question_${q.id}`) : (formData.get(`question_${q.id}`) || ""); });
+        try {
+            const response = await fetch(submitUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken }, body: JSON.stringify({ answers }) });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.message || 'Noma\'lum server xatoligi');
+            window.location.href = result.redirect_url;
+        } catch (error) {
+            alert(`Xatolik: ${error.message}`);
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonHtml;
+        }
+    }
+    function validateForm() {
+        let firstErrorEl = null; let isValid = true;
+        document.querySelectorAll('.invalid-feedback').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.survey-question-card').forEach(card => card.classList.remove('!border-red-400', '!bg-red-50', 'p-4', 'rounded-lg'));
+        document.querySelectorAll('textarea').forEach(el => el.classList.remove('!border-red-400', 'focus:!ring-red-500'));
+        surveyData.questions.forEach(question => {
+            if (!question.is_required) return;
+            const card = document.getElementById(`question-card-${question.id}`);
+            let hasValue = false;
+            if (question.question_type === 'multiple_choice' || question.question_type === 'single_choice') {
+                hasValue = card.querySelector(`[name="question_${question.id}"]:checked`);
+            } else {
+                const textarea = card.querySelector(`textarea`);
+                hasValue = textarea.value.trim() !== '';
+                if (!hasValue) textarea.classList.add('!border-red-400', 'focus:!ring-red-500');
+            }
+            if (!hasValue) {
+                isValid = false;
+                const errorDiv = card.querySelector('.invalid-feedback');
+                errorDiv.textContent = 'Bu savolga javob berish majburiy.';
+                errorDiv.classList.remove('hidden');
+                card.classList.add('!border-red-400', '!bg-red-50', 'p-4', 'rounded-lg');
+                if (!firstErrorEl) firstErrorEl = card;
+            }
+        });
+        if (!isValid && firstErrorEl) firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return isValid;
+    }
+</script>
+{% endblock extra_js_scripts %}

@@ -1,0 +1,244 @@
+{% extends "auth_app/base.html" %}
+
+{% block page_title %}Profilim - {{ student.short_name_api|default:student.username|default:"Talaba" }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Kichik qo'shimcha stillar, asosan Tailwind klasslari bilan hal qilinadi */
+    .profile-banner-gradient {
+        background: linear-gradient(135deg, theme('colors.sky.600') 0%, theme('colors.indigo.600') 100%);
+    }
+    .tab-button-active { /* Aktiv tab uchun maxsus border va matn rangi */
+        border-color: theme('colors.sky.600');
+        color: theme('colors.sky.600');
+        font-weight: 600;
+    }
+    .tab-button-inactive { /* Noaktiv tab uchun */
+        border-color: transparent;
+        color: theme('colors.slate.500');
+    }
+    .tab-button-inactive:hover {
+        color: theme('colors.sky.600');
+        border-color: theme('colors.slate.300');
+    }
+    .gpa-progress-bar {
+        background-image: linear-gradient(to right, theme('colors.sky.500'), theme('colors.indigo.500'));
+    }
+    /* Scrollbar uchun (base.html da bor, lekin bu yerda ham takrorlash mumkin) */
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-nav { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+{% endblock %}
+
+{% block content_area %}
+<div class="space-y-6 sm:space-y-8 animate-fade-in-down" 
+     x-data="{ activeTab: 'shaxsiy' }">
+
+    {# Talaba Profili Bosh Qismi (Header) #}
+    <section class="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+        <div class="profile-banner-gradient h-40 sm:h-48 relative">
+            <div class="absolute inset-0 bg-black opacity-10"></div> {# Subtil overlay #}
+        </div>
+        <div class="px-6 py-4 sm:py-6">
+            <div class="-mt-16 sm:-mt-20 flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="flex-shrink-0">
+                    <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-4 border-white bg-slate-200 shadow-xl flex items-center justify-center overflow-hidden relative z-10">
+                        {% if student.image_url %}
+                            <img src="{{ student.image_url }}" alt="{{ student.full_name_api|default:'Talaba rasmi' }}"
+                                 class="w-full h-full object-cover">
+                        {% else %}
+                            <span class="text-4xl sm:text-5xl font-semibold text-slate-500">
+                                {{ student.first_name|default_if_none:student.username|default:"T"|first|upper }}
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex-grow text-center sm:text-left pt-2 sm:pt-0">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                        {{ student.full_name_api|default_if_none:student.username|default:"Noma'lum Talaba" }}
+                    </h1>
+                    <p class="text-sm text-slate-500 mt-1">
+                        {{ student.specialty_name_api|default_if_none:"-" }}
+                    </p>
+                    <p class="mt-1 text-xs text-sky-700 font-medium bg-sky-100 px-2.5 py-1 rounded-full inline-block">
+                        ID: {{ student.student_id_number|default_if_none:"-" }}
+                    </p>
+                </div>
+                <div class="flex-shrink-0 mt-4 sm:mt-0">
+                    <a href="{% url 'logout' %}"
+                       class="inline-flex items-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors">
+                        <ion-icon name="log-out-outline" class="mr-2 text-lg"></ion-icon>
+                        Chiqish
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Tablar Navigatsiyasi (Yopishqoq) #}
+    <div class="bg-white rounded-xl shadow-md border border-slate-200 p-2 sm:p-3 sticky top-20 sm:top-24 z-30">
+        <nav class="tab-nav flex overflow-x-auto" aria-label="Tabs">
+            <button @click="activeTab = 'shaxsiy'" :class="{ 'tab-button-active': activeTab === 'shaxsiy', 'tab-button-inactive': activeTab !== 'shaxsiy' }" class="tab-button-v2">
+                <ion-icon name="person-outline" class="mr-1.5 align-middle text-base"></ion-icon>Shaxsiy
+            </button>
+            <button @click="activeTab = 'oquv'" :class="{ 'tab-button-active': activeTab === 'oquv', 'tab-button-inactive': activeTab !== 'oquv' }" class="tab-button-v2">
+                <ion-icon name="school-outline" class="mr-1.5 align-middle text-base"></ion-icon>O'quv
+            </button>
+            <button @click="activeTab = 'aloqa'" :class="{ 'tab-button-active': activeTab === 'aloqa', 'tab-button-inactive': activeTab !== 'aloqa' }" class="tab-button-v2">
+                <ion-icon name="call-outline" class="mr-1.5 align-middle text-base"></ion-icon>Aloqa
+            </button>
+            <button @click="activeTab = 'tizim'" :class="{ 'tab-button-active': activeTab === 'tizim', 'tab-button-inactive': activeTab !== 'tizim' }" class="tab-button-v2">
+                <ion-icon name="cog-outline" class="mr-1.5 align-middle text-base"></ion-icon>Tizim
+            </button>
+        </nav>
+    </div>
+
+    {# Tab Kontenti #}
+    <div class="pt-1"> {# .tab-content class o'rniga oddiy padding #}
+        {# Shaxsiy Ma'lumotlar Tabi #}
+        <div x-show="activeTab === 'shaxsiy'" x-transition class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden card-reveal">
+            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 flex items-center">
+                    <ion-icon name="id-card-outline" class="mr-2.5 text-xl text-sky-600"></ion-icon>Shaxsiy va Pasport Ma'lumotlari
+                </h3>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                {% include "auth_app/partials/_info_item.html" with label="To'liq F.I.Sh." value=student.full_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Qisqa F.I.Sh." value=student.short_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Tug'ilgan sana" value=student.get_birth_date_display %}
+                {% include "auth_app/partials/_info_item.html" with label="Jinsi" value=student.gender_name %}
+                {% include "auth_app/partials/_info_item.html" with label="Pasport PINFL" value=student.passport_pin %}
+                {% include "auth_app/partials/_info_item.html" with label="Pasport Seriya/Raqami" value=student.passport_number %}
+                {% include "auth_app/partials/_info_item.html" with label="Ijtimoiy Kategoriya" value=student.social_category_name %}
+                {% include "auth_app/partials/_info_item.html" with label="Turar Joyi" value=student.accommodation_name %}
+            </div>
+        </div>
+
+        {# O'quv Ma'lumotlari Tabi #}
+        <div x-show="activeTab === 'oquv'" x-transition class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden card-reveal card-reveal-delay-1">
+            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 flex items-center">
+                    <ion-icon name="library-outline" class="mr-2.5 text-xl text-sky-600"></ion-icon>Akademik Ma'lumotlar
+                </h3>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                {% include "auth_app/partials/_info_item.html" with label="Universitet" value=student.university_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Fakultet" value=student.faculty_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Mutaxassislik" value=student.specialty_name_api %}
+                <div class="info-item md:col-span-2">
+                     <span class="data-label">Mutaxassislik Kodi (API):</span>
+                     <code class="text-xs bg-slate-100 p-1 rounded break-all font-mono text-slate-600">{{ student.specialty_code_api|default_if_none:"-" }}</code>
+                </div>
+                {% include "auth_app/partials/_info_item.html" with label="Ta'lim Turi" value=student.education_type_name %}
+                {% include "auth_app/partials/_info_item.html" with label="Ta'lim Shakli" value=student.education_form_name %}
+                {% include "auth_app/partials/_info_item.html" with label="Kurs (Bosqich)" value=student.level_name %}
+                {% include "auth_app/partials/_info_item.html" with label="Guruh" value=student.group_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Guruh Ta'lim Tili" value=student.group_education_lang_name %}
+                {% include "auth_app/partials/_info_item.html" with label="Asosiy Ta'lim Tili" value=student.education_lang_name %}
+                <div class="info-item">
+                    <span class="data-label">Joriy Semestr:</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="data-value">{{ student.semester_name_api|default_if_none:"-" }}</span>
+                        {% if student.semester_is_current %}
+                            <span class="status-badge status-badge-active">Aktiv</span>
+                        {% elif student.semester_is_current == False %}
+                            <span class="status-badge status-badge-inactive">Aktiv emas</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% include "auth_app/partials/_info_item.html" with label="O'quv Yili (Semestr)" value=student.semester_education_year_name %}
+                {% include "auth_app/partials/_info_item.html" with label="To'lov Shakli" value=student.payment_form_name %}
+                <div class="info-item">
+                    <span class="data-label">Talaba Holati:</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="data-value">{{ student.student_status_name|default_if_none:"-" }}</span>
+                        {% if student.student_status_code == '11' %}
+                            <span class="status-badge status-badge-active">O'qimoqda</span>
+                        {% elif student.student_status_name %}
+                             <span class="status-badge status-badge-other">{{ student.student_status_name }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="info-item md:col-span-2">
+                    <span class="data-label">O'rtacha GPA:</span>
+                    <div class="flex items-center space-x-3 mt-1">
+                        <span class="text-3xl font-bold text-sky-600">{{ student.avg_gpa|default_if_none:"0.0" }}</span>
+                        <div class="w-full max-w-xs">
+                            <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                                <div class="gpa-progress-bar h-2.5 rounded-full" 
+                                     style="width: {{ gpa_percentage|default:0 }}%;"></div> 
+                            </div>
+                            <span class="text-xs text-slate-500 mt-0.5 block">Maksimal 5.0 ball</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Aloqa Ma'lumotlari Tabi #}
+        <div x-show="activeTab === 'aloqa'" x-transition class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden card-reveal card-reveal-delay-2">
+            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 flex items-center">
+                    <ion-icon name="chatbubbles-outline" class="mr-2.5 text-xl text-sky-600"></ion-icon>Aloqa va Manzil
+                </h3>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                {% include "auth_app/partials/_info_item_link.html" with label="Email" value=student.email type="email" %}
+                {% include "auth_app/partials/_info_item_link.html" with label="Telefon" value=student.phone type="tel" %}
+                <div class="info-item md:col-span-2">
+                     <span class="data-label">Manzil (API):</span>
+                     <span class="data-value">{{ student.address_api|default_if_none:"-" }}</span>
+                </div>
+                {% include "auth_app/partials/_info_item.html" with label="Davlat" value=student.country_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Viloyat" value=student.province_name_api %}
+                {% include "auth_app/partials/_info_item.html" with label="Tuman" value=student.district_name_api %}
+            </div>
+        </div>
+        
+        {# Tizim Ma'lumotlari Tabi #}
+        <div x-show="activeTab === 'tizim'" x-transition class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden card-reveal card-reveal-delay-3">
+            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 flex items-center">
+                    <ion-icon name="hardware-chip-outline" class="mr-2.5 text-xl text-sky-600"></ion-icon>Tizimga oid Ma'lumotlar
+                </h3>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                 <div class="info-item">
+                    <span class="data-label">Parol Yaroqliligi (API):</span>
+                    <span class="data-value">
+                        {% if student.password_is_valid_api %}
+                            <span class="status-badge status-badge-active">Yaroqli</span>
+                        {% elif student.password_is_valid_api == False %}
+                            <span class="status-badge status-badge-inactive">Yaroqsiz</span>
+                        {% else %}<span class="data-value-empty">-</span>{% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="data-label">API Hash:</span>
+                    <code class="text-xs bg-slate-100 p-1 rounded break-all font-mono text-slate-600 data-value">{{ student.api_user_hash|default_if_none:"-" }}</code>
+                </div>
+                 <div class="info-item md:col-span-2">
+                    <span class="data-label">Tasdiqlash Havolasi (API):</span>
+                    <span class="data-value">
+                        {% if student.validate_url_api %}
+                        <a href="{{ student.validate_url_api }}" target="_blank" title="{{ student.validate_url_api }}" class="text-sky-600 hover:text-sky-700 hover:underline break-all">{{ student.validate_url_api|urlizetrunc:50 }}</a>
+                        {% else %}<span class="data-value-empty">-</span>{% endif %}
+                    </span>
+                </div>
+                <div class="info-item">
+                    <span class="data-label">Oxirgi Kirish (API):</span>
+                    <span class="data-value">{{ student.last_login_api|date:"d-F-Y, H:i"|default_if_none:"-" }}</span>
+                </div>
+                 <div class="info-item">
+                    <span class="data-label">Profil Yaratilgan:</span>
+                    <span class="data-value">{{ student.created_at|date:"d-F-Y, H:i"|default_if_none:"-" }}</span>
+                </div>
+                 <div class="info-item">
+                    <span class="data-label">Oxirgi Yangilanish:</span>
+                    <span class="data-value">{{ student.updated_at|date:"d-F-Y, H:i"|default_if_none:"-" }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

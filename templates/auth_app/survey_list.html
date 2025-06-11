@@ -1,0 +1,81 @@
+{% extends "auth_app/base.html" %}
+{% load static %}
+
+{% block page_title %}Mavjud So'rovnomalar{% endblock %}
+
+{% block content_area %}
+<div class="animate-fade-in-down">
+    <!-- Sahifa sarlavhasi -->
+    <div class="pb-5 border-b border-slate-200 mb-6">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-serif">Mavjud So'rovnomalar</h1>
+        <p class="mt-2 text-base text-slate-600">O'z fikringizni bildirish orqali universitetimiz rivojiga hissa qo'shing.</p>
+    </div>
+
+    <!-- So'rovnomalar ro'yxati -->
+    {% if surveys_with_status %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for item in surveys_with_status %}
+            <div class="bg-white rounded-xl shadow-soft border border-slate-100/50 hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                <div class="p-6 flex-grow">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg font-semibold text-slate-800 leading-tight">
+                            <a href="{% if not item.has_responded %}{% url 'survey_detail' survey_pk=item.survey.pk %}{% else %}#{% endif %}" class="hover:text-primary-600">
+                                {{ item.survey.title }}
+                            </a>
+                        </h3>
+                        {% if item.survey.is_anonymous %}
+                        <span title="Bu so'rovnoma anonim tarzda o'tkaziladi" class="flex-shrink-0 ml-4 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+                            <ion-icon name="eye-off-outline" class="mr-1"></ion-icon>
+                            Anonim
+                        </span>
+                        {% endif %}
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4 line-clamp-3">
+                        {{ item.survey.description|default:"Tavsif mavjud emas." }}
+                    </p>
+                </div>
+
+                <div class="px-6 py-4 bg-slate-50 rounded-b-xl border-t border-slate-200/80">
+                    <div class="flex items-center justify-between">
+                        <!-- Holati (Ishtirok etish tugmasi yoki belgi) -->
+                        <div>
+                        {% if item.has_responded %}
+                            <span class="inline-flex items-center gap-x-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-green-700 bg-green-100">
+                                <ion-icon name="checkmark-done-outline" class="text-lg"></ion-icon>
+                                Ishtirok etilgan
+                            </span>
+                        {% else %}
+                            <a href="{% url 'survey_detail' survey_pk=item.survey.pk %}"
+                               class="inline-flex items-center gap-x-1.5 rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors">
+                                Ishtirok etish
+                                <ion-icon name="arrow-forward-outline" class="-mr-0.5 h-5 w-5"></ion-icon>
+                            </a>
+                        {% endif %}
+                        </div>
+
+                        <!-- Muddati -->
+                        <div class="text-xs text-slate-500 text-right">
+                            <p>Tugash sanasi:</p>
+                            <p class="font-medium">
+                                {% if item.survey.end_date %}
+                                    {{ item.survey.end_date|date:"d-m-Y H:i" }}
+                                {% else %}
+                                    Muddatsiz
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- So'rovnomalar yo'q bo'lganda ko'rinadigan blok -->
+        <div class="text-center bg-white rounded-lg p-12 border-2 border-dashed border-slate-200">
+            <ion-icon name="newspaper-outline" class="mx-auto h-12 w-12 text-slate-400"></ion-icon>
+            <h3 class="mt-2 text-lg font-semibold text-slate-900">Hozircha aktiv so'rovnomalar mavjud emas</h3>
+            <p class="mt-1 text-sm text-slate-500">Yangi so'rovnomalar paydo bo'lganda, ular shu yerda ko'rinadi.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
