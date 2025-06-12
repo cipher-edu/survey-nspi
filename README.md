@@ -28,7 +28,12 @@ Ushbu loyiha talabalar uchun tashqi **HEMIS API** orqali autentifikatsiya qilish
 
 So'rovnoma sahifasi foydalanuvchi uchun maksimal darajada qulay qilib ishlangan. Progress "Stepper" yordamida ko'rsatiladi va to'liq interaktiv.
 
+<<<<<<< HEAD
 ![So'rovnoma sahifasi](https://i.ibb.co/L5T199B/image.png)
+=======
+![So'rovnoma sahifasi](![image](https://github.com/user-attachments/assets/61045356-6446-46ef-9cb4-a27f4853a2cc)
+)
+>>>>>>> 5776e8ae9d3276bb282b5f90bb7e8cec82c723d4
 
 ---
 
@@ -176,4 +181,8 @@ HEMIS_SYSTEM_API_TOKEN=sizning_tizim_tokeningiz
 
 ## 📜 Litsenziya
 
+<<<<<<< HEAD
 Ushbu loyiha MIT litsenziyasi ostida tarqatiladi. Batafsil ma'lumot uchun `LICENSE` fayliga qarang.
+=======
+Ushbu loyiha MIT litsenziyasi ostida tarqatiladi. Batafsil ma'lumot uchun `LICENSE` fayliga qarang.
+>>>>>>> 5776e8ae9d3276bb282b5f90bb7e8cec82c723d4
