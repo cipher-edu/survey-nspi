@@ -13098,3 +13098,431 @@ WARNING 2025-06-13 16:14:03,638 log 24616 10972 Not Found: /.well-known/appspeci
 WARNING 2025-06-13 16:14:03,638 basehttp 24616 10972 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 179
 WARNING 2025-06-13 16:15:07,852 log 24616 24804 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 WARNING 2025-06-13 16:15:07,852 basehttp 24616 24804 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 179
+INFO 2025-06-13 22:33:04,054 autoreload 5760 2104 Watching for file changes with StatReloader
+INFO 2025-06-13 22:33:06,753 basehttp 5760 5672 "GET / HTTP/1.1" 200 15688
+WARNING 2025-06-13 22:33:14,285 log 5760 5672 Not Found: /favicon.ico
+WARNING 2025-06-13 22:33:14,285 basehttp 5760 5672 "GET /favicon.ico HTTP/1.1" 404 179
+INFO 2025-06-13 22:33:18,708 basehttp 5760 5672 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:33:20,404 basehttp 5760 5672 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:33:21,934 basehttp 5760 5672 "GET /login/ HTTP/1.1" 200 21937
+INFO 2025-06-13 22:33:31,687 views 5760 5672 Login attempt for user: 353201107000
+INFO 2025-06-13 22:33:33,794 views 5760 5672 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-13 22:33:34,262 views 5760 5672 User 353201107000 logged in. Session expiry: 2025-06-14 17:33:34.262628+00:00, API token expiry: 2025-06-14 22:33:34.262628
+ERROR 2025-06-13 22:33:36,641 log 5760 5672 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 138, in has_key
+    return self.client.has_key(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 56, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 668, in has_key
+    return client.exists(key) == 1
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\commands\core.py", line 1737, in exists
+    return self.execute_command("EXISTS", *names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ERROR 2025-06-13 22:33:36,803 basehttp 5760 5672 "POST /login/ HTTP/1.1" 500 145
+INFO 2025-06-13 22:34:22,831 autoreload 5760 2104 C:\Users\New\Desktop\survey-nspi\external_auth_project\settings.py changed, reloading.
+INFO 2025-06-13 22:34:28,483 autoreload 9728 9692 Watching for file changes with StatReloader
+INFO 2025-06-13 22:34:49,915 views 9728 8836 Login attempt for user: 353201107000
+INFO 2025-06-13 22:34:51,910 views 9728 8836 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-13 22:34:52,172 views 9728 8836 User 353201107000 logged in. Session expiry: 2025-06-14 17:34:52.172949+00:00, API token expiry: 2025-06-14 22:34:52.172949
+ERROR 2025-06-13 22:34:54,861 log 9728 8836 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 138, in has_key
+    return self.client.has_key(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 56, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 668, in has_key
+    return client.exists(key) == 1
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\commands\core.py", line 1737, in exists
+    return self.execute_command("EXISTS", *names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ERROR 2025-06-13 22:34:54,926 basehttp 9728 8836 "POST /login/ HTTP/1.1" 500 134734
+INFO 2025-06-13 22:35:54,109 autoreload 3492 9496 Watching for file changes with StatReloader
+INFO 2025-06-13 22:35:59,352 views 3492 9764 Login attempt for user: 353201107000
+INFO 2025-06-13 22:36:00,215 views 3492 9764 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-13 22:36:00,375 views 3492 9764 User 353201107000 logged in. Session expiry: 2025-06-14 17:36:00.375122+00:00, API token expiry: 2025-06-14 22:36:00.375122
+ERROR 2025-06-13 22:36:02,763 log 3492 9764 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 138, in has_key
+    return self.client.has_key(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 56, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 668, in has_key
+    return client.exists(key) == 1
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\commands\core.py", line 1737, in exists
+    return self.execute_command("EXISTS", *names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ERROR 2025-06-13 22:36:02,787 basehttp 3492 9764 "POST /login/ HTTP/1.1" 500 134733
+INFO 2025-06-13 22:36:05,081 basehttp 3492 9260 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:36:07,326 basehttp 3492 9260 "GET /login/ HTTP/1.1" 200 21937
+INFO 2025-06-13 22:36:16,652 views 3492 9260 Login attempt for user: 353201107000
+INFO 2025-06-13 22:36:17,436 views 3492 9260 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-13 22:36:17,593 views 3492 9260 User 353201107000 logged in. Session expiry: 2025-06-14 17:36:17.593316+00:00, API token expiry: 2025-06-14 22:36:17.593316
+ERROR 2025-06-13 22:36:20,118 log 3492 9260 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 138, in has_key
+    return self.client.has_key(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 56, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 668, in has_key
+    return client.exists(key) == 1
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\commands\core.py", line 1737, in exists
+    return self.execute_command("EXISTS", *names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ERROR 2025-06-13 22:36:20,141 basehttp 3492 9260 "POST /login/ HTTP/1.1" 500 134732
+INFO 2025-06-13 22:37:11,773 basehttp 3492 4536 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:37:20,491 basehttp 3492 4536 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:37:27,499 basehttp 3492 6108 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:37:29,111 basehttp 3492 6108 "GET / HTTP/1.1" 200 15688
+INFO 2025-06-13 22:37:33,913 basehttp 3492 6108 "GET /dashboard/ HTTP/1.1" 302 0
+ERROR 2025-06-13 22:37:36,313 log 3492 6108 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 138, in has_key
+    return self.client.has_key(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\middleware.py", line 59, in process_response
+    request.session.save()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 56, in save
+    return self.create()
+           ^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 668, in has_key
+    return client.exists(key) == 1
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\commands\core.py", line 1737, in exists
+    return self.execute_command("EXISTS", *names)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+ERROR 2025-06-13 22:37:36,339 basehttp 3492 6108 "GET /login/?next=/dashboard/ HTTP/1.1" 500 134352
+INFO 2025-06-13 22:38:42,731 basehttp 3492 10148 "GET /login/?next=/dashboard/ HTTP/1.1" 200 24239
+INFO 2025-06-13 22:38:49,919 views 3492 10148 Login attempt for user: 353201107000
+INFO 2025-06-13 22:38:50,793 views 3492 10148 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-13 22:38:50,952 views 3492 10148 User 353201107000 logged in. Session expiry: 2025-06-14 17:38:50.952482+00:00, API token expiry: 2025-06-14 22:38:50.952482
+INFO 2025-06-13 22:38:50,961 basehttp 3492 10148 "POST /login/?next=/dashboard/ HTTP/1.1" 302 0
+INFO 2025-06-13 22:38:50,982 basehttp 3492 10148 "GET /dashboard/ HTTP/1.1" 200 12826
+INFO 2025-06-13 22:38:58,471 basehttp 3492 9548 "GET /dashboard/ HTTP/1.1" 200 26742
+INFO 2025-06-13 22:39:02,580 basehttp 3492 9736 "GET / HTTP/1.1" 302 0
+INFO 2025-06-13 22:39:02,596 basehttp 3492 9736 "GET /dashboard/ HTTP/1.1" 200 24428
+INFO 2025-06-13 22:39:04,640 basehttp 3492 9736 "GET /dashboard/ HTTP/1.1" 200 24428
+INFO 2025-06-13 22:39:20,683 basehttp 3492 9376 "GET /dashboard/ HTTP/1.1" 200 21640
+INFO 2025-06-13 22:39:58,870 basehttp 3492 9376 "GET /surveys/ HTTP/1.1" 200 31380
+INFO 2025-06-13 22:40:13,422 basehttp 3492 9376 "GET /dashboard/ HTTP/1.1" 200 21640
+INFO 2025-06-13 22:41:13,861 basehttp 3492 9328 "GET /dashboard/ HTTP/1.1" 200 21668
+WARNING 2025-06-13 22:41:34,025 log 3492 4716 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:41:34,030 basehttp 3492 4716 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:43:34,835 autoreload 4220 32 Watching for file changes with StatReloader
+INFO 2025-06-13 22:43:42,848 basehttp 4220 2412 "GET /surveys/ HTTP/1.1" 200 31380
+WARNING 2025-06-13 22:43:44,918 log 4220 2412 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:43:44,918 basehttp 4220 2412 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:29,937 basehttp 4220 9792 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-06-13 22:44:29,992 basehttp 4220 9792 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3065
+INFO 2025-06-13 22:44:30,172 basehttp 4220 9792 "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 200 59344
+INFO 2025-06-13 22:44:30,186 basehttp 4220 9620 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 292458
+INFO 2025-06-13 22:44:30,187 basehttp 4220 904 "GET /static/vendor/adminlte/img/AdminLTELogo.png HTTP/1.1" 200 2637
+INFO 2025-06-13 22:44:30,187 basehttp 4220 9252 "GET /static/vendor/adminlte/css/adminlte.min.css HTTP/1.1" 200 1382975
+INFO 2025-06-13 22:44:30,215 basehttp 4220 5812 "GET /static/jazzmin/css/main.css HTTP/1.1" 200 16969
+INFO 2025-06-13 22:44:30,225 basehttp 4220 9792 "GET /static/vendor/adminlte/js/adminlte.min.js HTTP/1.1" 200 44244
+INFO 2025-06-13 22:44:30,263 basehttp 4220 2140 "GET /static/vendor/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 62440
+WARNING 2025-06-13 22:44:30,321 log 4220 2140 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:30,323 basehttp 4220 2140 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:30,531 basehttp 4220 2140 "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 78196
+INFO 2025-06-13 22:44:30,583 basehttp 4220 9252 "GET /static/vendor/adminlte/css/adminlte.min.css.map HTTP/1.1" 200 3783134
+INFO 2025-06-13 22:44:30,629 basehttp 4220 9252 "GET /static/vendor/bootstrap/js/bootstrap.min.js.map HTTP/1.1" 200 187646
+INFO 2025-06-13 22:44:30,631 basehttp 4220 2140 "GET /static/vendor/adminlte/js/adminlte.min.js.map HTTP/1.1" 200 129651
+INFO 2025-06-13 22:44:35,727 basehttp 4220 1288 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-06-13 22:44:35,823 basehttp 4220 1288 "GET /admin/ HTTP/1.1" 200 34431
+INFO 2025-06-13 22:44:35,901 basehttp 4220 1288 "GET /static/jazzmin/js/main.js HTTP/1.1" 200 2391
+WARNING 2025-06-13 22:44:35,934 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:35,936 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:36,149 basehttp 4220 1288 "GET /static/vendor/fontawesome-free/webfonts/fa-regular-400.woff2 HTTP/1.1" 200 13276
+INFO 2025-06-13 22:44:39,577 basehttp 4220 1288 "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-06-13 22:44:39,641 basehttp 4220 1288 "GET /admin/ HTTP/1.1" 200 34431
+WARNING 2025-06-13 22:44:39,748 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:39,763 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+WARNING 2025-06-13 22:44:40,591 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:40,591 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:40,727 basehttp 4220 1288 "GET /dashboard/ HTTP/1.1" 200 21056
+WARNING 2025-06-13 22:44:40,941 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:40,953 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+WARNING 2025-06-13 22:44:41,117 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:41,134 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+WARNING 2025-06-13 22:44:42,496 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:42,498 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+WARNING 2025-06-13 22:44:42,576 log 4220 1288 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:42,576 basehttp 4220 1288 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:44,443 basehttp 4220 4132 "GET /surveys/ HTTP/1.1" 200 33552
+WARNING 2025-06-13 22:44:44,536 log 4220 4132 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:44,538 basehttp 4220 4132 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:47,221 basehttp 4220 4132 "GET /surveys/3/statistics/ HTTP/1.1" 200 31443
+WARNING 2025-06-13 22:44:47,406 log 4220 4132 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:44:47,407 basehttp 4220 4132 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:44:49,135 basehttp 4220 4132 "GET /api/surveys/3/statistics/ HTTP/1.1" 200 2154
+WARNING 2025-06-13 22:45:07,518 log 4220 5708 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:45:07,518 basehttp 4220 5708 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+WARNING 2025-06-13 22:45:07,618 log 4220 5708 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:45:07,618 basehttp 4220 5708 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:45:10,071 basehttp 4220 5708 "GET /surveys/6/statistics/ HTTP/1.1" 200 31441
+WARNING 2025-06-13 22:45:10,176 log 4220 5708 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:45:10,177 basehttp 4220 5708 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:45:11,189 basehttp 4220 5708 "GET /api/surveys/6/statistics/ HTTP/1.1" 200 2494
+INFO 2025-06-13 22:46:14,677 basehttp 4220 1392 "GET /dashboard/ HTTP/1.1" 200 20915
+WARNING 2025-06-13 22:46:15,165 log 4220 1392 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:46:15,167 basehttp 4220 1392 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:46:19,324 basehttp 4220 1392 "GET /dashboard/ HTTP/1.1" 200 20915
+WARNING 2025-06-13 22:46:19,400 log 4220 1392 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:46:19,402 basehttp 4220 1392 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:46:21,371 basehttp 4220 1392 "GET / HTTP/1.1" 302 0
+INFO 2025-06-13 22:46:21,385 basehttp 4220 1392 "GET /dashboard/ HTTP/1.1" 200 20915
+WARNING 2025-06-13 22:46:21,499 log 4220 1392 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:46:21,501 basehttp 4220 1392 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:47:40,681 basehttp 4220 1392 "GET /dashboard/ HTTP/1.1" 200 32086
+WARNING 2025-06-13 22:47:40,772 log 4220 1392 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 22:47:40,773 basehttp 4220 1392 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 22:49:28,791 basehttp 4220 8004 "GET /dashboard/ HTTP/1.1" 200 21422
+INFO 2025-06-13 22:50:23,088 basehttp 4220 8004 "GET /dashboard/ HTTP/1.1" 200 21422
+INFO 2025-06-13 22:50:31,939 basehttp 4220 8004 "GET /dashboard/ HTTP/1.1" 200 34523
+INFO 2025-06-13 22:51:01,303 basehttp 4220 8004 "GET /dashboard/ HTTP/1.1" 200 34549
+INFO 2025-06-13 22:51:13,416 basehttp 4220 8004 "GET /dashboard/ HTTP/1.1" 200 34588
+INFO 2025-06-13 22:51:26,019 basehttp 4220 8004 "GET /dashboard/ HTTP/1.1" 200 34541
+INFO 2025-06-13 22:51:44,595 autoreload 9592 1768 Watching for file changes with StatReloader
+INFO 2025-06-13 22:51:50,234 basehttp 9592 1440 "GET /dashboard/ HTTP/1.1" 200 34553
+INFO 2025-06-13 22:52:17,704 basehttp 9592 1440 "GET /dashboard/ HTTP/1.1" 200 34556
+INFO 2025-06-13 22:53:05,141 basehttp 9592 1440 "GET /dashboard/ HTTP/1.1" 200 34537
+INFO 2025-06-13 22:53:35,519 basehttp 9592 1064 "GET /dashboard/ HTTP/1.1" 200 34529
+INFO 2025-06-13 22:55:54,571 basehttp 9592 1064 "GET /dashboard/ HTTP/1.1" 200 38745
+INFO 2025-06-13 22:58:35,223 basehttp 9592 3000 "GET /dashboard/ HTTP/1.1" 200 40532
+INFO 2025-06-13 22:59:41,779 basehttp 9592 3000 "GET /surveys/ HTTP/1.1" 200 33552
+INFO 2025-06-13 22:59:51,734 basehttp 9592 3000 "GET /surveys/6/statistics/ HTTP/1.1" 200 31441
+INFO 2025-06-13 22:59:52,536 basehttp 9592 3000 "GET /api/surveys/6/statistics/ HTTP/1.1" 200 2494
+INFO 2025-06-13 23:00:42,689 basehttp 9592 3000 "GET /surveys/3/ HTTP/1.1" 200 39061
+INFO 2025-06-13 23:01:00,851 basehttp 9592 3000 "POST /api/surveys/3/submit/ HTTP/1.1" 200 50
+INFO 2025-06-13 23:01:00,946 basehttp 9592 3000 "GET /surveys/ HTTP/1.1" 200 35883
+INFO 2025-06-13 23:01:06,000 basehttp 9592 3000 "GET /surveys/3/statistics/ HTTP/1.1" 200 31443
+INFO 2025-06-13 23:01:06,674 basehttp 9592 3000 "GET /api/surveys/3/statistics/ HTTP/1.1" 200 2240
+INFO 2025-06-13 23:03:16,302 basehttp 9592 3664 "GET /dashboard/ HTTP/1.1" 200 40914
+INFO 2025-06-13 23:05:16,874 basehttp 9592 3880 "GET /dashboard/ HTTP/1.1" 200 41092
+INFO 2025-06-13 23:06:07,272 basehttp 9592 10176 "GET /dashboard/ HTTP/1.1" 200 40596
+INFO 2025-06-13 23:06:23,684 basehttp 9592 8336 "GET /dashboard/ HTTP/1.1" 200 41092
+WARNING 2025-06-13 23:06:37,066 log 9592 8336 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 23:06:37,068 basehttp 9592 8336 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 23:07:31,508 autoreload 1456 600 Watching for file changes with StatReloader
+INFO 2025-06-13 23:07:32,609 basehttp 1456 6024 "GET /dashboard/ HTTP/1.1" 200 41094
+WARNING 2025-06-13 23:07:32,860 log 1456 9368 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-06-13 23:07:32,927 basehttp 1456 9368 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4208
+INFO 2025-06-13 23:08:56,155 basehttp 1456 204 "GET /dashboard/ HTTP/1.1" 200 41403
+INFO 2025-06-13 23:09:46,194 basehttp 1456 8508 "GET /dashboard/ HTTP/1.1" 200 42191
+INFO 2025-06-13 23:10:07,564 basehttp 1456 8508 "GET /surveys/ HTTP/1.1" 200 33510
+INFO 2025-06-13 23:10:10,217 basehttp 1456 8508 "GET /dashboard/ HTTP/1.1" 200 42191
+INFO 2025-06-13 23:11:50,324 basehttp 1456 4668 "GET /dashboard/ HTTP/1.1" 200 42510
+INFO 2025-06-13 23:12:04,718 basehttp 1456 9844 "GET /dashboard/ HTTP/1.1" 200 42516
+INFO 2025-06-13 23:12:32,219 basehttp 1456 6352 "GET /dashboard/ HTTP/1.1" 200 43758
+INFO 2025-06-13 23:12:47,433 autoreload 3328 5708 Watching for file changes with StatReloader
+INFO 2025-06-13 23:12:49,745 basehttp 3328 5852 "GET /dashboard/ HTTP/1.1" 200 43758
