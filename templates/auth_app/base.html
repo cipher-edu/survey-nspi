@@ -22,23 +22,31 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { // BU QISM MUHIM
+                    colors: {
                         primary: {
-                            50: '#f0f9ff', // sky-50
-                            100: '#e0f2fe', // sky-100
-                            200: '#bae6fd', // sky-200
-                            300: '#7dd3fc', // sky-300
-                            400: '#38bdf8', // sky-400
-                            500: '#0ea5e9', // sky-500
-                            600: '#0284c7', // sky-600
-                            700: '#0369a1', // sky-700
-                            800: '#075985', // sky-800
-                            900: '#0c4a6e', // sky-900
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -47,6 +55,8 @@
                     animation: {
                         'fade-in-down': 'fadeInDown 0.5s ease-out',
                         'fade-in-up': 'fadeInUp 0.5s ease-out',
+                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin': 'spin 1s linear infinite'
                     },
                     keyframes: {
                         fadeInDown: {
@@ -56,6 +66,10 @@
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(10px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        spin: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
                         }
                     }
                 }
@@ -64,7 +78,6 @@
     </script>
 
     <style>
-    
         body {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -103,19 +116,10 @@
             @apply bg-slate-400;
         }
         
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
         /* Alpine.js */
         [x-cloak] { display: none !important; }
         
-        /* Custom components */
+        /* Navigation links */
         .nav-link-desktop {
             @apply flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors;
             @apply text-slate-700 hover:bg-slate-100 hover:text-primary-600;
@@ -142,34 +146,90 @@
         .shadow-soft {
             box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
         }
-        /* Base templatega qo'shiladigan qo'shimcha stil */
-.btn-logout {
-    @apply inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
-}
-
-/* Gradient fonlar */
-.bg-gradient-blue {
-    @apply bg-gradient-to-r from-blue-600 to-blue-800;
-}
-
-/* Card hover effektlari */
-.info-card:hover {
-    @apply transform transition-transform duration-200 ease-in-out shadow-lg -translate-y-1;
-}
-
-/* Maxsus scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-    @apply w-2 h-2;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-slate-100 rounded-full;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400;
-}
+        .shadow-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        /* Survey specific styles */
+        .survey-card {
+            @apply bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden;
+            transition: all 0.3s ease;
+        }
+        .survey-card:hover {
+            @apply shadow-md -translate-y-1;
+        }
+        .survey-card-active {
+            @apply border-blue-200;
+        }
+        .survey-card-completed {
+            @apply border-green-100;
+        }
+        
+        /* Question styles */
+        .question-card {
+            @apply p-4 bg-white rounded-xl shadow-sm cursor-pointer transition-all duration-200;
+            border: 1px solid transparent;
+        }
+        .question-card:hover {
+            @apply border-blue-100;
+        }
+        .question-card.selected {
+            @apply border-blue-300 bg-blue-50;
+        }
+        
+        /* Progress bar */
+        .progress-step {
+            @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium;
+            @apply bg-gray-200 text-gray-600 transition-all duration-300;
+        }
+        .progress-step.active {
+            @apply bg-blue-600 text-white ring-2 ring-blue-500 ring-offset-2;
+        }
+        .progress-step.completed {
+            @apply bg-green-500 text-white;
+        }
+        
+        /* Form elements */
+        .form-input {
+            @apply w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+        }
+        .form-textarea {
+            @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+        }
+        .form-checkbox {
+            @apply h-5 w-5 border border-gray-300 rounded focus:ring-blue-500 text-blue-600 transition-colors;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            @apply px-6 py-3 bg-blue-600 rounded-xl font-medium text-white hover:bg-blue-700 transition-colors;
+        }
+        .btn-primary:disabled {
+            @apply bg-gray-300 cursor-not-allowed;
+        }
+        .btn-secondary {
+            @apply px-6 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:bg-gray-50 transition-colors;
+        }
+        .btn-success {
+            @apply px-6 py-3 bg-green-600 rounded-xl font-medium text-white hover:bg-green-700 transition-colors;
+        }
+        .btn-danger {
+            @apply px-6 py-3 bg-red-600 rounded-xl font-medium text-white hover:bg-red-700 transition-colors;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Skeleton loader */
+        .skeleton {
+            @apply bg-gray-200 rounded-full animate-pulse;
+        }
     </style>
     
     {% block extra_css %}{% endblock %}
@@ -201,6 +261,10 @@
                     <a href="{% url 'dashboard' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'dashboard' %}nav-link-active{% endif %}">
                         <ion-icon name="person-outline" class="text-xl"></ion-icon>
                         <span class="ml-1.5">Profilim</span>
+                    </a>
+                    <a href="{% url 'survey_list' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'survey_list' %}nav-link-active{% endif %}">
+                        <ion-icon name="list-outline" class="text-xl"></ion-icon>
+                        <span class="ml-1.5">So'rovnomalar</span>
                     </a>
                     {% endif %}
                 </div>
@@ -238,6 +302,10 @@
                                     <a href="{% url 'dashboard' %}" class="user-menu-item">
                                         <ion-icon name="speedometer-outline" class="mr-2.5"></ion-icon>
                                         Boshqaruv paneli
+                                    </a>
+                                    <a href="{% url 'survey_list' %}" class="user-menu-item">
+                                        <ion-icon name="list-outline" class="mr-2.5"></ion-icon>
+                                        So'rovnomalar
                                     </a>
                                     <a href="{% url 'logout' %}" class="user-menu-item text-red-600 hover:bg-red-50 hover:text-red-700">
                                         <ion-icon name="log-out-outline" class="mr-2.5"></ion-icon>
@@ -280,6 +348,9 @@
                 <a href="{% url 'dashboard' %}" class="nav-link-mobile {% if request.resolver_match.url_name == 'dashboard' %}nav-link-mobile-active{% endif %}">
                     Profilim
                 </a>
+                <a href="{% url 'survey_list' %}" class="nav-link-mobile {% if request.resolver_match.url_name == 'survey_list' %}nav-link-mobile-active{% endif %}">
+                    So'rovnomalar
+                </a>
                 {% endif %}
             </div>
             
@@ -302,6 +373,9 @@
                     <div class="mt-3 space-y-1 px-2">
                         <a href="{% url 'dashboard' %}" class="nav-link-mobile">
                             Boshqaruv paneli
+                        </a>
+                        <a href="{% url 'survey_list' %}" class="nav-link-mobile">
+                            So'rovnomalar
                         </a>
                         <a href="{% url 'logout' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-red-600 hover:bg-red-100 hover:text-red-700">
                             Chiqish
@@ -367,7 +441,7 @@
                 </div>
             {% endif %}
 
-            {% block content_area %}
+            {% block content %}
                 <!-- Asosiy kontent shu yerda bo'ladi -->
             {% endblock %}
         </div>
@@ -384,6 +458,6 @@
     <!-- Scripts -->
     <script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
     
-    {% block extra_js_scripts %}{% endblock %}
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

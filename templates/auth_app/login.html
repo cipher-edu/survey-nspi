@@ -4,168 +4,173 @@
 
 {% block extra_css %}
 <style>
-    /* Parolni ko'rsatish/yashirish tugmasi uchun */
-    .password-input-container {
-        position: relative;
+    .password-toggle {
+        @apply absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600 transition-colors;
     }
-    .password-toggle-btn {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        padding-left: 0.75rem; 
-        padding-right: 0.75rem;
-        display: inline-flex;
-        align-items: center;
-        color: #9ca3af; /* text-slate-400 */
-        cursor: pointer;
-        transition: color 0.15s ease-in-out;
+    .auth-container {
+        @apply w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden;
     }
-    .password-toggle-btn:hover {
-        color: #374151; /* text-slate-700 */
+    .auth-header {
+        @apply bg-gradient-to-r from-blue-600 to-blue-800 py-6 px-8 text-center;
+    }
+    .auth-body {
+        @apply p-8 space-y-6;
+    }
+    .form-input {
+        @apply w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+    }
+    .form-input-error {
+        @apply border-red-400 text-red-800 placeholder-red-400 focus:ring-red-500;
+    }
+    .error-message {
+        @apply mt-1.5 text-xs text-red-600 flex items-center;
     }
 </style>
 {% endblock %}
 
-{% block content_area %}
-<div class="min-h-[calc(100vh-12rem)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12 animate-fade-in-down">
-    <div class="w-full max-w-lg bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-2xl space-y-8 border border-slate-200" 
-         x-data="{ submitting: false }"> {/* Alpine.js submitting holati uchun */}
-        <div class="text-center">
-            <a href="{% url 'home' %}" class="inline-block mb-6">
-                <ion-icon name="logo-electron" class="text-6xl text-sky-600 mx-auto hover:text-sky-500 transition-colors"></ion-icon>
-            </a>
-            <h1 class="text-3xl sm:text-4xl font-bold font-serif tracking-tight text-slate-900">
-                Xush Kelibsiz!
-            </h1>
-            <p class="mt-3 text-base text-slate-600">
-                HEMIS profilingiz orqali tizimga kiring.
-            </p>
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="auth-container animate-fade-in-up" x-data="{ submitting: false, showPassword: false }">
+        <!-- Header qismi -->
+        <div class="auth-header">
+            <div class="flex justify-center mb-4">
+                <ion-icon name="shield-checkmark-outline" class="text-4xl text-white"></ion-icon>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Tizimga Kirish</h2>
+            <p class="mt-2 text-blue-100">HEMIS hisobingiz bilan tizimga kiring</p>
         </div>
-
-        {% if form.non_field_errors %}
-            <div class="rounded-lg bg-red-50 p-4 border-l-4 border-red-500" role="alert">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <ion-icon name="alert-circle-outline" class="h-5 w-5 text-red-500" aria-hidden="true"></ion-icon>
-                    </div>
-                    <div class="ml-3">
-                        {% for error in form.non_field_errors %}
-                        <p class="text-sm font-medium text-red-700">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        {% endif %}
         
-        <form method="post" novalidate id="loginForm" class="mt-8 space-y-6" 
-              @submit="submitting = true; 
-                       if (!$el.checkValidity()) { submitting = false; }">
-            {% csrf_token %}
-            
-            <div>
-                <label for="{{ form.username.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-1.5">
-                    {{ form.username.label|default:"Login (ID Raqam)" }}
-                </label>
-                <input type="text" 
-                       name="{{ form.username.html_name }}" 
-                       autocomplete="username" 
-                       required 
-                       id="{{ form.username.id_for_label }}"
-                       class="block w-full px-4 py-3 sm:py-3.5 border rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent sm:text-sm transition-shadow 
-                              {% if form.username.errors %}border-red-400 text-red-800 placeholder-red-400 focus:ring-red-500{% else %}border-slate-300 text-slate-900 focus:ring-sky-500{% endif %}"
-                       placeholder="Sizning talaba ID raqamingiz"
-                       value="{{ form.username.value|default_if_none:'' }}"
-                       aria-invalid="{{ form.username.errors|yesno:'true,false' }}"
-                       aria-describedby="{{ form.username.id_for_label }}-error">
-                {% if form.username.errors %}
-                    <p class="mt-1.5 text-xs text-red-600 flex items-center" id="{{ form.username.id_for_label }}-error">
-                        <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
-                        {% for error in form.username.errors %}{{ error }}{% endfor %}
-                    </p>
-                {% endif %}
+        <!-- Xatolik xabarlari -->
+        {% if form.non_field_errors %}
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mx-8 mt-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <ion-icon name="alert-circle-outline" class="h-5 w-5 text-red-500"></ion-icon>
+                </div>
+                <div class="ml-3">
+                    {% for error in form.non_field_errors %}
+                    <p class="text-sm text-red-700">{{ error }}</p>
+                    {% endfor %}
+                </div>
             </div>
+        </div>
+        {% endif %}
 
-            <div x-data="{ showPassword: false }">
-                <label for="{{ form.password.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-1.5">
-                    {{ form.password.label|default:"Parol" }}
-                </label>
-                <div class="password-input-container">
-                    <input name="{{ form.password.html_name }}" 
-                           :type="showPassword ? 'text' : 'password'" 
-                           autocomplete="current-password" 
-                           required 
-                           id="{{ form.password.id_for_label }}"
-                           class="block w-full px-4 py-3 sm:py-3.5 border rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent sm:text-sm transition-shadow pr-10
-                                  {% if form.password.errors %}border-red-400 text-red-800 placeholder-red-400 focus:ring-red-500{% else %}border-slate-300 text-slate-900 focus:ring-sky-500{% endif %}"
-                           placeholder="Parolingizni kiriting"
-                           aria-invalid="{{ form.password.errors|yesno:'true,false' }}"
-                           aria-describedby="{{ form.password.id_for_label }}-error">
-                    <button type="button" class="password-toggle-btn" @click="showPassword = !showPassword" title="Parolni ko'rsatish/yashirish">
-                        <ion-icon :name="showPassword ? 'eye-off-outline' : 'eye-outline'" class="h-5 w-5"></ion-icon>
-                    </button>
+        <!-- Asosiy forma -->
+        <div class="auth-body">
+            <form method="post" novalidate @submit="submitting = true" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Login maydoni -->
+                <div>
+                    <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-slate-700 mb-1">
+                        {{ form.username.label|default:"Login (ID Raqam)" }}
+                    </label>
+                    <div class="mt-1 relative">
+                        <input type="text" 
+                               name="{{ form.username.html_name }}" 
+                               id="{{ form.username.id_for_label }}"
+                               autocomplete="username"
+                               required
+                               class="form-input {% if form.username.errors %}form-input-error{% endif %}"
+                               placeholder="Talaba ID raqamingiz"
+                               value="{{ form.username.value|default_if_none:'' }}"
+                               aria-invalid="{% if form.username.errors %}true{% else %}false{% endif %}"
+                               aria-describedby="{% if form.username.errors %}{{ form.username.id_for_label }}-error{% endif %}">
+                        {% if form.username.errors %}
+                        <p id="{{ form.username.id_for_label }}-error" class="error-message">
+                            <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
+                            {{ form.username.errors.0 }}
+                        </p>
+                        {% endif %}
+                    </div>
                 </div>
-                {% if form.password.errors %}
-                    <p class="mt-1.5 text-xs text-red-600 flex items-center" id="{{ form.password.id_for_label }}-error">
-                        <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
-                        {% for error in form.password.errors %}{{ error }}{% endfor %}
-                    </p>
-                {% endif %}
-            </div>
-            
-            <div class="flex items-center justify-between pt-2">
-                <div class="flex items-center">
-                    {# "Meni eslab qol" qismi #}
+                
+                <!-- Parol maydoni -->
+                <div>
+                    <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-slate-700 mb-1">
+                        {{ form.password.label|default:"Parol" }}
+                    </label>
+                    <div class="mt-1 relative">
+                        <input :type="showPassword ? 'text' : 'password'"
+                               name="{{ form.password.html_name }}" 
+                               id="{{ form.password.id_for_label }}"
+                               autocomplete="current-password"
+                               required
+                               class="form-input {% if form.password.errors %}form-input-error{% endif %} pr-10"
+                               placeholder="Parolingizni kiriting"
+                               aria-invalid="{% if form.password.errors %}true{% else %}false{% endif %}"
+                               aria-describedby="{% if form.password.errors %}{{ form.password.id_for_label }}-error{% endif %}">
+                        <button type="button" class="password-toggle" @click="showPassword = !showPassword">
+                            <ion-icon :name="showPassword ? 'eye-off-outline' : 'eye-outline'" class="h-5 w-5"></ion-icon>
+                        </button>
+                        {% if form.password.errors %}
+                        <p id="{{ form.password.id_for_label }}-error" class="error-message">
+                            <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
+                            {{ form.password.errors.0 }}
+                        </p>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="text-sm">
-                    <a href="#" class="font-medium text-sky-600 hover:text-sky-500 hover:underline transition-colors">
-                        Parolni tiklash
-                    </a>
+                
+                <!-- Qo'shimcha elementlar -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" 
+                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-slate-700">
+                            Eslab qolish
+                        </label>
+                    </div>
+                    
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
+                            Parolni unutdingizmi?
+                        </a>
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <button type="submit" 
-                        x-bind:disabled="submitting"
-                        class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-base font-semibold rounded-lg text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-150 ease-in-out">
-                    <span class="absolute left-0 inset-y-0 flex items-center pl-4" x-show="submitting" x-transition>
-                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                
+                <!-- Tugma -->
+                <div>
+                    <button type="submit" 
+                            :disabled="submitting"
+                            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all">
+                        <svg x-show="submitting" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                    </span>
-                    <span x-text="submitting ? 'Tekshirilmoqda...' : 'Kirish'">Kirish</span>
-                    <ion-icon name="arrow-forward-outline" class="ml-2 text-xl group-hover:translate-x-1 transition-transform duration-200" x-show="!submitting" x-transition></ion-icon>
-                </button>
+                        <span x-text="submitting ? 'Kirish amalga oshirilmoqda...' : 'Tizimga kirish'">Tizimga kirish</span>
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Footer qismi -->
+            <div class="text-center text-sm text-slate-500 pt-4 border-t border-slate-100">
+                <p>Hali hisobingiz yo'qmi? <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Ro'yxatdan o'tish</a></p>
             </div>
-        </form>
-
-        <p class="mt-8 text-center text-xs text-slate-500">
-            <ion-icon name="shield-checkmark-outline" class="align-text-bottom mr-1 text-green-600"></ion-icon>
-            Barcha ma'lumotlar HEMIS tizimi orqali xavfsiz qayta ishlanadi.
-        </p>
+        </div>
     </div>
 </div>
 {% endblock %}
 
-{% block extra_js_scripts %}
+{% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('loginForm');
-    
+    // Agar xatolik bo'lsa, submitting holatini o'chirish
     {% if form.errors or form.non_field_errors %}
-        const alpineComponent = loginForm.closest('[x-data]');
-        if (alpineComponent && alpineComponent.__x) {
-            alpineComponent.__x.$data.submitting = false;
-        }
-    {% endif %}
-
-    const firstErrorInput = loginForm.querySelector('[aria-invalid="true"]');
+    const alpineComponent = document.querySelector('[x-data]');
+    if (alpineComponent && alpineComponent.__x) {
+        alpineComponent.__x.$data.submitting = false;
+    }
+    
+    // Birinchi xato maydoniga fokus qilish
+    const firstErrorInput = document.querySelector('[aria-invalid="true"]');
     if (firstErrorInput) {
         setTimeout(() => {
             firstErrorInput.focus();
         }, 100);
     }
+    {% endif %}
 });
 </script>
 {% endblock %}

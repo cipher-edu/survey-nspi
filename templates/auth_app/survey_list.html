@@ -1,81 +1,128 @@
-{% extends "auth_app/base.html" %}
-{% load static %}
+{% extends 'auth_app/base.html' %}
 
-{% block page_title %}Mavjud So'rovnomalar{% endblock %}
-
-{% block content_area %}
-<div class="animate-fade-in-down">
-    <!-- Sahifa sarlavhasi -->
-    <div class="pb-5 border-b border-slate-200 mb-6">
-        <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-serif">Mavjud So'rovnomalar</h1>
-        <p class="mt-2 text-base text-slate-600">O'z fikringizni bildirish orqali universitetimiz rivojiga hissa qo'shing.</p>
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-7xl">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Aktiv So'rovnomalar</h1>
+            <p class="text-gray-600">Barcha mavjud so'rovnomalar ro'yxati</p>
+        </div>
+        <div class="relative w-full md:w-64">
+            <input type="text" placeholder="Qidirish..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <ion-icon name="search-outline" class="absolute left-3 top-2.5 text-gray-400"></ion-icon>
+        </div>
     </div>
-
-    <!-- So'rovnomalar ro'yxati -->
-    {% if surveys_with_status %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for item in surveys_with_status %}
-            <div class="bg-white rounded-xl shadow-soft border border-slate-100/50 hover:shadow-lg transition-shadow duration-300 flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex items-start justify-between mb-3">
-                        <h3 class="text-lg font-semibold text-slate-800 leading-tight">
-                            <a href="{% if not item.has_responded %}{% url 'survey_detail' survey_pk=item.survey.pk %}{% else %}#{% endif %}" class="hover:text-primary-600">
-                                {{ item.survey.title }}
-                            </a>
-                        </h3>
-                        {% if item.survey.is_anonymous %}
-                        <span title="Bu so'rovnoma anonim tarzda o'tkaziladi" class="flex-shrink-0 ml-4 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
-                            <ion-icon name="eye-off-outline" class="mr-1"></ion-icon>
-                            Anonim
+    
+    {% if not surveys_with_status %}
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-sm p-8 text-center">
+        <ion-icon name="file-tray-outline" class="text-4xl text-blue-400 mb-4"></ion-icon>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Hozirda aktiv so'rovnomalar mavjud emas</h3>
+        <p class="text-gray-600 max-w-md mx-auto">Aktiv so'rovnomalar paydo bo'lganda ular shu yerda ko'rinadi</p>
+    </div>
+    {% else %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for survey in surveys_with_status %}
+            {% if survey.has_responded %}
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            <ion-icon name="checkmark-circle" class="mr-1"></ion-icon>
+                            Ishtirok etilgan
                         </span>
-                        {% endif %}
+                        <span class="text-xs text-gray-500">{{ survey.survey.total_responses }} ta javob</span>
                     </div>
-                    <p class="text-slate-600 text-sm mb-4 line-clamp-3">
-                        {{ item.survey.description|default:"Tavsif mavjud emas." }}
-                    </p>
+                    <h2 class="text-xl font-bold text-gray-900 mb-3">{{ survey.survey.title }}</h2>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ survey.survey.description }}</p>
                 </div>
-
-                <div class="px-6 py-4 bg-slate-50 rounded-b-xl border-t border-slate-200/80">
-                    <div class="flex items-center justify-between">
-                        <!-- Holati (Ishtirok etish tugmasi yoki belgi) -->
-                        <div>
-                        {% if item.has_responded %}
-                            <span class="inline-flex items-center gap-x-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-green-700 bg-green-100">
-                                <ion-icon name="checkmark-done-outline" class="text-lg"></ion-icon>
-                                Ishtirok etilgan
-                            </span>
-                        {% else %}
-                            <a href="{% url 'survey_detail' survey_pk=item.survey.pk %}"
-                               class="inline-flex items-center gap-x-1.5 rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors">
-                                Ishtirok etish
-                                <ion-icon name="arrow-forward-outline" class="-mr-0.5 h-5 w-5"></ion-icon>
-                            </a>
-                        {% endif %}
-                        </div>
-
-                        <!-- Muddati -->
-                        <div class="text-xs text-slate-500 text-right">
-                            <p>Tugash sanasi:</p>
-                            <p class="font-medium">
-                                {% if item.survey.end_date %}
-                                    {{ item.survey.end_date|date:"d-m-Y H:i" }}
-                                {% else %}
-                                    Muddatsiz
-                                {% endif %}
-                            </p>
-                        </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100">
+                    <div class="flex items-center text-gray-500">
+                        <ion-icon name="lock-closed-outline" class="mr-2"></ion-icon>
+                        <span class="text-sm">Tugatilgan</span>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <!-- So'rovnomalar yo'q bo'lganda ko'rinadigan blok -->
-        <div class="text-center bg-white rounded-lg p-12 border-2 border-dashed border-slate-200">
-            <ion-icon name="newspaper-outline" class="mx-auto h-12 w-12 text-slate-400"></ion-icon>
-            <h3 class="mt-2 text-lg font-semibold text-slate-900">Hozircha aktiv so'rovnomalar mavjud emas</h3>
-            <p class="mt-1 text-sm text-slate-500">Yangi so'rovnomalar paydo bo'lganda, ular shu yerda ko'rinadi.</p>
-        </div>
+            {% else %}
+            <a href="{% url 'survey_detail' survey.survey.pk %}" class="block group">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 group-hover:border-blue-200">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                <ion-icon name="time-outline" class="mr-1"></ion-icon>
+                                Aktiv
+                            </span>
+                            <span class="text-xs text-gray-500">{{ survey.survey.total_responses }} ta javob</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-900 mb-3">{{ survey.survey.title }}</h2>
+                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ survey.survey.description }}</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-t border-gray-100">
+                        <div class="flex items-center text-blue-600 font-medium">
+                            <span class="text-sm">Ishtirok etish</span>
+                            <ion-icon name="arrow-forward" class="ml-2"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
     {% endif %}
 </div>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .card-hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover-effect:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Search functionality
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.grid > div, .grid > a');
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h2').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+        
+        // Animate cards on load
+        const cards = document.querySelectorAll('.grid > div, .grid > a');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    });
+</script>
 {% endblock %}

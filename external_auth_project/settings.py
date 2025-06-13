@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # environs sozlamalari
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False) # Agar .env da bo'lmasa, False bo'ladi
+    DEBUG=(bool, True) # Agar .env da bo'lmasa, False bo'ladi
 )
 # .env faylini o'qish (agar mavjud bo'lsa)
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
