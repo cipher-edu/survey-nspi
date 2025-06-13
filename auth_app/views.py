@@ -546,3 +546,123 @@ def submit_survey_api_view(request, survey_pk):
     except Exception as e:
         logger.error(f"Survey submission API'da kutilmagan xatolik: {e}", exc_info=True)
         return JsonResponse({'status': 'error', 'message': 'Javoblarni saqlashda serverda xatolik yuz berdi.'}, status=500)
+    
+
+# auth_app/views.py
+
+# Mavjud importlarga qo'shimcha:
+from django.db.models import Count, Q
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser # Faqat adminlar uchun
+from .models import Survey, SurveyResponse, Question, Choice, Answer
+from .serializers import QuestionStatisticsSerializer
+
+# ... (mavjud view'lar) ...
+
+
+# --- YANGI STATISTIKA API ---
+
+# auth_app/views.py
+# ... (mavjud importlar)
+
+class SurveyStatisticsAPIView(APIView):
+    """
+    Bitta so'rovnoma uchun barcha statistikani hisoblab,
+    JSON formatida qaytaradigan API endpoint. YANGILANGAN.
+    """
+    permission_classes = [IsAdminUser]
+
+    def get(self, request, survey_pk):
+        try:
+            survey = Survey.objects.get(pk=survey_pk)
+        except Survey.DoesNotExist:
+            return Response({"error": "So'rovnoma topilmadi."}, status=404)
+
+        responses = SurveyResponse.objects.filter(survey=survey).select_related('student')
+        
+        total_participants = responses.count()
+        
+        # --- Demografik statistika ---
+        # Yangi kesimlar qo'shildi
+        faculty_stats, level_stats, gender_stats = {}, {}, {}
+        education_form_stats, payment_form_stats = {}, {}
+        social_category_stats, accommodation_stats = {}, {}
+
+        if not survey.is_anonymous and total_participants > 0:
+            faculty_stats = self._get_grouped_stats(responses, 'student__faculty_name_api', "Fakultet noma'lum")
+            level_stats = self._get_grouped_stats(responses, 'student__level_name', "Kurs noma'lum")
+            gender_stats = self._get_grouped_stats(responses, 'student__gender_name', "Jinsi noma'lum")
+            education_form_stats = self._get_grouped_stats(responses, 'student__education_form_name', "Ta'lim shakli noma'lum")
+            payment_form_stats = self._get_grouped_stats(responses, 'student__payment_form_name', "To'lov shakli noma'lum")
+            social_category_stats = self._get_grouped_stats(responses, 'student__social_category_name', "Ijtimoiy holat noma'lum")
+            accommodation_stats = self._get_grouped_stats(responses, 'student__accommodation_name', "Turar joyi noma'lum")
+        
+        # --- Savollar bo'yicha statistika ---
+        questions_stats_data = []
+        questions = Question.objects.filter(survey=survey).prefetch_related('choices')
+
+        for question in questions:
+            # ... (bu qism o'zgarishsiz qoladi, oldingi javobdagi kod) ...
+            question_data = {'id': question.id, 'text': question.text, 'question_type': question.question_type, 'choices_stats': [], 'text_answers': []}
+            if question.question_type in ['single_choice', 'multiple_choice']:
+                choices_with_counts = question.choices.annotate(
+                    count=Count('chosen_in_answers', filter=Q(chosen_in_answers__survey_response__survey=survey)) +
+                          Count('multi_chosen_in_answers', filter=Q(multi_chosen_in_answers__survey_response__survey=survey))
+                ).order_by('-count')
+                question_data['choices_stats'] = [{"id": c.id, "text": c.text, "count": c.count} for c in choices_with_counts]
+            elif question.question_type == 'text':
+                text_answers = Answer.objects.filter(survey_response__survey=survey, question=question).values_list('text_answer', flat=True).exclude(text_answer__exact='')
+                question_data['text_answers'] = list(text_answers[:50])
+            questions_stats_data.append(question_data)
+        
+        # --- Yakuniy JSON javobini yig'ish ---
+        final_data = {
+            "survey_title": survey.title,
+            "total_participants": total_participants,
+            "demographics": {
+                "by_faculty": faculty_stats,
+                "by_level": level_stats,
+                "by_gender": gender_stats,
+                "by_education_form": education_form_stats,
+                "by_payment_form": payment_form_stats,
+                "by_social_category": social_category_stats,
+                "by_accommodation": accommodation_stats,
+            },
+            "questions_statistics": questions_stats_data
+        }
+        
+        return Response(final_data)
+
+    def _get_grouped_stats(self, queryset, group_by_field, default_key="Noma'lum"):
+        # ... (bu metod o'zgarishsiz qoladi)
+        stats = queryset.values(group_by_field).annotate(count=Count('id')).order_by('-count')
+        result = {}
+        for item in stats:
+            key = item[group_by_field] or default_key
+            result[key] = item['count']
+        return result
+
+# auth_app/views.py
+# ... mavjud importlar
+from django.contrib.auth.decorators import user_passes_test
+
+def is_staff_user(user):
+    return user.is_staff
+
+@user_passes_test(is_staff_user) # Faqat admin (staff) foydalanuvchilar kira oladi
+def survey_statistics_view(request, survey_pk):
+    """
+    Bitta so'rovnomaning statistikasini ko'rsatadigan sahifani render qiladi.
+    Asosiy ma'lumotlar JavaScript orqali API'dan olinadi.
+    """
+    try:
+        survey = Survey.objects.get(pk=survey_pk)
+    except Survey.DoesNotExist:
+        raise Http404("So'rovnoma topilmadi")
+        
+    context = {
+        'survey': survey,
+        'page_title': f'"{survey.title}" Statistikasi'
+    }
+    return render(request, 'auth_app/survey_stat.html', context)

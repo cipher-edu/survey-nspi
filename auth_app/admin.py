@@ -21,6 +21,8 @@ logger = logging.getLogger(__name__)
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    list_max_show_all = 1000
     list_display = (
         'username', 
         'get_full_name_display',
@@ -219,6 +221,8 @@ class StudentAdmin(admin.ModelAdmin):
 # --- So'rovnoma uchun Admin sozlamalari ---
 
 class SurveyFileInline(admin.TabularInline):
+    list_per_page = 20
+    list_max_show_all = 1000
     model = SurveyFile
     extra = 1
     fields = ('file', 'caption')
@@ -227,6 +231,8 @@ class SurveyFileInline(admin.TabularInline):
     verbose_name_plural = "So'rovnoma fayllari"
 
 class ChoiceInline(admin.TabularInline):
+    list_per_page = 20
+    list_max_show_all = 1000
     model = Choice
     extra = 3 # Har bir savol uchun boshida 3 ta bo'sh variant formasi
     fields = ('text',)
@@ -234,6 +240,8 @@ class ChoiceInline(admin.TabularInline):
     verbose_name_plural = "Variantlar"
 
 class QuestionInline(admin.StackedInline):
+    list_per_page = 20
+    list_max_show_all = 1000
     model = Question
     extra = 2 # Boshida 2 ta bo'sh savol formasi
     fields = ('text', 'question_type', 'order', 'is_required')
@@ -248,6 +256,8 @@ class QuestionInline(admin.StackedInline):
 
 @admin.register(Survey)
 class SurveyAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    list_max_show_all = 1000
     list_display = ('title', 'start_date_formatted', 'end_date_formatted', 'is_active', 'is_anonymous', 'total_responses_link', 'created_by_admin_display', 'is_currently_open')
     list_filter = ('is_active', 'is_anonymous', 'start_date', 'end_date', 'created_by')
     search_fields = ('title', 'purpose', 'description', 'created_by__username')
@@ -308,6 +318,8 @@ class SurveyAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    list_max_show_all = 1000
     list_display = ('text_short', 'survey_link', 'question_type', 'order', 'is_required')
     list_filter = ('survey__title', 'question_type', 'is_required')
     search_fields = ('text', 'survey__title')
@@ -335,6 +347,8 @@ class QuestionAdmin(admin.ModelAdmin):
 
 @admin.register(SurveyResponse)
 class SurveyResponseAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    list_max_show_all = 1000
     list_display = ('survey_title', 'student_name_display', 'submitted_at_formatted', 'view_answers_link')
     list_filter = ('survey__title', ('student', admin.RelatedOnlyFieldListFilter), 'submitted_at') # Studentni qidirish uchun
     search_fields = ('survey__title', 'student__username', 'student__first_name', 'student__last_name')
@@ -399,6 +413,8 @@ class SurveyResponseAdmin(admin.ModelAdmin):
 
 @admin.register(ResponsiblePerson)
 class ResponsiblePersonAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    list_max_show_all = 1000
     list_display = ('full_name', 'position', 'email', 'phone_number', 'is_active', 'received_messages_count')
     list_filter = ('is_active', 'position')
     search_fields = ('first_name', 'last_name', 'patronymic', 'position', 'email')

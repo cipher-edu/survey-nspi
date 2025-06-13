@@ -1,128 +1,83 @@
 {% extends 'auth_app/base.html' %}
 
+{% block page_title %}Aktiv So'rovnomalar{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-8 max-w-7xl">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Aktiv So'rovnomalar</h1>
-            <p class="text-gray-600">Barcha mavjud so'rovnomalar ro'yxati</p>
-        </div>
-        <div class="relative w-full md:w-64">
-            <input type="text" placeholder="Qidirish..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-            <ion-icon name="search-outline" class="absolute left-3 top-2.5 text-gray-400"></ion-icon>
+            <h1 class="text-3xl font-bold font-serif text-slate-900">Aktiv So'rovnomalar</h1>
+            <p class="text-slate-500 mt-1">Ishtirok etishingiz mumkin bo'lgan barcha so'rovnomalar.</p>
         </div>
     </div>
     
     {% if not surveys_with_status %}
-    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-sm p-8 text-center">
-        <ion-icon name="file-tray-outline" class="text-4xl text-blue-400 mb-4"></ion-icon>
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">Hozirda aktiv so'rovnomalar mavjud emas</h3>
-        <p class="text-gray-600 max-w-md mx-auto">Aktiv so'rovnomalar paydo bo'lganda ular shu yerda ko'rinadi</p>
+    <div class="bg-white rounded-2xl shadow-soft border border-slate-100 p-8 text-center animate-fade-in-up">
+        <ion-icon name="file-tray-outline" class="text-5xl text-primary-400 mb-4"></ion-icon>
+        <h3 class="text-xl font-semibold text-slate-800 mb-2">Hozirda aktiv so'rovnomalar mavjud emas</h3>
+        <p class="text-slate-600 max-w-md mx-auto">Yangi so'rovnomalar paydo bo'lganda ular shu yerda ko'rinadi.</p>
     </div>
     {% else %}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for survey in surveys_with_status %}
-            {% if survey.has_responded %}
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            <ion-icon name="checkmark-circle" class="mr-1"></ion-icon>
-                            Ishtirok etilgan
-                        </span>
-                        <span class="text-xs text-gray-500">{{ survey.survey.total_responses }} ta javob</span>
-                    </div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-3">{{ survey.survey.title }}</h2>
-                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ survey.survey.description }}</p>
-                </div>
-                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100">
-                    <div class="flex items-center text-gray-500">
-                        <ion-icon name="lock-closed-outline" class="mr-2"></ion-icon>
-                        <span class="text-sm">Tugatilgan</span>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <a href="{% url 'survey_detail' survey.survey.pk %}" class="block group">
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1 group-hover:border-blue-200">
-                    <div class="p-6">
+        {% for item in surveys_with_status %}
+            {% with survey=item.survey has_responded=item.has_responded %}
+                <div class="survey-card bg-white flex flex-col {% if has_responded %}border-green-200{% endif %}">
+                    <div class="p-6 flex-grow">
                         <div class="flex justify-between items-start mb-4">
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                <ion-icon name="time-outline" class="mr-1"></ion-icon>
-                                Aktiv
-                            </span>
-                            <span class="text-xs text-gray-500">{{ survey.survey.total_responses }} ta javob</span>
+                            {% if has_responded %}
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <ion-icon name="checkmark-circle-outline" class="mr-1.5"></ion-icon>Ishtirok etilgan
+                                </span>
+                            {% else %}
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                                    <ion-icon name="time-outline" class="mr-1.5"></ion-icon>Aktiv
+                                </span>
+                            {% endif %}
+                            <span class="text-xs text-slate-500">{{ survey.total_responses }} ta javob</span>
                         </div>
-                        <h2 class="text-xl font-bold text-gray-900 mb-3">{{ survey.survey.title }}</h2>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ survey.survey.description }}</p>
+                        <h2 class="text-xl font-bold text-slate-900 mb-2">{{ survey.title }}</h2>
+                        <p class="text-sm text-slate-600 line-clamp-2">{{ survey.description }}</p>
                     </div>
-                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-t border-gray-100">
-                        <div class="flex items-center text-blue-600 font-medium">
-                            <span class="text-sm">Ishtirok etish</span>
-                            <ion-icon name="arrow-forward" class="ml-2"></ion-icon>
-                        </div>
+
+                    {# TUGMALAR QISMI #}
+                    <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between gap-4">
+                        {% if not has_responded %}
+                            <a href="{% url 'survey_detail' survey.pk %}" class="flex items-center text-primary-600 font-semibold group">
+                                <span class="text-sm">Ishtirok etish</span>
+                                <ion-icon name="arrow-forward-outline" class="ml-2 transition-transform group-hover:translate-x-1"></ion-icon>
+                            </a>
+                        {% else %}
+                            <div class="flex items-center text-slate-500">
+                                <ion-icon name="lock-closed-outline" class="mr-2"></ion-icon>
+                                <span class="text-sm font-medium">Yakunlangan</span>
+                            </div>
+                        {% endif %}
+                        
+                        {# --- ADMIN UCHUN YANGI TUGMA --- #}
+                        {% if user.is_staff %}
+                        <a href="{% url 'survey_statistics' survey.pk %}" class="inline-flex items-center text-xs font-medium text-slate-500 hover:text-primary-600 transition-colors">
+                            <ion-icon name="stats-chart-outline" class="mr-1.5 text-base"></ion-icon>
+                            Statistika
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
-            </a>
-            {% endif %}
+            {% endwith %}
         {% endfor %}
     </div>
     {% endif %}
 </div>
+{% endblock content %}
 
-<style>
-    .line-clamp-2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    .card-hover-effect {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card-hover-effect:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-</style>
-
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+{% block extra_js %}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Search functionality
-        const searchInput = document.querySelector('input[type="text"]');
-        if (searchInput) {
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const cards = document.querySelectorAll('.grid > div, .grid > a');
-                
-                cards.forEach(card => {
-                    const title = card.querySelector('h2').textContent.toLowerCase();
-                    const description = card.querySelector('p').textContent.toLowerCase();
-                    
-                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        }
-        
-        // Animate cards on load
-        const cards = document.querySelectorAll('.grid > div, .grid > a');
-        cards.forEach((card, index) => {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.survey-card').forEach((card, index) => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 100 * index);
+            card.style.transition = `opacity 0.5s ${index * 0.1}s ease, transform 0.5s ${index * 0.1}s ease`;
+            setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
         });
     });
 </script>
-{% endblock %}
+{% endblock extra_js %}

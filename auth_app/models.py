@@ -279,10 +279,15 @@ class Answer(models.Model):
     survey_response = models.ForeignKey(SurveyResponse, related_name='answers', on_delete=models.CASCADE, verbose_name="So'rovnoma ishtiroki")
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text_answer = models.TextField(null=True, blank=True)
-    selected_choice = models.ForeignKey(Choice, null=True, blank=True, on_delete=models.SET_NULL)
+    selected_choice = models.ForeignKey(
+        Choice, null=True, blank=True, on_delete=models.SET_NULL,
+        related_name='chosen_in_answers', verbose_name="Tanlangan yagona variant"
+    )
     # Agar 'multiple_choice' bo'lsa, ManyToManyField (Choice)
-    selected_choices = models.ManyToManyField(Choice, blank=True, 
-                                              related_name='multi_chosen_in_answers', verbose_name="Tanlangan ko'p variantlar")
+    selected_choices = models.ManyToManyField(
+        Choice, blank=True, 
+        related_name='multi_chosen_in_answers', verbose_name="Tanlangan ko'p variantlar"
+    )
 
     answered_at = models.DateTimeField(auto_now_add=True) # Bu aslida SurveyResponse.submitted_at bilan bir xil bo'ladi
 

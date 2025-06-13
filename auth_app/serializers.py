@@ -3,6 +3,33 @@
 from rest_framework import serializers
 from .models import Survey, Question, Choice, Student, SurveyResponse
 
+
+class ChoiceWithCountSerializer(serializers.ModelSerializer):
+    """
+    Har bir javob varianti va unga necha kishi ovoz berganini ko'rsatadi.
+    """
+    count = serializers.IntegerField() # Bu qiymat view'da annotate orqali qo'shiladi
+
+    class Meta:
+        model = Choice
+        fields = ['id', 'text', 'count']
+
+class QuestionStatisticsSerializer(serializers.ModelSerializer):
+    """
+    Bitta savol va uning statistikasi (javob variantlari va ularning soni).
+    """
+    choices_stats = ChoiceWithCountSerializer(many=True, read_only=True)
+    # Matnli javoblarni alohida qaytarish mumkin (agar kerak bo'lsa)
+    text_answers = serializers.ListField(
+        child=serializers.CharField(),
+        read_only=True,
+        required=False
+    )
+
+    class Meta:
+        model = Question
+        fields = ['id', 'text', 'question_type', 'choices_stats', 'text_answers']
+
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
