@@ -1,176 +1,97 @@
-{% extends "auth_app/base.html" %}
 
+{% extends "auth_app/base.html" %}
 {% block page_title %}Tizimga Kirish{% endblock %}
 
-{% block extra_css %}
-<style>
-    .password-toggle {
-        @apply absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-slate-400 hover:text-slate-600 transition-colors;
-    }
-    .auth-container {
-        @apply w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden;
-    }
-    .auth-header {
-        @apply bg-gradient-to-r from-blue-600 to-blue-800 py-6 px-8 text-center;
-    }
-    .auth-body {
-        @apply p-8 space-y-6;
-    }
-    .form-input {
-        @apply w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
-    }
-    .form-input-error {
-        @apply border-red-400 text-red-800 placeholder-red-400 focus:ring-red-500;
-    }
-    .error-message {
-        @apply mt-1.5 text-xs text-red-600 flex items-center;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="auth-container animate-fade-in-up" x-data="{ submitting: false, showPassword: false }">
-        <!-- Header qismi -->
-        <div class="auth-header">
-            <div class="flex justify-center mb-4">
-                <ion-icon name="shield-checkmark-outline" class="text-4xl text-white"></ion-icon>
-            </div>
-            <h2 class="text-2xl font-bold text-white">Tizimga Kirish</h2>
-            <p class="mt-2 text-blue-100">HEMIS hisobingiz bilan tizimga kiring</p>
-        </div>
-        
-        <!-- Xatolik xabarlari -->
-        {% if form.non_field_errors %}
-        <div class="bg-red-50 border-l-4 border-red-500 p-4 mx-8 mt-4">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <ion-icon name="alert-circle-outline" class="h-5 w-5 text-red-500"></ion-icon>
-                </div>
-                <div class="ml-3">
-                    {% for error in form.non_field_errors %}
-                    <p class="text-sm text-red-700">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        {% endif %}
 
-        <!-- Asosiy forma -->
-        <div class="auth-body">
-            <form method="post" novalidate @submit="submitting = true" class="space-y-6">
-                {% csrf_token %}
-                
-                <!-- Login maydoni -->
-                <div>
-                    <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-slate-700 mb-1">
-                        {{ form.username.label|default:"Login (ID Raqam)" }}
-                    </label>
-                    <div class="mt-1 relative">
-                        <input type="text" 
-                               name="{{ form.username.html_name }}" 
-                               id="{{ form.username.id_for_label }}"
-                               autocomplete="username"
-                               required
-                               class="form-input {% if form.username.errors %}form-input-error{% endif %}"
-                               placeholder="Talaba ID raqamingiz"
-                               value="{{ form.username.value|default_if_none:'' }}"
-                               aria-invalid="{% if form.username.errors %}true{% else %}false{% endif %}"
-                               aria-describedby="{% if form.username.errors %}{{ form.username.id_for_label }}-error{% endif %}">
-                        {% if form.username.errors %}
-                        <p id="{{ form.username.id_for_label }}-error" class="error-message">
-                            <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
-                            {{ form.username.errors.0 }}
-                        </p>
-                        {% endif %}
-                    </div>
-                </div>
-                
-                <!-- Parol maydoni -->
-                <div>
-                    <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-slate-700 mb-1">
-                        {{ form.password.label|default:"Parol" }}
-                    </label>
-                    <div class="mt-1 relative">
-                        <input :type="showPassword ? 'text' : 'password'"
-                               name="{{ form.password.html_name }}" 
-                               id="{{ form.password.id_for_label }}"
-                               autocomplete="current-password"
-                               required
-                               class="form-input {% if form.password.errors %}form-input-error{% endif %} pr-10"
-                               placeholder="Parolingizni kiriting"
-                               aria-invalid="{% if form.password.errors %}true{% else %}false{% endif %}"
-                               aria-describedby="{% if form.password.errors %}{{ form.password.id_for_label }}-error{% endif %}">
-                        <button type="button" class="password-toggle" @click="showPassword = !showPassword">
-                            <ion-icon :name="showPassword ? 'eye-off-outline' : 'eye-outline'" class="h-5 w-5"></ion-icon>
-                        </button>
-                        {% if form.password.errors %}
-                        <p id="{{ form.password.id_for_label }}-error" class="error-message">
-                            <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
-                            {{ form.password.errors.0 }}
-                        </p>
-                        {% endif %}
-                    </div>
-                </div>
-                
-                <!-- Qo'shimcha elementlar -->
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="remember-me" name="remember-me" type="checkbox" 
-                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded">
-                        <label for="remember-me" class="ml-2 block text-sm text-slate-700">
-                            Eslab qolish
-                        </label>
-                    </div>
-                    
-                    <div class="text-sm">
-                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
-                            Parolni unutdingizmi?
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Tugma -->
-                <div>
-                    <button type="submit" 
-                            :disabled="submitting"
-                            class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all">
-                        <svg x-show="submitting" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span x-text="submitting ? 'Kirish amalga oshirilmoqda...' : 'Tizimga kirish'">Tizimga kirish</span>
-                    </button>
-                </div>
-            </form>
-            
-            <!-- Footer qismi -->
-            <div class="text-center text-sm text-slate-500 pt-4 border-t border-slate-100">
-                <p>Hali hisobingiz yo'qmi? <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Ro'yxatdan o'tish</a></p>
-            </div>
-        </div>
+  <center>
+    <div class="bg-white/90 backdrop-blur-lg shadow-2xl rounded-2xl p-8 max-w-sm w-full space-y-6 border border-slate-100 transition-all">
+    <div class="text-center space-y-2">
+      <img src="https://nsuni.uz/assets/logobluefull-Cet2BLY6.png" class="mx-auto h-12" alt="Logo">
+      <h2 class="text-2xl font-bold text-slate-800">Tizimga Kirish</h2>
+      <p class="text-slate-500 text-sm">ID va parolingizni kiriting</p>
     </div>
-</div>
+
+    {% if form.non_field_errors %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-sm" role="alert">
+      <strong class="font-semibold">Xatolik:</strong>
+      {% for error in form.non_field_errors %}
+      <span class="block">{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form class="space-y-4" method="post" novalidate>
+      {% csrf_token %}
+
+      <div>
+        <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1"></label>
+        <input id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" type="text"
+               value="{{ form.username.value|default_if_none:'' }}"
+               class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all shadow-sm text-sm {% if form.username.errors %}border-red-500{% endif %}"
+               placeholder="Talaba ID raqamingiz" autocomplete="username" required>
+        {% if form.username.errors %}
+        <p class="text-sm text-red-500 mt-1">{{ form.username.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div>
+        <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1"></label>
+        <div class="relative">
+          <input id="passwordInput" name="{{ form.password.html_name }}" type="password"
+                 class="w-full px-4 py-2.5 pr-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all shadow-sm text-sm {% if form.password.errors %}border-red-500{% endif %}"
+                 placeholder="********" autocomplete="current-password" required>
+          <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700">
+            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+        {% if form.password.errors %}
+        <p class="text-sm text-red-500 mt-1">{{ form.password.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="flex items-center text-sm text-gray-600">
+          <input type="checkbox" name="remember_me" class="mr-2 rounded border-gray-300 text-blue-500 focus:ring-blue-400">
+          Eslab qolish
+        </label>
+        <a href="#" class="text-sm text-blue-600 hover:text-blue-800 transition">Parolni unutdingizmi?</a>
+      </div>
+
+      <button type="submit"
+              class="w-full py-2.5 text-sm font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md transition">
+        Tizimga kirish
+      </button>
+    </form>
+
+    <div class="text-center text-xs text-gray-500 pt-2 border-t border-gray-200">
+      Hisobingiz yo‘qmi? <a href="#" class="text-blue-600 hover:text-blue-500 font-medium">Ro‘yxatdan o‘tish</a>
+    </div>
+  </div>
+  </center>
+
 {% endblock %}
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Agar xatolik bo'lsa, submitting holatini o'chirish
-    {% if form.errors or form.non_field_errors %}
-    const alpineComponent = document.querySelector('[x-data]');
-    if (alpineComponent && alpineComponent.__x) {
-        alpineComponent.__x.$data.submitting = false;
-    }
-    
-    // Birinchi xato maydoniga fokus qilish
-    const firstErrorInput = document.querySelector('[aria-invalid="true"]');
-    if (firstErrorInput) {
-        setTimeout(() => {
-            firstErrorInput.focus();
-        }, 100);
-    }
-    {% endif %}
-});
+function togglePassword() {
+  const input = document.getElementById("passwordInput");
+  const icon = document.getElementById("eyeIcon");
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.05 10.05 0 011.658-2.918m2.386-2.386A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.964 9.964 0 01-4.293 5.303M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>`;
+  } else {
+    input.type = "password";
+    icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`;
+  }
+}
 </script>
 {% endblock %}
