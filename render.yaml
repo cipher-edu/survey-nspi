@@ -2,7 +2,7 @@ services:
   - type: web
     name: external-auth-web
     env: docker
-    repo: https://github.com/cipher-edu/survey-nspi # <-- bu yerga o'zingizning repo URL manzilingizni yozing
+    repo: https://github.com/cipher-edu/survey-nspi
     branch: main
     dockerfilePath: ./Dockerfile
     autoDeploy: true
@@ -15,12 +15,11 @@ services:
         value: postgres://survey_user:super_secret_password@survey-prod-db:5432/survey_prod_db
       - key: REDIS_URL
         value: redis://default@localhost:6379
-      # Qo‘shimcha kerakli ENV o‘zgaruvchilarni shu yerga qo‘shing
 
   - type: worker
     name: celery-worker
     env: docker
-    repo: https://github.com/your-username/your-repo-name
+    repo: https://github.com/cipher-edu/survey-nspi   # <-- shu yerda to‘g‘ri repo ko‘rsatilmoqda
     branch: main
     dockerfilePath: ./Dockerfile
     autoDeploy: true
