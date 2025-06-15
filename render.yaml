@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: external-auth-web
+    env: docker
+    repo: https://github.com/your-username/your-repo-name  # <--- GitHub repo URL ni to'g'rilang
+    branch: main
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: gunicorn --bind 0.0.0.0:8000 external_auth_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: external_auth_project.settings.prod  # o'zingizga moslang
+      - fromDotEnv: .env.prod
+    autoDeploy: true
+
+  - type: worker
+    name: celery-worker
+    env: docker
+    repo: https://github.com/your-username/your-repo-name
+    branch: main
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: celery -A external_auth_project worker -l info
+    envVars:
+      - fromDotEnv: .env.prod
+    autoDeploy: true
+
+databases:
+  - name: survey-prod-db
+    databaseName: survey_prod_db
+    user: survey_user
