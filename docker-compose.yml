@@ -17,7 +17,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=survey-nspi-db
+      - POSTGRES_DB=survey_prod_db
       - POSTGRES_USER=survey_user
       - POSTGRES_PASSWORD=super_secret_password
     ports:
