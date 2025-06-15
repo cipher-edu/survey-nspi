@@ -1,8 +1,0 @@
---- Test statistikasi ---
-Foydalanuvchilar soni: 100
-Muvaffaqiyatli so'rovlar: 100
-Umumiy vaqt: 1.14 s
-O'rtacha so'rov vaqti: 0.0101 s
-Maksimal so'rov vaqti: 0.1089 s
-Xotira sarfi: 1.63 MB (peak: 2.15 MB)
-------------------------

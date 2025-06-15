@@ -23,16 +23,31 @@ logger = logging.getLogger(__name__)
 class StudentAdmin(admin.ModelAdmin):
     list_per_page = 20
     list_max_show_all = 1000
+    # Barcha model maydonlarini ro'yxatda ko'rsatish
     list_display = (
-        'username', 
-        'get_full_name_display',
-        'student_id_number', 
-        'faculty_name_api', 
-        'level_name', 
-        'group_name_api', 
-        'last_login_api_formatted',
-        'is_profile_complete',
-        'updated_at_formatted'
+        
+        'username', 'student_id_number', 'api_user_hash',
+        'first_name', 'last_name', 'patronymic', 'full_name_api', 'short_name_api',
+        'get_image_preview', 'birth_date_timestamp', 'passport_pin', 'passport_number', 'email', 'phone',
+        'gender_code', 'gender_name', 'university_name_api',
+        'specialty_id_api', 'specialty_code_api', 'specialty_name_api',
+        'student_status_code', 'student_status_name',
+        'education_form_code', 'education_form_name',
+        'education_type_code', 'education_type_name',
+        'payment_form_code', 'payment_form_name',
+        'group_id_api', 'group_name_api', 'group_education_lang_code', 'group_education_lang_name',
+        'faculty_id_api', 'faculty_name_api', 'faculty_code_api',
+        'education_lang_code', 'education_lang_name',
+        'level_code', 'level_name',
+        'semester_id_api', 'semester_code_api', 'semester_name_api', 'semester_is_current',
+        'semester_education_year_code', 'semester_education_year_name', 'semester_education_year_is_current',
+        'avg_gpa', 'password_is_valid_api', 'address_api',
+        'country_code_api', 'country_name_api',
+        'province_code_api', 'province_name_api',
+        'district_code_api', 'district_name_api',
+        'social_category_code', 'social_category_name',
+        'accommodation_code', 'accommodation_name',
+        'validate_url_api', 'last_login_api', 'created_at', 'updated_at'
     )
     list_filter = (
         'faculty_name_api', 
@@ -157,7 +172,7 @@ class StudentAdmin(admin.ModelAdmin):
     def get_full_name_display(self, obj):
         return obj.full_name_api or f"{obj.last_name or ''} {obj.first_name or ''}".strip() or obj.username
 
-    @admin.display(description='Rasm', empty_value="-Rasm yo'q-")
+    @admin.display(description='Talabning surati ', empty_value="-Rasm yo'q-")
     def get_image_preview(self, obj):
         if obj.image_url:
             return format_html('<img src="{}" style="max-height: 100px; max-width: 100px; border-radius: 5px;" />', obj.image_url)
@@ -480,7 +495,7 @@ class MessageAttachmentInline(admin.TabularInline):
 @admin.register(MessageToResponsible)
 class MessageToResponsibleAdmin(admin.ModelAdmin):
     list_display = ('subject_short', 'student_link', 'responsible_person_link', 'status', 'created_at_formatted', 'responded_at_formatted', 'has_attachments')
-    list_filter = ('status', 'responsible_person', 'created_at', ('student__faculty_name_api', admin.RelatedOnlyFieldListFilter))
+    list_filter = ('status', 'responsible_person', 'created_at')
     search_fields = ('subject', 'content', 'student__username', 'student__first_name', 'student__last_name', 'responsible_person__first_name', 'responsible_person__last_name')
     list_editable = ('status',)
     # `student` va `responsible_person` ni o'zgartirishga ruxsat bermaymiz, chunki ular xabar yuborilganda belgilanadi.

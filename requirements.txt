@@ -11,6 +11,9 @@ tzdata==2024.1
 # Agar PostgreSQL ishlatsangiz, buni "psycopg2-binary" ga almashtiring
 mysqlclient==2.2.7
 
+# --- Ma'lumotlar Bazasi (PostgreSQL) ---
+psycopg2-binary==2.9.9
+
 # --- Asinxron Vazifalar (Celery) ---
 celery==5.3.6
 django-celery-results==2.5.1

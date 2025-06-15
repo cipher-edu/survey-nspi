@@ -93,39 +93,17 @@ TEMPLATES = [
 ]
 
 # ...
-CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default='redis://localhost:6379/0') # Yoki 'django-db'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Tashkent' # settings.TIME_ZONE ga mos
-CELERY_TASK_TRACK_STARTED = True # Vazifaning boshlanganini kuzatish
-CELERY_TASK_SEND_SENT_EVENT = True # Vazifa yuborilgani haqida event yuborish
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True # Ishga tushganda brokerga ulanishga harakat qilish
-
-# Django Cache Framework (Redis bilan)
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": env('REDIS_URL', default="redis://127.0.0.1:6379/1"), # Kesh uchun boshqa DB
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             "CONNECTION_POOL_KWARGS": {"max_connections": 50} # Katta yuklama uchun
-#         },
-#         "KEY_PREFIX": "hemis_auth" # Kesh kalitlari uchun prefiks
-#     }
-# }
-
+CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
 CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env('REDIS_URL', default="redis://redis:6379/0"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
     }
 }
-# Sessiyalarni ham keshda saqlash mumkin (ixtiyoriy, performans uchun)
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
@@ -162,8 +140,12 @@ LOGIN_REDIRECT_URL = 'home'  # URL to redirect after login
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': env('DB_NAME', default='survey_prod_db'),
+        'USER': env('DB_USER', default='survey_user'),
+        'PASSWORD': env('DB_PASSWORD', default='super_secret_password'),
+        'HOST': env('DB_HOST', default='db'),
+        'PORT': env('DB_PORT', default='5432'),
     }
 }
 
