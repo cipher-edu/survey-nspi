@@ -6843,7 +6843,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\django_redis\client\default.py", line 260, in get
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -6895,7 +6895,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 INFO 2025-06-03 10:30:29,212 basehttp 11756 16812 - Broken pipe from ('127.0.0.1', 62525)
 ERROR 2025-06-03 10:30:31,449 log 11756 15004 Internal Server Error: /api/login/
 Traceback (most recent call last):
@@ -6907,7 +6907,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\django_redis\client\default.py", line 260, in get
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -6959,7 +6959,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 INFO 2025-06-03 10:30:31,453 basehttp 11756 15004 - Broken pipe from ('127.0.0.1', 62523)
 ERROR 2025-06-03 10:30:43,527 log 11756 16932 Internal Server Error: /api/login/
 Traceback (most recent call last):
@@ -6971,7 +6971,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\django_redis\client\default.py", line 260, in get
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7023,7 +7023,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-03 10:30:43,530 basehttp 11756 16932 "GET /api/login/ HTTP/1.1" 500 157195
 INFO 2025-06-03 10:30:57,202 basehttp 11756 680 "GET /dashboard/ HTTP/1.1" 200 30089
 INFO 2025-06-03 10:30:58,393 basehttp 11756 11972 "GET /logout/ HTTP/1.1" 302 0
@@ -7038,7 +7038,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\django_redis\client\default.py", line 260, in get
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7090,7 +7090,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 INFO 2025-06-03 10:30:59,000 basehttp 11756 9440 - Broken pipe from ('127.0.0.1', 62537)
 ERROR 2025-06-03 10:31:07,777 log 11756 11972 Internal Server Error: /api/login/
 Traceback (most recent call last):
@@ -7102,7 +7102,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\django_redis\client\default.py", line 260, in get
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7154,7 +7154,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-03 10:31:07,781 basehttp 11756 11972 "GET /api/login/ HTTP/1.1" 500 157046
 INFO 2025-06-03 10:32:40,873 autoreload 5240 3508 Watching for file changes with StatReloader
 ERROR 2025-06-03 10:32:46,174 log 5240 6248 Internal Server Error: /api/login/
@@ -7167,7 +7167,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\django_redis\client\default.py", line 260, in get
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7219,7 +7219,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Sozla.uz\Desktop\apii\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-03 10:32:46,180 basehttp 5240 6248 "GET /api/login/ HTTP/1.1" 500 156977
 INFO 2025-06-03 10:34:12,567 autoreload 5240 3508 C:\Users\Sozla.uz\Desktop\apii\auth_app\api.py changed, reloading.
 INFO 2025-06-03 10:34:13,630 autoreload 16460 15308 Watching for file changes with StatReloader
@@ -7492,7 +7492,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7568,7 +7568,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 13:57:32,545 basehttp 19076 8848 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206529
 INFO 2025-06-11 13:57:37,261 basehttp 19076 8848 "GET /admin/ HTTP/1.1" 302 0
 INFO 2025-06-11 13:57:37,264 basehttp 19076 8848 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3065
@@ -7582,7 +7582,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7658,7 +7658,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 13:57:49,173 basehttp 19076 8848 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206529
 INFO 2025-06-11 13:58:04,550 autoreload 19076 13076 C:\Users\blood\OneDrive\Desktop\koorupsia\auth_app\api_views.py changed, reloading.
 INFO 2025-06-11 13:58:04,955 autoreload 10280 22988 Watching for file changes with StatReloader
@@ -7673,7 +7673,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7749,7 +7749,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 13:58:14,686 basehttp 7580 15128 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206529
 INFO 2025-06-11 13:58:31,494 basehttp 7580 2112 "GET /admin HTTP/1.1" 301 0
 INFO 2025-06-11 13:58:31,508 basehttp 7580 10844 "GET /admin/ HTTP/1.1" 302 0
@@ -7775,7 +7775,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7851,7 +7851,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 13:59:56,312 basehttp 8228 21196 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206529
 INFO 2025-06-11 14:00:12,233 basehttp 8228 3608 "POST /admin/login/?next=/admin/ HTTP/1.1" 200 3388
 ERROR 2025-06-11 14:00:18,740 log 8228 3608 Internal Server Error: /admin/login/
@@ -7863,7 +7863,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -7939,7 +7939,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 14:00:18,745 basehttp 8228 3608 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206380
 WARNING 2025-06-11 14:00:18,830 log 8228 3608 Not Found: /favicon.ico
 WARNING 2025-06-11 14:00:18,831 basehttp 8228 3608 "GET /favicon.ico HTTP/1.1" 404 3447
@@ -7956,7 +7956,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -8032,7 +8032,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 14:00:47,017 basehttp 16952 15496 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206380
 INFO 2025-06-11 14:00:51,597 basehttp 16952 15496 "GET /admin/l HTTP/1.1" 302 0
 INFO 2025-06-11 14:00:51,609 basehttp 16952 15496 "GET /admin/login/?next=/admin/l HTTP/1.1" 200 3066
@@ -8046,7 +8046,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -8122,7 +8122,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 14:01:22,570 basehttp 11088 22436 "POST /admin/login/?next=/admin/l HTTP/1.1" 500 206404
 INFO 2025-06-11 14:01:25,347 basehttp 11088 22436 "GET /admin/ HTTP/1.1" 302 0
 INFO 2025-06-11 14:01:25,362 basehttp 11088 22436 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 3065
@@ -8136,7 +8136,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -8212,7 +8212,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 INFO 2025-06-11 14:01:36,112 basehttp 11088 22436 - Broken pipe from ('127.0.0.1', 50662)
 ERROR 2025-06-11 14:01:38,172 log 11088 12716 Internal Server Error: /admin/login/
 Traceback (most recent call last):
@@ -8223,7 +8223,7 @@ Traceback (most recent call last):
            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -8299,7 +8299,7 @@ Traceback (most recent call last):
     ~~~~~~~~~~~~~~~~~~^^
   File "C:\Users\blood\OneDrive\Desktop\koorupsia\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-11 14:01:38,178 basehttp 11088 12716 "POST /admin/login/?next=/admin/ HTTP/1.1" 500 206380
 INFO 2025-06-11 14:02:45,428 autoreload 21156 24244 Watching for file changes with StatReloader
 INFO 2025-06-11 14:02:49,406 basehttp 21156 9296 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
@@ -13118,7 +13118,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -13161,7 +13161,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-13 22:33:36,803 basehttp 5760 5672 "POST /login/ HTTP/1.1" 500 145
 INFO 2025-06-13 22:34:22,831 autoreload 5760 2104 C:\Users\New\Desktop\survey-nspi\external_auth_project\settings.py changed, reloading.
 INFO 2025-06-13 22:34:28,483 autoreload 9728 9692 Watching for file changes with StatReloader
@@ -13178,7 +13178,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -13221,7 +13221,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-13 22:34:54,926 basehttp 9728 8836 "POST /login/ HTTP/1.1" 500 134734
 INFO 2025-06-13 22:35:54,109 autoreload 3492 9496 Watching for file changes with StatReloader
 INFO 2025-06-13 22:35:59,352 views 3492 9764 Login attempt for user: 353201107000
@@ -13237,7 +13237,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -13280,7 +13280,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-13 22:36:02,787 basehttp 3492 9764 "POST /login/ HTTP/1.1" 500 134733
 INFO 2025-06-13 22:36:05,081 basehttp 3492 9260 "GET / HTTP/1.1" 200 15688
 INFO 2025-06-13 22:36:07,326 basehttp 3492 9260 "GET /login/ HTTP/1.1" 200 21937
@@ -13297,7 +13297,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -13340,7 +13340,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-13 22:36:20,141 basehttp 3492 9260 "POST /login/ HTTP/1.1" 500 134732
 INFO 2025-06-13 22:37:11,773 basehttp 3492 4536 "GET / HTTP/1.1" 200 15688
 INFO 2025-06-13 22:37:20,491 basehttp 3492 4536 "GET / HTTP/1.1" 200 15688
@@ -13357,7 +13357,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\django_redis\client\default.py", line 670, in has_key
     raise ConnectionInterrupted(connection=client) from e
-django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -13400,7 +13400,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\New\Desktop\survey-nspi\env\Lib\site-packages\redis\connection.py", line 282, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2025-06-13 22:37:36,339 basehttp 3492 6108 "GET /login/?next=/dashboard/ HTTP/1.1" 500 134352
 INFO 2025-06-13 22:38:42,731 basehttp 3492 10148 "GET /login/?next=/dashboard/ HTTP/1.1" 200 24239
 INFO 2025-06-13 22:38:49,919 views 3492 10148 Login attempt for user: 353201107000
@@ -18139,3 +18139,49 @@ Traceback (most recent call last):
   File "/opt/venv/lib/python3.11/site-packages/django/contrib/admin/utils.py", line 467, in get_model_from_relation
     raise NotRelationField
 django.contrib.admin.utils.NotRelationField
+WARNING 2025-06-16 15:29:43,872 log 7 134064579013504 Not Found: /static/images/news-1.jpg
+WARNING 2025-06-16 15:29:43,877 log 7 134064579013504 Not Found: /static/images/news-2.jpg
+WARNING 2025-06-16 15:29:44,463 log 7 134064579013504 Not Found: /favicon.ico
+INFO 2025-06-16 15:29:52,469 views 7 134064579013504 Login attempt for user: 353201107000
+CRITICAL 2025-06-16 15:29:53,314 views 7 134064579013504 Error Log ID: 20250616102952469282_UNEXP - User: 353201107000, Unexpected error in login_view: AttributeError - 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "/app/auth_app/services/base_api_service.py", line 54, in _request
+    response.raise_for_status() # HTTP xatolar uchun exception chiqaradi
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://student.nspi.uz/rest/v1/auth/login
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/auth_app/views.py", line 165, in login_view
+    api_token, refresh_data = api_client.login(username, password) # refresh_data endi dict yoki string bo'lishi mumkin
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/services/hemis_api_service.py", line 19, in login
+    response_data = self.post(settings.EXTERNAL_API_LOGIN_ENDPOINT.replace(self.base_url, ''), json=payload)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/services/base_api_service.py", line 93, in post
+    return self._request("POST", endpoint, data=data, json=json, params=params, headers=headers, files=files)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/services/base_api_service.py", line 73, in _request
+    api_err = response_data.get('error') or response_data.get('message') or response_data.get('detail')
+              ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+INFO 2025-06-16 15:29:57,287 views 7 134064579013504 Login attempt for user: 353201107000
+INFO 2025-06-16 15:29:58,098 views 7 134064579013504 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-16 15:29:58,257 views 7 134064579013504 User 353201107000 logged in. Session expiry: 2025-06-17 10:29:58.257657+00:00, API token expiry: 2025-06-17 15:29:58.257636
+WARNING 2025-06-16 15:30:47,514 log 8 134064579013504 Not Found: /static/images/news-1.jpg
+WARNING 2025-06-16 15:30:47,530 log 8 134064579013504 Not Found: /static/images/news-2.jpg
+WARNING 2025-06-16 15:30:48,093 log 8 134064579013504 Not Found: /static/images/news-1.jpg
+WARNING 2025-06-16 15:30:48,113 log 8 134064579013504 Not Found: /static/images/news-2.jpg
+WARNING 2025-06-16 15:30:49,797 log 8 134064579013504 Not Found: /favicon.ico
+WARNING 2025-06-16 15:34:54,969 log 10 134064579013504 Not Found: /static/images/news-1.jpg
+WARNING 2025-06-16 15:34:54,979 log 10 134064579013504 Not Found: /static/images/news-2.jpg
+WARNING 2025-06-16 15:34:56,741 log 10 134064579013504 Not Found: /static/images/news-1.jpg
+WARNING 2025-06-16 15:34:56,758 log 10 134064579013504 Not Found: /static/images/news-2.jpg
+INFO 2025-06-16 15:35:06,335 views 10 134064579013504 Login attempt for user: 353201107000
+INFO 2025-06-16 15:35:07,248 views 10 134064579013504 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-06-16 15:35:07,375 views 10 134064579013504 User 353201107000 logged in. Session expiry: 2025-06-17 10:35:07.375941+00:00, API token expiry: 2025-06-17 15:35:07.375920
+INFO 2025-06-16 15:37:56,930 autoreload 23196 1836 Watching for file changes with StatReloader
+INFO 2025-06-16 15:38:40,528 autoreload 7304 25164 Watching for file changes with StatReloader
