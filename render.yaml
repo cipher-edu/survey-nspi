@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: external-auth-web
+    env: docker
+    repo: https://github.com/cipher-edu/survey-nspi
+    branch: main
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: external_auth_project.settings.prod
+      - key: SECRET_KEY
+        value: your-very-secret-key
+      - key: DATABASE_URL
+        value: postgres://survey_user:super_secret_password@survey-prod-db:5432/survey_prod_db
+      - key: REDIS_URL
+        value: redis://default@localhost:6379
+
+  - type: worker
+    name: celery-worker
+    env: docker
+    repo: https://github.com/cipher-edu/survey-nspi   # <-- shu yerda to‘g‘ri repo ko‘rsatilmoqda
+    branch: main
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: external_auth_project.settings.prod
+      - key: SECRET_KEY
+        value: your-very-secret-key
+      - key: DATABASE_URL
+        value: postgres://survey_user:super_secret_password@survey-prod-db:5432/survey_prod_db
+      - key: REDIS_URL
+        value: redis://default@localhost:6379
+
+databases:
+  - name: survey-prod-db
+    databaseName: survey_prod_db
+    user: survey_user
