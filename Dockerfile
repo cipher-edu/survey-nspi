@@ -1,44 +1,36 @@
-# Dockerfile
-
-# 1. Asosiy obrazni tanlash
-# Python'ning rasmiy, optimallashtirilgan obrazidan foydalanamiz
+# 1. Rasmiy Python image (eng kichik, lekin kerakli kutubxonalar bilan)
 FROM python:3.11-slim
 
-# 2. Ishchi papkani belgilash
-# Keyingi barcha buyruqlar shu papka ichida bajariladi
+# 2. Ishchi katalogni o‘rnatamiz
 WORKDIR /app
 
-# 3. Tizim o'zgaruvchilarini sozlash
-# Python'ning buferlashini o'chiramiz, loglar darhol ko'rinishi uchun
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# 3. Muhit o‘zgaruvchilar
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=8080
 
-# 4. Tizim bog'liqliklarini o'rnatish (masalan, postgresql-client, gettext)
-# Bu mysqlclient yoki psycopg2-binary to'g'ri ishlashi uchun kerak
+# 4. Tizimga kerakli kutubxonalarni o‘rnatamiz (psycopg2, mysqlclient, va h.k.)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc default-libmysqlclient-dev pkg-config \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# 5. Virtual muhit yaratish
+# 5. Virtual muhit yaratamiz
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# 6. Bog'liqliklarni o'rnatish
-# Avval requirements.txt faylini nusxalab, keyin o'rnatamiz.
-# Bu Docker keshidan unumli foydalanish imkonini beradi.
+# 6. Python kutubxonalarini o‘rnatamiz
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 7. Butun loyiha kodini konteynerga nusxalash
+# 7. Loyihani konteynerga ko‘chiramiz
 COPY . .
 
-# 8. Statik fayllarni yig'ish (agar kerak bo'lsa)
+# 8. Statik fayllar (kerak bo‘lsa avtomatik yig‘iladi)
 # RUN python manage.py collectstatic --noinput
 
-# 9. Portni ochish (Gunicorn shu portda ishlaydi)
-EXPOSE 8000
+# 9. Cloud Run porti 8080 da ishlaydi
+EXPOSE 8080
 
-# 10. Konteyner ishga tushganda bajariladigan buyruq
-# Gunicorn serverini ishga tushiramiz
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "external_auth_project.wsgi:application"]
+# 10. Gunicorn serverini port 8080 da ishga tushiramiz
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "external_auth_project.wsgi:application"]
