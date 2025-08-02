@@ -1,13 +1,27 @@
-# # Byte-compiled / optimized / DLL files
-# __pycache__/
-# *.py[cod]
-# *$py.class
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
 
-# # C extensions
-# *.so
+# Static files
+staticfiles/
+static/
 
-# # Distribution / packaging
-# .Python
+# Environment variables (PRODUCTION UCHUN MUHIM!)
+.env
+.env.local
+.env.production
+.env.staging
+
+# Virtual environment
+venv/
+ENV/
+env/
 # build/
 # develop-eggs/
 # dist/

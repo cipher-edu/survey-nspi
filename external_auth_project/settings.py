@@ -1,6 +1,9 @@
 from pathlib import Path
 import environ # environ ni import qilish
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,7 +17,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = '*'
+# Production uchun aniq hostlarni belgilash
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # Application definition
 
@@ -59,8 +63,20 @@ MEDIA_DIR = BASE_DIR / 'media'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 # Xavfsizlik sozlamalari
-# Xavfsizlik uchun HTTPS va CSRF sozlamalari
+# Production uchun HTTPS va CSRF sozlamalari
 X_FRAME_OPTIONS = 'DENY' 
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Production uchun HTTPS sozlamalari (HTTPS dan foydalanayotgan bo'lsangiz)
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 yil
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
 # CSRF himoyasi
 CSRF_COOKIE_HTTPONLY = True  # CSRF cookie'sini JavaScript orqali o'qish mumkin emas
 CSRF_COOKIE_AGE = 60 * 60 * 24  # CSRF cookie muddati (1 kun)
@@ -69,7 +85,6 @@ CSRF_COOKIE_DOMAIN = None  # Agar subdomenlar uchun kerak bo'lsa, domen nomini q
 # settings.py
 CSRF_COOKIE_NAME = 'hemis_csrf_token'  # CSRF cookie nomi
 CSRF_USE_SESSIONS = False  # CSRF token sessiyada saqlanmaydi, faqat cookie'da
-CSRF_COOKIE_SECURE = True  # Faqat HTTPS orqali CSRF cookie'sini yuborish
 CSRF_COOKIE_SAMESITE = 'Lax' # Yoki 'Strict' (ko'proq himoya, lekin ba'zi holatlarda noqulaylik tug'dirishi mumkin)
 # CSRF_TRUSTED_ORIGINS = ['https://sizning-domeningiz.com'] # Agar subdomenlardan yoki boshqa trusted originlardan POST so'rovlar kelsa
 ROOT_URLCONF = 'external_auth_project.urls'
@@ -210,7 +225,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -256,7 +271,7 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'DEBUG', # Development uchun DEBUG, production uchun INFO yoki WARNING
+            'level': 'INFO' if not DEBUG else 'DEBUG',  # Production uchun INFO
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
@@ -265,35 +280,43 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': BASE_DIR / 'django_app.log', # Loyiha papkasida log fayli
             'maxBytes': 1024*1024*5, # 5 MB
-            'backupCount': 2,
+            'backupCount': 5,  # Ko'proq backup fayllar
+            'formatter': 'verbose',
+        },
+        'error_file': {  # Faqat xatoliklar uchun alohida fayl
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / 'django_error.log',
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
             'formatter': 'verbose',
         },
     },
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],
-            'level': 'INFO', # Django loglarini kamaytirish uchun INFO
+            'level': 'INFO',
             'propagate': False,
         },
         'auth_app': { # Bizning ilovamiz uchun logger
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG', # Developmentda DEBUG
+            'handlers': ['console', 'file', 'error_file'],
+            'level': 'INFO' if not DEBUG else 'DEBUG',
             'propagate': False,
         },
          # requests kutubxonasi loglarini kamaytirish uchun (kerak bo'lsa)
         'requests': {
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'WARNING',
             'propagate': False,
         },
         'urllib3': {
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'WARNING',
             'propagate': False,
         },
     },
     'root': { # Boshqa barcha loggerlar uchun
-        'handlers': ['console', 'file'],
+        'handlers': ['console', 'file', 'error_file'],
         'level': 'INFO',
     }
 }
