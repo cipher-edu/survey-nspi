@@ -15,8 +15,8 @@ env = environ.Env(
 # .env faylini o'qish (agar mavjud bo'lsa)
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-test-key-for-development-only')
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 # Production uchun aniq hostlarni belgilash
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
@@ -57,8 +57,16 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': False,  # Disable blacklisting
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/' 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Additional locations of static files for development
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 MEDIA_DIR = BASE_DIR / 'media'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -106,19 +114,19 @@ TEMPLATES = [
 ]
 
 # ...
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+CELERY_BROKER_URL = env('CELERY_BROKER_URL', default='redis://redis:6379/0')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND', default='redis://redis:6379/0')
+
+# Use database cache instead of Redis for development
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": env('REDIS_URL', default="redis://redis:6379/0"),
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        },
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "cache_table",
     }
 }
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"
+
+# Use database sessions instead of cache-based sessions
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 # API sozlamalari
 EXTERNAL_API_BASE_URL = env('EXTERNAL_API_BASE_URL', default="https://student.nspi.uz/rest")
@@ -134,7 +142,7 @@ REQUESTS_VERIFY_SSL = env.bool('REQUESTS_VERIFY_SSL', default=True)
 API_TOKEN_REFRESH_THRESHOLD_SECONDS = 10 * 60 # Token muddati tugashiga 10 daqiqa qolganda yangilash (default 5 edi)
 
 # Admin panelidagi action uchun yoki tizimli tasklar uchun ishlatiladigan token (agar mavjud bo'lsa)
-HEMIS_ADMIN_API_TOKEN = env('b1scfqAQKK2PjRvll0MTAbFOQ1yumi4b', default=None) 
+HEMIS_ADMIN_API_TOKEN = env('HEMIS_ADMIN_API_TOKEN', default=None) 
 # Yoki HEMIS_SYSTEM_API_TOKEN (tasks.py da ishlatilgan)
 HEMIS_SYSTEM_API_TOKEN = env('HEMIS_SYSTEM_API_TOKEN', default=None)
 
@@ -156,7 +164,7 @@ DATABASES = {
         'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql'),
         'NAME': env('DB_NAME', default='survey_prod_db'),
         'USER': env('DB_USER', default='survey_user'),
-        'PASSWORD': env('DB_PASSWORD', default='super_secret_password'),
+        'PASSWORD': env('DB_PASSWORD', default='your_database_password_here'),
         'HOST': env('DB_HOST', default='db'),
         'PORT': env('DB_PORT', default='5432'),
     }
@@ -238,11 +246,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
