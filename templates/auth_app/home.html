@@ -1,6 +1,6 @@
 {% extends "auth_app/base.html" %}
 
-{% block page_title %}Navoiy Davlat Pedagogika Instituti - HEMIS Tizimi{% endblock %}
+{% block page_title %}Navoiy davlat universiteti - HEMIS Tizimi{% endblock %}
 {%  load static %}
 {% block extra_css %}
 <style>
@@ -88,7 +88,7 @@
                 <div class="lg:w-1/2 mb-10 lg:mb-0">
                     <h1 class="text-4xl md:text-5xl font-extrabold mb-4 flex items-center gap-3">
                         <ion-icon name="school-outline" class="text-yellow-300 animate-bounce text-4xl"></ion-icon>
-                        Navoiy Davlat Pedagogika Instituti
+                        Navoiy davlat universiteti
                     </h1>
                     <p class="text-xl mb-6">Ta'lim sifatini oshirish va boshqarish tizimi</p>
                     <ul class="mb-8 text-base text-indigo-100 space-y-1">
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 flex justify-center relative">
-                    <img src="https://nsuni.uz/api/files/settings/db112544-a8cb-41a5-b9f2-139072961f8e.jpg" alt="NDPI HEMIS Tizimi" class="w-full max-w-md float-animation z-10">
+                    <img src="{% static 'images/fon2-min.jpg' %}" alt="NDPI HEMIS Tizimi" class="w-full max-w-md float-animation z-10">
                     <ion-icon name="cloud-outline" class="absolute left-0 top-0 text-white/30 text-6xl animate-pulse"></ion-icon>
                     <ion-icon name="sparkles-outline" class="absolute right-0 bottom-0 text-yellow-200 text-5xl animate-spin-slow"></ion-icon>
                 </div>
@@ -249,7 +249,7 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="news-card">
-                            <img src="{% static 'images/news-1.jpg' %}" alt="Yangilik 1" class="w-full h-48 object-cover">
+                            <img src="{% static 'images/fon2-min.jpg' %}" alt="Yangilik 1" class="w-full h-48 object-cover">
                             <div class="p-5">
                                 <span class="text-xs text-slate-500">15-Iyun, 2023</span>
                                 <h3 class="text-lg font-semibold mt-1">Yangi o'quv yili boshlanishi</h3>
@@ -259,7 +259,7 @@
                         </div>
                         
                         <div class="news-card">
-                            <img src="{% static 'images/news-2.jpg' %}" alt="Yangilik 2" class="w-full h-48 object-cover">
+                            <img src="{% static 'images/fon2-min.jpg' %}" alt="Yangilik 2" class="w-full h-48 object-cover">
                             <div class="p-5">
                                 <span class="text-xs text-slate-500">10-Iyun, 2023</span>
                                 <h3 class="text-lg font-semibold mt-1">Xalqaro konferensiya</h3>
@@ -321,17 +321,17 @@
     <!-- Hamkorlar va Foydali havolalar -->
     <section class="py-10 bg-white border-t border-slate-100">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-xl font-bold text-center mb-6">Hamkorlar va Foydali havolalar</h2>
+            <h2 class="text-xl font-bold text-center mb-6">Foydali havolalar</h2>
             <div class="flex flex-wrap justify-center items-center gap-8 mb-6">
-                <a href="https://edu.uz" target="_blank"><img src="https://edu.uz/media/logos/eduuz.png" alt="Edu.uz" class="partners-logo"></a>
-                <a href="https://hedu.uz" target="_blank"><img src="https://hedu.uz/static/img/logo.png" alt="HEDU" class="partners-logo"></a>
-                <a href="https://uzedu.uz" target="_blank"><img src="https://uzedu.uz/images/logo.png" alt="UzEdu" class="partners-logo"></a>
+                <a href="https://nspi.uz" target="_blank"><img src="{% static 'images/LOGO UNIVERSITET.png' %}" alt="Navoiy davlat universiteti" class="partners-logo"></a>
+                <a href="https://edu.uz" target="_blank"><img src="{% static 'images/vazirlik.png' %}" alt="Edu.uz" class="partners-logo"></a>
+                <a href="https://uzedu.uz" target="_blank"><img src="{% static 'images/maktab.png' %}" alt="UzEdu" class="partners-logo"></a>
                 <a href="https://my.gov.uz" target="_blank"><img src="https://my.gov.uz/img/logo.svg" alt="my.gov.uz" class="partners-logo"></a>
             </div>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://nspi.uz" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium underline">Institut rasmiy sayti</a>
+                <a href="https://nsuni.uz" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium underline">Universitet rasmiy sayti</a>
                 <a href="https://student.nspi.uz" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium underline">Talabalar portali</a>
-                <a href="https://t.me/nspiuz" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium underline">Telegram kanal</a>
+                <a href="https://t.me/NavDU_NavSU" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-medium underline">Telegram kanal</a>
             </div>
         </div>
     </section>

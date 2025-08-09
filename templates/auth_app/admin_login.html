@@ -1,0 +1,165 @@
+{% extends "auth_app/base.html" %}
+{% load static %}
+
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="mx-auto h-16 w-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                <ion-icon name="shield-outline" class="text-3xl text-white"></ion-icon>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-900 mb-2">Rahbariyat uchun kirish</h2>
+            <p class="text-slate-600">Administrator huquqlari bilan tizimga kirish</p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/50 p-8">
+            <form class="space-y-6" method="post">
+                {% csrf_token %}
+                
+                <!-- Username -->
+                <div>
+                    <label for="{{ form.username.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
+                        <ion-icon name="person-outline" class="text-base mr-1"></ion-icon>
+                        Foydalanuvchi nomi
+                    </label>
+                    <input type="text" 
+                           name="{{ form.username.name }}" 
+                           id="{{ form.username.id_for_label }}"
+                           value="{{ form.username.value|default:'' }}"
+                           class="block w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white/80"
+                           placeholder="Admin foydalanuvchi nomingizni kiriting"
+                           required>
+                    {% if form.username.errors %}
+                        <div class="mt-2 text-sm text-red-600">
+                            {% for error in form.username.errors %}
+                                <p class="flex items-center">
+                                    <ion-icon name="alert-circle-outline" class="text-base mr-1"></ion-icon>
+                                    {{ error }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="{{ form.password.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
+                        <ion-icon name="lock-closed-outline" class="text-base mr-1"></ion-icon>
+                        Parol
+                    </label>
+                    <div class="relative" x-data="{ showPassword: false }">
+                        <input :type="showPassword ? 'text' : 'password'"
+                               name="{{ form.password.name }}" 
+                               id="{{ form.password.id_for_label }}"
+                               class="block w-full px-4 py-3 pr-12 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white/80"
+                               placeholder="Admin parolingizni kiriting"
+                               required>
+                        <button type="button" 
+                                @click="showPassword = !showPassword"
+                                class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600">
+                            <ion-icon :name="showPassword ? 'eye-off-outline' : 'eye-outline'" class="text-xl"></ion-icon>
+                        </button>
+                    </div>
+                    {% if form.password.errors %}
+                        <div class="mt-2 text-sm text-red-600">
+                            {% for error in form.password.errors %}
+                                <p class="flex items-center">
+                                    <ion-icon name="alert-circle-outline" class="text-base mr-1"></ion-icon>
+                                    {{ error }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" 
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <ion-icon name="shield-checkmark-outline" class="h-5 w-5 text-blue-300 group-hover:text-blue-200"></ion-icon>
+                        </span>
+                        Admin sifatida kirish
+                    </button>
+                </div>
+
+                <!-- Form Errors -->
+                {% if form.non_field_errors %}
+                    <div class="rounded-lg bg-red-50 border border-red-200 p-4">
+                        {% for error in form.non_field_errors %}
+                            <div class="flex items-start">
+                                <ion-icon name="close-circle-outline" class="text-red-500 text-xl mr-2 mt-0.5 flex-shrink-0"></ion-icon>
+                                <p class="text-sm text-red-700">{{ error }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="text-center mt-8 space-y-4">
+            <div class="flex items-center justify-center space-x-6 text-sm">
+                <a href="{% url 'home' %}" class="text-slate-600 hover:text-blue-600 transition-colors flex items-center">
+                    <ion-icon name="home-outline" class="text-base mr-1"></ion-icon>
+                    Bosh sahifa
+                </a>
+                <a href="{% url 'login' %}" class="text-slate-600 hover:text-blue-600 transition-colors flex items-center">
+                    <ion-icon name="person-outline" class="text-base mr-1"></ion-icon>
+                    Talaba sifatida kirish
+                </a>
+            </div>
+            
+            <!-- Info Box -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
+                <div class="flex items-start">
+                    <ion-icon name="information-circle-outline" class="text-blue-500 text-xl mr-2 mt-0.5 flex-shrink-0"></ion-icon>
+                    <div>
+                        <p class="font-medium mb-1">Administrator huquqlari zarur</p>
+                        <p class="text-blue-700">Bu sahifa faqat admin huquqlariga ega foydalanuvchilar uchun mo'ljallangan. Agar sizda administrator huquqlari bo'lmasa, talaba sifatida kirish tugmasini bosing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Scripts -->
+<script defer src="https://unpkg.com/alpinejs@3.13.10/dist/cdn.min.js"></script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Additional animations for admin login */
+    .backdrop-blur-sm {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .bg-white\/70 {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .bg-white\/80 {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .border-white\/50 {
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Smooth focus transitions */
+    input:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    /* Button press animation */
+    button:active {
+        transform: translateY(1px);
+    }
+</style>
+{% endblock %}

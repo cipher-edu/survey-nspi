@@ -1,13 +1,15 @@
 
 {% extends "auth_app/base.html" %}
+{% load static %}
 {% block page_title %}Tizimga Kirish{% endblock %}
+
 
 {% block content %}
 
   <center>
     <div class="bg-white/90 backdrop-blur-lg shadow-2xl rounded-2xl p-8 max-w-sm w-full space-y-6 border border-slate-100 transition-all">
     <div class="text-center space-y-2">
-      <img src="https://nsuni.uz/assets/logobluefull-Cet2BLY6.png" class="mx-auto h-12" alt="Logo">
+      <img src="{% static 'images/LOGO UNIVERSITET.png' %}" class="mx-auto h-12" alt="Logo">
       <h2 class="text-2xl font-bold text-slate-800">Tizimga Kirish</h2>
       <p class="text-slate-500 text-sm">ID va parolingizni kiriting</p>
     </div>

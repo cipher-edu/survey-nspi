@@ -1,0 +1,178 @@
+{% extends "auth_app/base.html" %}
+{% load static %}
+
+{% block page_title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    <ion-icon name="shield-outline" class="text-blue-600 mr-2"></ion-icon>
+                    Admin Dashboard
+                </h1>
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm text-gray-600">Salom,</span>
+                    <span class="font-medium text-gray-900">{{ current_admin.get_full_name|default:current_admin.username }}</span>
+                    <div class="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-medium">
+                            {{ current_admin.get_full_name|default:current_admin.username|first|upper }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Total Students -->
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-5">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <ion-icon name="people-outline" class="h-6 w-6 text-gray-400"></ion-icon>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dl>
+                                    <dt class="text-sm font-medium text-gray-500 truncate">Jami Talabalar</dt>
+                                    <dd class="text-lg font-medium text-gray-900">{{ total_students }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-5 py-3">
+                        <div class="text-sm">
+                            <a href="{% url 'admin:auth_app_student_changelist' %}" class="font-medium text-blue-700 hover:text-blue-900">
+                                Batafsil ko'rish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Surveys -->
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-5">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <ion-icon name="document-text-outline" class="h-6 w-6 text-gray-400"></ion-icon>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dl>
+                                    <dt class="text-sm font-medium text-gray-500 truncate">Jami So'rovnomalar</dt>
+                                    <dd class="text-lg font-medium text-gray-900">{{ total_surveys }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-5 py-3">
+                        <div class="text-sm">
+                            <a href="{% url 'admin:auth_app_survey_changelist' %}" class="font-medium text-blue-700 hover:text-blue-900">
+                                Batafsil ko'rish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Responses -->
+                <div class="bg-white overflow-hidden shadow rounded-lg">
+                    <div class="p-5">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <ion-icon name="checkmark-circle-outline" class="h-6 w-6 text-gray-400"></ion-icon>
+                            </div>
+                            <div class="ml-5 w-0 flex-1">
+                                <dl>
+                                    <dt class="text-sm font-medium text-gray-500 truncate">Jami Javoblar</dt>
+                                    <dd class="text-lg font-medium text-gray-900">{{ total_responses }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-5 py-3">
+                        <div class="text-sm">
+                            <a href="{% url 'admin:auth_app_surveyresponse_changelist' %}" class="font-medium text-blue-700 hover:text-blue-900">
+                                Batafsil ko'rish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                        <ion-icon name="flash-outline" class="text-yellow-500 mr-2"></ion-icon>
+                        Tezkor Amallar
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <a href="/admin/" class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg text-center transition">
+                            <ion-icon name="settings-outline" class="text-2xl mb-2 block"></ion-icon>
+                            <span class="block font-medium">Admin Panel</span>
+                        </a>
+                        <a href="{% url 'admin_surveys_list' %}" class="bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-lg text-center transition">
+                            <ion-icon name="bar-chart-outline" class="text-2xl mb-2 block"></ion-icon>
+                            <span class="block font-medium">So'rovnoma Statistika</span>
+                        </a>
+                        <a href="{% url 'survey_list' %}" class="bg-green-600 hover:bg-green-700 text-white p-4 rounded-lg text-center transition">
+                            <ion-icon name="list-outline" class="text-2xl mb-2 block"></ion-icon>
+                            <span class="block font-medium">So'rovnomalar</span>
+                        </a>
+                        <a href="/admin/auth_app/student/" class="bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg text-center transition">
+                            <ion-icon name="people-outline" class="text-2xl mb-2 block"></ion-icon>
+                            <span class="block font-medium">Talabalar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Info -->
+            <div class="mt-8 bg-white shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                        <ion-icon name="information-circle-outline" class="text-blue-500 mr-2"></ion-icon>
+                        Tizim Ma'lumotlari
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">Sizning Huquqlaringiz:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li class="flex items-center">
+                                    <ion-icon name="checkmark-outline" class="text-green-500 mr-2"></ion-icon>
+                                    Admin Panel kirish
+                                </li>
+                                <li class="flex items-center">
+                                    <ion-icon name="checkmark-outline" class="text-green-500 mr-2"></ion-icon>
+                                    So'rovnomalarni ko'rish
+                                </li>
+                                <li class="flex items-center">
+                                    <ion-icon name="checkmark-outline" class="text-green-500 mr-2"></ion-icon>
+                                    Talabalar ma'lumotlari
+                                </li>
+                                <li class="flex items-center">
+                                    <ion-icon name="checkmark-outline" class="text-green-500 mr-2"></ion-icon>
+                                    Hisobotlar va statistika
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">Session Ma'lumotlari:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Username:</strong> {{ current_admin.username }}</li>
+                                <li><strong>Email:</strong> {{ current_admin.email|default:"Belgilanmagan" }}</li>
+                                <li><strong>Faol:</strong> {{ current_admin.is_active|yesno:"Ha,Yo'q" }}</li>
+                                <li><strong>Superuser:</strong> {{ current_admin.is_superuser|yesno:"Ha,Yo'q" }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

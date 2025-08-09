@@ -6,12 +6,29 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="mb-8">
-        <a href="{% url 'survey_list' %}" class="inline-flex items-center text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors group">
-            <ion-icon name="arrow-back-outline" class="mr-2 text-lg group-hover:-translate-x-1 transition-transform"></ion-icon>
-            Barcha so'rovnomalarga qaytish
-        </a>
-        <h1 class="text-3xl font-bold font-serif text-slate-900 mt-2">{{ survey.title }}</h1>
-        <p class="text-slate-500 mt-1">So'rovnoma bo'yicha to'liq statistik ma'lumotlar</p>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <a href="{% url 'admin_surveys_list' %}" class="inline-flex items-center text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors group">
+                    <ion-icon name="arrow-back-outline" class="mr-2 text-lg group-hover:-translate-x-1 transition-transform"></ion-icon>
+                    Barcha so'rovnomalarga qaytish
+                </a>
+                <h1 class="text-3xl font-bold font-serif text-slate-900 mt-2">{{ survey.title }}</h1>
+                <p class="text-slate-500 mt-1">So'rovnoma bo'yicha to'liq statistik ma'lumotlar</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="{% url 'survey_statistics_pdf' survey.pk %}" 
+                   target="_blank"
+                   class="inline-flex items-center px-4 py-2.5 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                    <ion-icon name="download-outline" class="mr-2 text-lg"></ion-icon>
+                    PDF yuklab olish
+                </a>
+                <button onclick="window.print()" 
+                        class="inline-flex items-center px-4 py-2.5 bg-slate-600 text-white text-sm font-medium rounded-lg hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                    <ion-icon name="print-outline" class="mr-2 text-lg"></ion-icon>
+                    Chop etish
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- SKELETON LOADER -->

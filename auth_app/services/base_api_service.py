@@ -8,10 +8,11 @@ from requests.packages.urllib3.util.retry import Retry
 logger = logging.getLogger(__name__)
 
 class APIClientException(Exception):
-    def __init__(self, message, status_code=None, response_data=None):
+    def __init__(self, message, status_code=None, response_data=None, url=None):
         super().__init__(message)
         self.status_code = status_code
         self.response_data = response_data
+        self.url = url
 
 class BaseAPIClient:
     def __init__(self, base_url, timeout=15, verify_ssl=None, default_headers=None):
@@ -70,21 +71,24 @@ class BaseAPIClient:
             
             error_message = f"API HTTP Error {status_code} on {url}"
             if response_data:
-                 api_err = response_data.get('error') or response_data.get('message') or response_data.get('detail')
+                 # response_data dict yoki string bo'lishi mumkin
+                 api_err = None
+                 if isinstance(response_data, dict):
+                     api_err = response_data.get('error') or response_data.get('message') or response_data.get('detail')
                  if api_err:
                      error_message = str(api_err) # API xabarini ishlatamiz
 
             logger.error(f"{error_message}. Response data: {response_data}", exc_info=True, extra=log_extra)
-            raise APIClientException(error_message, status_code=status_code, response_data=response_data) from e
+            raise APIClientException(error_message, status_code=status_code, response_data=response_data, url=url) from e
         except requests.exceptions.ConnectionError as e:
             logger.error(f"API Connection Error on {url}: {e}", exc_info=True, extra=log_extra)
-            raise APIClientException(f"API serveriga ulanishda xatolik: {url}", status_code=503) from e # 503 Service Unavailable
+            raise APIClientException(f"API serveriga ulanishda xatolik: {url}", status_code=503, url=url) from e # 503 Service Unavailable
         except requests.exceptions.Timeout as e:
             logger.error(f"API Timeout on {url}: {e}", exc_info=True, extra=log_extra)
-            raise APIClientException(f"API serveridan javob kutish vaqti tugadi: {url}", status_code=504) from e # 504 Gateway Timeout
+            raise APIClientException(f"API serveridan javob kutish vaqti tugadi: {url}", status_code=504, url=url) from e # 504 Gateway Timeout
         except requests.exceptions.RequestException as e:
             logger.error(f"API Request Exception on {url}: {e}", exc_info=True, extra=log_extra)
-            raise APIClientException(f"API so'rovida noma'lum xatolik: {url}", status_code=500) from e
+            raise APIClientException(f"API so'rovida noma'lum xatolik: {url}", status_code=500, url=url) from e
 
     def get(self, endpoint, params=None, headers=None):
         return self._request("GET", endpoint, params=params, headers=headers)

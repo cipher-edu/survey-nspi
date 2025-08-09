@@ -278,6 +278,40 @@ def logout_view(request):
     return redirect(settings.LOGIN_URL)
 
 
+def admin_login_view(request):
+    """Rahbariyat uchun Django admin orqali login qilish"""
+    from django.contrib.auth import authenticate, login
+    from django.contrib.auth.forms import AuthenticationForm
+    
+    # Agar admin allaqachon login qilgan bo'lsa
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            
+            if user is not None and user.is_staff:
+                login(request, user)
+                messages.success(request, f"Xush kelibsiz, {user.get_full_name() or user.username}!")
+                return redirect('dashboard')
+            else:
+                messages.error(request, "Rahbariyat huquqlari yetarli emas.")
+        else:
+            messages.error(request, "Login yoki parol xato.")
+    else:
+        form = AuthenticationForm()
+    
+    context = {
+        'form': form,
+        'title': 'Rahbariyat uchun kirish'
+    }
+    return render(request, 'auth_app/admin_login.html', context)
+
+
 def home_view(request):
     if 'api_token' in request.session and 'student_db_id' in request.session:
         if _handle_api_token_refresh(request):
@@ -290,8 +324,48 @@ def home_view(request):
     return render(request, 'auth_app/home.html')
 
 
-@custom_login_required_with_token_refresh 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+@login_required
 def dashboard_view(request):
+    # Admin authentication check
+    if request.user.is_staff:
+        # Admin dashboard
+        total_students = Student.objects.count()
+        total_surveys = Survey.objects.count()
+        total_responses = SurveyResponse.objects.count()
+        
+        context = {
+            'current_admin': request.user,
+            'is_admin': True,
+            'total_students': total_students,
+            'total_surveys': total_surveys,
+            'total_responses': total_responses,
+        }
+        return render(request, 'auth_app/admin_dashboard.html', context)
+    
+    # API based authentication check for students
+    if request.session.get('is_admin_user') and request.session.get('admin_user_id'):
+        try:
+            admin_user = User.objects.get(pk=request.session['admin_user_id'], is_staff=True)
+            # Admin dashboard
+            total_students = Student.objects.count()
+            total_surveys = Survey.objects.count()
+            total_responses = SurveyResponse.objects.count()
+            
+            context = {
+                'current_admin': admin_user,
+                'is_admin': True,
+                'total_students': total_students,
+                'total_surveys': total_surveys,
+                'total_responses': total_responses,
+            }
+            return render(request, 'auth_app/admin_dashboard.html', context)
+        except User.DoesNotExist:
+            request.session.flush()
+            return redirect(settings.LOGIN_URL)
+
     current_student = getattr(request, 'current_student', None) # Dekorator o'rnatadi
 
     if not current_student: # Bu holat kamdan-kam yuz berishi kerak
@@ -650,6 +724,48 @@ from django.contrib.auth.decorators import user_passes_test
 def is_staff_user(user):
     return user.is_staff
 
+# Admin panel uchun surveys ro'yxati
+@user_passes_test(is_staff_user)
+def admin_surveys_list(request):
+    """
+    Admin panel uchun barcha so'rovnomalar ro'yxati.
+    Har bir so'rovnoma uchun asosiy statistika ko'rsatiladi.
+    """
+    surveys = Survey.objects.all().order_by('-created_at')
+    
+    # Har bir survey uchun statistika hisoblash
+    surveys_with_stats = []
+    total_responses_all = 0
+    active_count = 0
+    
+    for survey in surveys:
+        total_responses = SurveyResponse.objects.filter(survey=survey).count()
+        total_responses_all += total_responses
+        
+        if survey.is_active and survey.is_open:
+            active_count += 1
+            
+        surveys_with_stats.append({
+            'survey': survey,
+            'total_responses': total_responses,
+            'is_active': survey.is_active,
+            'is_open': survey.is_open,
+        })
+    
+    # Umumiy statistikalar
+    total_surveys = len(surveys_with_stats)
+    average_responses = round(total_responses_all / total_surveys) if total_surveys > 0 else 0
+    
+    context = {
+        'surveys_with_stats': surveys_with_stats,
+        'page_title': 'So\'rovnomalar statistikasi',
+        'total_surveys': total_surveys,
+        'active_surveys': active_count,
+        'total_responses_all': total_responses_all,
+        'average_responses': average_responses,
+    }
+    return render(request, 'auth_app/admin_surveys_list.html', context)
+
 @user_passes_test(is_staff_user) # Faqat admin (staff) foydalanuvchilar kira oladi
 def survey_statistics_view(request, survey_pk):
     """
@@ -666,3 +782,75 @@ def survey_statistics_view(request, survey_pk):
         'page_title': f'"{survey.title}" Statistikasi'
     }
     return render(request, 'auth_app/survey_stat.html', context)
+
+
+@user_passes_test(is_staff_user)
+def survey_statistics_pdf_view(request, survey_pk):
+    """
+    So'rovnoma statistikasini PDF formatida yuklab olish funksiyasi.
+    xhtml2pdf kutubxonasidan foydalanadi.
+    """
+    try:
+        from xhtml2pdf import pisa
+        from django.http import HttpResponse
+        from django.template.loader import get_template
+        from io import BytesIO
+        import requests
+        
+        # Survey va statistikalarni olish
+        survey = Survey.objects.get(pk=survey_pk)
+        
+        # API'dan statistika ma'lumotlarini olish
+        api_view = SurveyStatisticsAPIView()
+        api_request = request
+        api_request.method = 'GET'
+        api_response = api_view.get(api_request, survey_pk)
+        
+        if api_response.status_code != 200:
+            messages.error(request, "Statistika ma'lumotlarini olishda xatolik yuz berdi.")
+            return redirect('admin_survey_statistics', survey_pk=survey_pk)
+        
+        statistics_data = api_response.data
+        
+        # PDF uchun context tayyorlash
+        context = {
+            'survey': survey,
+            'statistics': statistics_data,
+            'current_date': timezone.now(),
+        }
+        
+        # PDF shablonini render qilish
+        template = get_template('auth_app/survey_statistics_pdf.html')
+        html = template.render(context)
+        
+        # PDF generatsiyasi
+        result = BytesIO()
+        pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result, encoding='UTF-8')
+        
+        if not pdf.err:
+            # Fayl nomini tayyorlash (Unicode belgilarni o'zgartirish)
+            safe_title = survey.title.replace(' ', '_').replace('/', '_').replace('\\', '_')
+            safe_title = ''.join(c for c in safe_title if c.isalnum() or c in ('_', '-'))[:50]
+            filename = f"statistika_{safe_title}_{timezone.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+            
+            # HTTP response yaratish
+            response = HttpResponse(result.getvalue(), content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            response['Content-Length'] = len(result.getvalue())
+            
+            logger.info(f"PDF hisobot yaratildi: {filename} (Survey ID: {survey_pk})")
+            return response
+        else:
+            logger.error(f"PDF yaratishda xatolik: {pdf.err}")
+            messages.error(request, "PDF faylini yaratishda xatolik yuz berdi.")
+            return redirect('admin_survey_statistics', survey_pk=survey_pk)
+            
+    except ImportError:
+        messages.error(request, "PDF export uchun kerakli kutubxona o'rnatilmagan.")
+        return redirect('admin_survey_statistics', survey_pk=survey_pk)
+    except Survey.DoesNotExist:
+        raise Http404("So'rovnoma topilmadi")
+    except Exception as e:
+        logger.error(f"PDF export'da kutilmagan xatolik: {e}", exc_info=True)
+        messages.error(request, "PDF yaratishda kutilmagan xatolik yuz berdi.")
+        return redirect('admin_survey_statistics', survey_pk=survey_pk)

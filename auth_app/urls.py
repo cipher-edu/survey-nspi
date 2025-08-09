@@ -8,6 +8,7 @@ from .views import SurveyStatisticsAPIView
 # Bu mavjud URL manzillaringiz
 urlpatterns = [
     path('login/', views.login_view, name='login'),
+    path('admin-login/', views.admin_login_view, name='admin_login'),
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('', views.home_view, name='home'),
@@ -17,6 +18,11 @@ urlpatterns = [
     path('api/surveys/<int:survey_pk>/submit/', views.submit_survey_api_view, name='submit_survey_api'),
     path('api/surveys/<int:survey_pk>/statistics/', SurveyStatisticsAPIView.as_view(), name='survey_statistics_api'),
     path('surveys/<int:survey_pk>/statistics/', views.survey_statistics_view, name='survey_statistics'),
+    
+    # Admin panel URLs
+    path('admin-surveys/', views.admin_surveys_list, name='admin_surveys_list'),
+    path('admin-surveys/<int:survey_pk>/stats/', views.survey_statistics_view, name='admin_survey_statistics'),
+    path('admin-surveys/<int:survey_pk>/stats/pdf/', views.survey_statistics_pdf_view, name='survey_statistics_pdf'),
     # path('api/surveys/<int:survey_pk>/submit/<int:question_pk>/', views.submit_question_api_view, name='submit_question_api'),
     # path('api/surveys/<int:survey_pk>/submit/<int:question_pk>/<int:choice_pk>/', views.submit_choice_api_view, name='submit_choice_api'),
     # path('api/surveys/<int:survey_pk>/submit/<int:question_pk>/text/', views.submit_text_api_view, name='submit_text_api'),

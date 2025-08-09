@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ survey.title }} - Statistika hisoboti</title>
+    <style>
+        @page {
+            margin: 1.5cm;
+            size: A4;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #2d3748;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 22px;
+            margin: 0 0 8px 0;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 13px;
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        
+        .header .date {
+            font-size: 10px;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        
+        .section h2 {
+            color: #2b6cb0;
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding: 8px 15px;
+            background-color: #ebf8ff;
+            border-left: 4px solid #2b6cb0;
+            font-weight: bold;
+        }
+        
+        .section h3 {
+            color: #4a5568;
+            font-size: 13px;
+            margin: 12px 0 8px 0;
+            font-weight: bold;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .stats-grid {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            margin-bottom: 8px;
+            width: 45%;
+            float: left;
+            margin-right: 5%;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card:nth-child(even) {
+            margin-right: 0;
+        }
+        
+        .stat-card .label {
+            color: #718096;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .stat-card .value {
+            color: #2d3748;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .stat-card.primary {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border-color: #38b2ac;
+        }
+        
+        .stat-card.primary .value {
+            color: #2c7a7b;
+        }
+        
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        .demographics {
+            margin-bottom: 25px;
+        }
+        
+        .demo-section {
+            margin-bottom: 18px;
+            page-break-inside: avoid;
+            background-color: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .demo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .demo-item {
+            padding: 6px 10px;
+            margin-bottom: 4px;
+            background-color: white;
+            border-left: 3px solid #4299e1;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .demo-item:nth-child(odd) {
+            background-color: #f7fafc;
+        }
+        
+        .demo-item .name {
+            font-weight: 500;
+            color: #2d3748;
+            float: left;
+        }
+        
+        .demo-item .count {
+            font-weight: bold;
+            color: #2b6cb0;
+            font-size: 12px;
+            float: right;
+            background-color: #bee3f8;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+        
+        .questions-section {
+            margin-top: 25px;
+        }
+        
+        .question-block {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .question-title {
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 12px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .question-type {
+            display: inline-block;
+            background-color: #e6fffa;
+            color: #2c7a7b;
+            font-size: 9px;
+            padding: 2px 6px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            border: 1px solid #81e6d9;
+        }
+        
+        .choices-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .choice-item {
+            padding: 5px 8px;
+            margin-bottom: 2px;
+            background-color: #f7fafc;
+            font-size: 10px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .choice-item:nth-child(odd) {
+            background-color: #edf2f7;
+        }
+        
+        .choice-text {
+            color: #4a5568;
+            float: left;
+            width: 70%;
+        }
+        
+        .choice-count {
+            font-weight: bold;
+            color: #2b6cb0;
+            float: right;
+            background-color: #bee3f8;
+            padding: 1px 6px;
+            border-radius: 8px;
+            font-size: 9px;
+        }
+        
+        .progress-bar {
+            width: 15%;
+            height: 4px;
+            background-color: #e2e8f0;
+            float: right;
+            margin-top: 3px;
+            margin-left: 5px;
+            border-radius: 2px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4299e1, #2b6cb0);
+            border-radius: 2px;
+        }
+        
+        .text-answers {
+            margin-top: 8px;
+        }
+        
+        .text-answer {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border-left: 3px solid #38a169;
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            font-size: 10px;
+            color: #2d3748;
+            word-break: break-word;
+            border-radius: 0 4px 4px 0;
+            border: 1px solid #c6f6d5;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+            font-size: 9px;
+            background-color: #f7fafc;
+        }
+        
+        .no-data {
+            text-align: center;
+            color: #a0aec0;
+            font-style: italic;
+            padding: 15px;
+            background-color: #f7fafc;
+            border-radius: 4px;
+            border: 1px dashed #cbd5e0;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+        
+        .highlight {
+            background-color: #fed7d7;
+            color: #c53030;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+            border: 1px solid #f6ad55;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            font-size: 10px;
+        }
+        
+        .icon {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>📊 {{ survey.title }}</h1>
+        <div class="subtitle">So'rovnoma statistika hisoboti</div>
+        {% if survey.description %}
+        <div class="subtitle" style="margin-top: 8px; font-style: italic;">
+            {{ survey.description|truncatechars:150 }}
+        </div>
+        {% endif %}
+        <div class="date">🗓️ Hisobot yaratilgan sana: {{ current_date|date:"d.m.Y H:i" }}</div>
+    </div>
+
+    <!-- Umumiy statistikalar -->
+    <div class="section">
+        <h2>📈 Umumiy ko'rsatkichlar</h2>
+        
+        <div class="summary-box">
+            <strong>🎯 Asosiy natijalar:</strong> Ushbu hisobot {{ statistics.total_participants }} ta ishtirokchi javoblari asosida tuzilgan. 
+            So'rovnoma {{ survey.created_at|date:"d.m.Y" }} sanasida yaratilgan va hozirda {% if survey.is_active %}<span class="highlight">faol</span>{% else %}<span style="color: #e53e3e;">nofaol</span>{% endif %} holatda.
+        </div>
+        
+        <div class="stats-grid clearfix">
+            <div class="stat-card primary">
+                <div class="label">👥 Jami ishtirokchilar</div>
+                <div class="value">{{ statistics.total_participants }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">❓ Savollar soni</div>
+                <div class="value">{{ statistics.questions_statistics|length }}</div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="stat-card primary">
+                <div class="label">📊 So'rovnoma holati</div>
+                <div class="value">{% if survey.is_active %}✅ Faol{% else %}❌ Nofaol{% endif %}</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">🗓️ Yaratilgan sana</div>
+                <div class="value" style="font-size: 14px;">{{ survey.created_at|date:"d.m.Y" }}</div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <!-- Demografik ma'lumotlar -->
+    {% if statistics.total_participants > 0 and not survey.is_anonymous %}
+    <div class="section demographics">
+        <h2>👥 Demografik tahlil</h2>
+        
+        {% if statistics.demographics.by_faculty %}
+        <div class="demo-section">
+            <h3>🏛️ Fakultetlar kesimida</h3>
+            <ul class="demo-list">
+                {% for faculty, count in statistics.demographics.by_faculty.items %}
+                <li class="demo-item clearfix">
+                    <span class="name">📚 {{ faculty }}</span>
+                    <span class="count">{{ count }} kishi</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {% widthratio count statistics.total_participants 100 %}%;"></div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if statistics.demographics.by_level %}
+        <div class="demo-section">
+            <h3>🎓 Kurslar kesimida</h3>
+            <ul class="demo-list">
+                {% for level, count in statistics.demographics.by_level.items %}
+                <li class="demo-item clearfix">
+                    <span class="name">📈 {{ level }}</span>
+                    <span class="count">{{ count }} talaba</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {% widthratio count statistics.total_participants 100 %}%;"></div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if statistics.demographics.by_gender %}
+        <div class="demo-section">
+            <h3>⚤ Jinslar kesimida</h3>
+            <ul class="demo-list">
+                {% for gender, count in statistics.demographics.by_gender.items %}
+                <li class="demo-item clearfix">
+                    <span class="name">{% if gender == 'Erkak' %}👨{% elif gender == 'Ayol' %}👩{% else %}👤{% endif %} {{ gender }}</span>
+                    <span class="count">{{ count }} kishi</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {% widthratio count statistics.total_participants 100 %}%;"></div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if statistics.demographics.by_education_form %}
+        <div class="demo-section">
+            <h3>🎒 Ta'lim shakli</h3>
+            <ul class="demo-list">
+                {% for form, count in statistics.demographics.by_education_form.items %}
+                <li class="demo-item clearfix">
+                    <span class="name">📖 {{ form }}</span>
+                    <span class="count">{{ count }} kishi</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {% widthratio count statistics.total_participants 100 %}%;"></div>
+                    </div>
+                    <div style="clear: both;"></div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Savollar bo'yicha statistika -->
+    <div class="section questions-section page-break">
+        <h2>🔍 Savollar bo'yicha batafsil tahlil</h2>
+        
+        <div class="summary-box">
+            📊 <strong>Tahlil xulosasi:</strong> Quyida har bir savol bo'yicha batafsil statistikalar keltirilgan. 
+            Jami {{ statistics.questions_statistics|length }} ta savol tahlil qilingan.
+        </div>
+        
+        {% for question in statistics.questions_statistics %}
+        <div class="question-block avoid-break">
+            <div class="question-type">
+                {% if question.question_type == 'single_choice' %}📝 Bitta tanlov
+                {% elif question.question_type == 'multiple_choice' %}☑️ Ko'p tanlov  
+                {% elif question.question_type == 'text' %}💬 Matn javob
+                {% else %}❓ {{ question.question_type }}
+                {% endif %}
+            </div>
+            <div class="question-title">{{ forloop.counter }}. {{ question.text }}</div>
+            
+            {% if question.question_type == 'text' %}
+                {% if question.text_answers %}
+                <div class="text-answers">
+                    <h4 style="font-size: 12px; color: #374151; margin-bottom: 8px;">💭 Javoblar (birinchi 20 ta):</h4>
+                    {% for answer in question.text_answers|slice:":20" %}
+                    <div class="text-answer">{{ answer }}</div>
+                    {% endfor %}
+                    {% if question.text_answers|length > 20 %}
+                    <div class="no-data" style="padding: 10px;">
+                        📋 ... va yana {{ question.text_answers|length|add:"-20" }} ta javob
+                    </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="no-data">❌ Javob berilmagan</div>
+                {% endif %}
+            {% else %}
+                {% if question.choices_stats %}
+                <ul class="choices-list">
+                    {% for choice in question.choices_stats %}
+                    <li class="choice-item clearfix">
+                        <span class="choice-text">{{ choice.text }}</span>
+                        <span class="choice-count">{{ choice.count }} ta</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {% if statistics.total_participants > 0 %}{% widthratio choice.count statistics.total_participants 100 %}{% else %}0{% endif %}%;"></div>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <div class="no-data">❌ Javob berilmagan</div>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>🎓 NSU Survey System - Navoiy Davlat Universiteti</div>
+        <div>📊 Hisobot yaratildi: {{ current_date|date:"d.m.Y H:i" }} | ⚡ Powered by NYZ Group</div>
+    </div>
+</body>
+</html>

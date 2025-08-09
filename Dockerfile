@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 8. Statik fayllar yig'ish (production uchun muhim)
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # 9. Production porti
 EXPOSE 8000

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block page_title %}Bosh sahifa{% endblock %} - NSPI HEMIS</title>
+    <title>{% block page_title %}Bosh sahifa{% endblock %} - NSU HEMIS</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -319,7 +319,7 @@
                 <div class="flex items-center">
                     <a href="{% url 'home' %}" class="flex items-center group">
                         <ion-icon name="logo-electron" class="text-3xl sm:text-4xl mr-2 text-primary-600 group-hover:text-primary-500 transition-colors"></ion-icon>
-                        <span class="text-2xl sm:text-3xl font-bold font-serif text-slate-900">HEMIS</span>
+                        <span class="text-2xl sm:text-3xl font-bold font-serif text-slate-900">Survey NSU</span>
                     </a>
                 </div>
                 
@@ -337,6 +337,18 @@
                     <a href="{% url 'survey_list' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'survey_list' %}nav-link-active{% endif %}">
                         <ion-icon name="list-outline" class="text-xl"></ion-icon>
                         <span class="ml-1.5">So'rovnomalar</span>
+                    </a>
+                    {% endif %}
+                    
+                    <!-- Admin statistika linki -->
+                    {% if request.user.is_authenticated and request.user.is_staff %}
+                    <a href="{% url 'admin_surveys_list' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'admin_surveys_list' %}nav-link-active{% endif %}">
+                        <ion-icon name="bar-chart-outline" class="text-xl"></ion-icon>
+                        <span class="ml-1.5">Statistika</span>
+                    </a>
+                    <a href="{% url 'dashboard' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'dashboard' %}nav-link-active{% endif %}">
+                        <ion-icon name="speedometer-outline" class="text-xl"></ion-icon>
+                        <span class="ml-1.5">Dashboard</span>
                     </a>
                     {% endif %}
                 </div>
@@ -379,6 +391,19 @@
                                         <ion-icon name="list-outline" class="mr-2.5"></ion-icon>
                                         So'rovnomalar
                                     </a>
+                                    
+                                    <!-- Admin statistika menusi -->
+                                    {% if request.user.is_authenticated and request.user.is_staff %}
+                                    <a href="{% url 'admin_surveys_list' %}" class="user-menu-item">
+                                        <ion-icon name="bar-chart-outline" class="mr-2.5"></ion-icon>
+                                        Statistika
+                                    </a>
+                                    <a href="/admin/" class="user-menu-item">
+                                        <ion-icon name="settings-outline" class="mr-2.5"></ion-icon>
+                                        Admin Panel
+                                    </a>
+                                    {% endif %}
+                                    
                                     <a href="{% url 'logout' %}" class="user-menu-item text-red-600 hover:bg-red-50 hover:text-red-700">
                                         <ion-icon name="log-out-outline" class="mr-2.5"></ion-icon>
                                         Chiqish
@@ -386,9 +411,15 @@
                                 </div>
                             </div>
                         {% else %}
-                            <a href="{% url 'login' %}" class="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                                Kirish
-                            </a>
+                            <div class="flex items-center space-x-3">
+                                <a href="{% url 'login' %}" class="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                                    Kirish
+                                </a>
+                                <a href="{% url 'admin_login' %}" class="px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 flex items-center">
+                                    <ion-icon name="shield-outline" class="text-base mr-1.5"></ion-icon>
+                                    Rahbariyat
+                                </a>
+                            </div>
                         {% endif %}
                     </div>
                     
@@ -424,6 +455,13 @@
                     So'rovnomalar
                 </a>
                 {% endif %}
+                
+                <!-- Admin statistika mobile linki -->
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                <a href="{% url 'admin_surveys_list' %}" class="nav-link-mobile {% if request.resolver_match.url_name == 'admin_surveys_list' %}nav-link-mobile-active{% endif %}">
+                    Statistika
+                </a>
+                {% endif %}
             </div>
             
             {% if request.session.api_token and request.session.student_db_id %}
@@ -449,15 +487,30 @@
                         <a href="{% url 'survey_list' %}" class="nav-link-mobile">
                             So'rovnomalar
                         </a>
+                        
+                        <!-- Admin mobile user menu linklar -->
+                        {% if request.user.is_authenticated and request.user.is_staff %}
+                        <a href="{% url 'admin_surveys_list' %}" class="nav-link-mobile">
+                            Statistika
+                        </a>
+                        <a href="/admin/" class="nav-link-mobile">
+                            Admin Panel
+                        </a>
+                        {% endif %}
+                        
                         <a href="{% url 'logout' %}" class="block rounded-lg px-3 py-2 text-base font-medium text-red-600 hover:bg-red-100 hover:text-red-700">
                             Chiqish
                         </a>
                     </div>
                 </div>
             {% else %}
-                <div class="py-3 px-2 sm:px-3 border-t border-slate-200">
+                <div class="py-3 px-2 sm:px-3 border-t border-slate-200 space-y-2">
                     <a href="{% url 'login' %}" class="block w-full text-center px-4 py-2.5 rounded-lg text-base font-semibold text-white bg-primary-600 hover:bg-primary-700 transition-colors">
                         Kirish
+                    </a>
+                    <a href="{% url 'admin_login' %}" class="block w-full text-center px-4 py-2.5 rounded-lg text-base font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors">
+                        <ion-icon name="shield-outline" class="text-base mr-1.5"></ion-icon>
+                        Rahbariyat uchun kirish
                     </a>
                 </div>
             {% endif %}
@@ -522,8 +575,8 @@
     <!-- Footer -->
     <footer class="mt-auto bg-slate-900 text-slate-400">
         <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 text-center text-sm">
-            <p>© {% now "Y" %} Navoiy Davlat Pedagogika Instituti. HEMIS bilan integratsiya.</p>
-            <p class="mt-1">Powered by <a href="https://djangoproject.com" target="_blank" class="text-primary-400 hover:text-primary-300">Django</a> & <a href="https://tailwindcss.com" target="_blank" class="text-primary-400 hover:text-primary-300">Tailwind CSS</a>.</p>
+            <p>© {% now "Y" %} Navoiy Davlat Universiteti. HEMIS bilan integratsiya.</p>
+            <p class="mt-1">Powered by <a href="https://www.instagram.com/nyzgroup?igsh=YjY4cXVlbDFrbXN0" target="_blank" class="text-primary-400 hover:text-primary-300">NYZ Group</a> </p>
         </div>
     </footer>
 
