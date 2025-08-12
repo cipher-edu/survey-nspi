@@ -142,7 +142,7 @@ REQUESTS_VERIFY_SSL = env.bool('REQUESTS_VERIFY_SSL', default=True)
 API_TOKEN_REFRESH_THRESHOLD_SECONDS = 10 * 60 # Token muddati tugashiga 10 daqiqa qolganda yangilash (default 5 edi)
 
 # Admin panelidagi action uchun yoki tizimli tasklar uchun ishlatiladigan token (agar mavjud bo'lsa)
-HEMIS_ADMIN_API_TOKEN = env('HEMIS_ADMIN_API_TOKEN', default=None) 
+HEMIS_ADMIN_API_TOKEN = env('b1scfqAQKK2PjRvll0MTAbFOQ1yumi4b', default=None) 
 # Yoki HEMIS_SYSTEM_API_TOKEN (tasks.py da ishlatilgan)
 HEMIS_SYSTEM_API_TOKEN = env('HEMIS_SYSTEM_API_TOKEN', default=None)
 
@@ -164,7 +164,7 @@ DATABASES = {
         'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql'),
         'NAME': env('DB_NAME', default='survey_prod_db'),
         'USER': env('DB_USER', default='survey_user'),
-        'PASSWORD': env('DB_PASSWORD', default='your_database_password_here'),
+        'PASSWORD': env('DB_PASSWORD', default='super_secret_password'),
         'HOST': env('DB_HOST', default='db'),
         'PORT': env('DB_PORT', default='5432'),
     }

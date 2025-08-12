@@ -1,11 +1,13 @@
-# Production environment uchun Docker Compose
-version: "3.8"
+version: "3.9"
 
 services:
   web:
     build: .
     container_name: survey_web
-    command: gunicorn --bind 0.0.0.0:8000 --workers 3 --worker-class sync --timeout 120 --max-requests 1000 --max-requests-jitter 100 external_auth_project.wsgi:application
+    command: >
+      gunicorn --bind 0.0.0.0:8000 --workers 3 --worker-class sync
+      --timeout 120 --max-requests 1000 --max-requests-jitter 100
+      external_auth_project.wsgi:application
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
@@ -13,11 +15,13 @@ services:
     expose:
       - "8000"
     env_file:
-      - ./.env
+      - .env.prod
     depends_on:
       - db
       - redis
     restart: unless-stopped
+    networks:
+      - survey_network
 
   db:
     image: postgres:15
@@ -27,13 +31,17 @@ services:
       POSTGRES_USER: survey_user
       POSTGRES_PASSWORD: super_secret_password
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - survey_network
 
   redis:
     image: redis:7-alpine
     container_name: survey_redis
     restart: unless-stopped
+    networks:
+      - survey_network
 
   celery:
     build: .
@@ -42,18 +50,20 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./.env
+      - .env
     depends_on:
       - redis
       - db
     restart: unless-stopped
+    networks:
+      - survey_network
 
   nginx:
     image: nginx:latest
     container_name: survey_nginx
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:80"       # HTTP
+      - "443:443"     # HTTPS
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - static_volume:/app/staticfiles
@@ -62,9 +72,14 @@ services:
     depends_on:
       - web
     restart: unless-stopped
+    networks:
+      - survey_network
 
 volumes:
   postgres_data:
-    driver: local
   static_volume:
   media_volume:
+
+networks:
+  survey_network:
+    driver: bridge

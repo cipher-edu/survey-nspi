@@ -236,83 +236,138 @@
             </div>
         </div>
     </section>
-    <!-- Yangiliklar va Tadbirlar -->
+    <!-- So'rovnoma Tizimi Ma'lumotlari -->
     <section class="py-16 bg-slate-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Yangiliklar -->
-                <div class="lg:w-2/3">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">So'nggi Yangiliklar</h2>
-                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Barchasi <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">So'rovnoma Tizimi Haqida</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">NSU Survey System - Navoiy Davlat Universiteti talabalarining fikr-mulohazalarini yig'ish va tahlil qilish uchun zamonaviy platforma</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Tizim Imkoniyatlari -->
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <ion-icon name="rocket-outline" class="text-blue-600 mr-3 text-3xl"></ion-icon>
+                        Tizim Imkoniyatlari
+                    </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="news-card">
-                            <img src="{% static 'images/fon2-min.jpg' %}" alt="Yangilik 1" class="w-full h-48 object-cover">
-                            <div class="p-5">
-                                <span class="text-xs text-slate-500">15-Iyun, 2023</span>
-                                <h3 class="text-lg font-semibold mt-1">Yangi o'quv yili boshlanishi</h3>
-                                <p class="text-slate-600 mt-2 text-sm">1-sentyabr kuni yangi o'quv yili tantanali ravishda ochiladi...</p>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium mt-3 inline-block">Batafsil <i class="fas fa-arrow-right ml-1"></i></a>
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mr-4">
+                                    <ion-icon name="create-outline" class="text-green-600 text-2xl"></ion-icon>
+                                </div>
+                                <h4 class="font-semibold text-slate-800">Oson So'rovnoma Yaratish</h4>
                             </div>
+                            <p class="text-slate-600 text-sm">Turli xil savol turlari bilan so'rovnomalarni tez va oson yaratish imkoniyati</p>
                         </div>
                         
-                        <div class="news-card">
-                            <img src="{% static 'images/fon2-min.jpg' %}" alt="Yangilik 2" class="w-full h-48 object-cover">
-                            <div class="p-5">
-                                <span class="text-xs text-slate-500">10-Iyun, 2023</span>
-                                <h3 class="text-lg font-semibold mt-1">Xalqaro konferensiya</h3>
-                                <p class="text-slate-600 mt-2 text-sm">Institutimizda xalqaro miqyosdagi pedagogika konferensiyasi bo'lib o'tdi...</p>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium mt-3 inline-block">Batafsil <i class="fas fa-arrow-right ml-1"></i></a>
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mr-4">
+                                    <ion-icon name="bar-chart-outline" class="text-blue-600 text-2xl"></ion-icon>
+                                </div>
+                                <h4 class="font-semibold text-slate-800">Real-time Statistika</h4>
                             </div>
+                            <p class="text-slate-600 text-sm">Natijalar darhol tahlil qilinib, grafik va diagramma ko'rinishida taqdim etiladi</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mr-4">
+                                    <ion-icon name="download-outline" class="text-purple-600 text-2xl"></ion-icon>
+                                </div>
+                                <h4 class="font-semibold text-slate-800">PDF Hisobotlar</h4>
+                            </div>
+                            <p class="text-slate-600 text-sm">Natijalarni professional PDF hisobotlar sifatida yuklab olish</p>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center mr-4">
+                                    <ion-icon name="shield-checkmark-outline" class="text-orange-600 text-2xl"></ion-icon>
+                                </div>
+                                <h4 class="font-semibold text-slate-800">Anonim Javoblar</h4>
+                            </div>
+                            <p class="text-slate-600 text-sm">Talabalar o'z fikrlarini ochiq va xavfsiz tarzda bildirish imkoniyati</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Tadbirlar -->
-                <div class="lg:w-1/3">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">Yaqinlashayotgan Tadbirlar</h2>
-                        <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Barchasi <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
+                <!-- Qo'llanma va Yordam -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 flex items-center">
+                        <ion-icon name="help-circle-outline" class="text-green-600 mr-3 text-3xl"></ion-icon>
+                        Yordam va Qo'llanma
+                    </h3>
                     
                     <div class="space-y-4">
-                        <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
                             <div class="flex items-start">
-                                <div class="bg-indigo-100 text-indigo-600 rounded-lg p-2 mr-3">
-                                    <i class="fas fa-calendar-day"></i>
+                                <div class="bg-blue-100 text-blue-600 rounded-lg p-2 mr-3 flex-shrink-0">
+                                    <ion-icon name="book-outline" class="text-lg"></ion-icon>
                                 </div>
                                 <div>
-                                    <h3 class="font-medium">O'quv yili ochilishi</h3>
-                                    <p class="text-sm text-slate-500 mt-1">1-Sentabr, 2023 | 09:00</p>
+                                    <h4 class="font-semibold text-blue-900 mb-1">Foydalanish Qo'llanmasi</h4>
+                                    <p class="text-blue-700 text-sm">Tizimdan to'liq foydalanish bo'yicha batafsil qo'llanma</p>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium mt-2 inline-block">Ko'rish →</a>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
                             <div class="flex items-start">
-                                <div class="bg-indigo-100 text-indigo-600 rounded-lg p-2 mr-3">
-                                    <i class="fas fa-microphone"></i>
+                                <div class="bg-green-100 text-green-600 rounded-lg p-2 mr-3 flex-shrink-0">
+                                    <ion-icon name="chatbubbles-outline" class="text-lg"></ion-icon>
                                 </div>
                                 <div>
-                                    <h3 class="font-medium">Ilmiy seminar</h3>
-                                    <p class="text-sm text-slate-500 mt-1">10-Sentabr, 2023 | 14:00</p>
+                                    <h4 class="font-semibold text-green-900 mb-1">Texnik Yordam</h4>
+                                    <p class="text-green-700 text-sm">Savollaringiz bo'yicha 24/7 yordam xizmati</p>
+                                    <a href="mailto:support@nsuni.uz" class="text-green-600 hover:text-green-800 text-sm font-medium mt-2 inline-block">Bog'lanish →</a>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
+                        <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl p-5 border border-purple-100">
                             <div class="flex items-start">
-                                <div class="bg-indigo-100 text-indigo-600 rounded-lg p-2 mr-3">
-                                    <i class="fas fa-graduation-cap"></i>
+                                <div class="bg-purple-100 text-purple-600 rounded-lg p-2 mr-3 flex-shrink-0">
+                                    <ion-icon name="videocam-outline" class="text-lg"></ion-icon>
                                 </div>
                                 <div>
-                                    <h3 class="font-medium">Bitiruvchilar marosimi</h3>
-                                    <p class="text-sm text-slate-500 mt-1">25-Iyun, 2023 | 10:00</p>
+                                    <h4 class="font-semibold text-purple-900 mb-1">Video Darslar</h4>
+                                    <p class="text-purple-700 text-sm">Tizim bilan ishlash bo'yicha video qo'llanmalar</p>
+                                    <a href="#" class="text-purple-600 hover:text-purple-800 text-sm font-medium mt-2 inline-block">Tomosha qilish →</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tizim Statistikasi -->
+            <div class="mt-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-2">Tizim Statistikasi</h3>
+                    <p class="text-indigo-100">NSU Survey System orqali yig'ilgan umumiy ma'lumotlar</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-2">150+</div>
+                        <div class="text-indigo-100 text-sm">Yaratilgan So'rovnoma</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-2">2,500+</div>
+                        <div class="text-indigo-100 text-sm">Ishtirokchi Talaba</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-2">15,000+</div>
+                        <div class="text-indigo-100 text-sm">Berilgan Javob</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-2">98%</div>
+                        <div class="text-indigo-100 text-sm">Mamnunlik Darajasi</div>
                     </div>
                 </div>
             </div>
