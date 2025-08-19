@@ -327,15 +327,13 @@ def home_view(request):
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-@login_required
+
 def dashboard_view(request):
     # Admin authentication check
-    if request.user.is_staff:
-        # Admin dashboard
+    if request.user.is_authenticated and request.user.is_staff:
         total_students = Student.objects.count()
         total_surveys = Survey.objects.count()
         total_responses = SurveyResponse.objects.count()
-        
         context = {
             'current_admin': request.user,
             'is_admin': True,
@@ -344,66 +342,30 @@ def dashboard_view(request):
             'total_responses': total_responses,
         }
         return render(request, 'auth_app/admin_dashboard.html', context)
-    
-    # API based authentication check for students
-    if request.session.get('is_admin_user') and request.session.get('admin_user_id'):
+
+    # Student session-based authentication
+    student_db_id_in_session = request.session.get('student_db_id')
+    api_token_in_session = request.session.get('api_token')
+    if not api_token_in_session or not student_db_id_in_session:
+        messages.warning(request, "Iltimos, davom etish uchun tizimga kiring.")
+        login_url_name = settings.LOGIN_URL
         try:
-            admin_user = User.objects.get(pk=request.session['admin_user_id'], is_staff=True)
-            # Admin dashboard
-            total_students = Student.objects.count()
-            total_surveys = Survey.objects.count()
-            total_responses = SurveyResponse.objects.count()
-            
-            context = {
-                'current_admin': admin_user,
-                'is_admin': True,
-                'total_students': total_students,
-                'total_surveys': total_surveys,
-                'total_responses': total_responses,
-            }
-            return render(request, 'auth_app/admin_dashboard.html', context)
-        except User.DoesNotExist:
-            request.session.flush()
-            return redirect(settings.LOGIN_URL)
+            login_url_path = reverse(login_url_name)
+        except Exception:
+            login_url_path = f"/{login_url_name}/"
+        current_path = request.get_full_path()
+        return redirect(f'{login_url_path}?next={current_path}')
 
-    current_student = getattr(request, 'current_student', None) # Dekorator o'rnatadi
-
-    if not current_student: # Bu holat kamdan-kam yuz berishi kerak
-        logger.error(f"FATAL: current_student not found in request for dashboard despite decorator. Session: {request.session.session_key}")
+    try:
+        current_student = Student.objects.get(pk=student_db_id_in_session)
+    except Student.DoesNotExist:
+        logger.warning(f"Student ID {student_db_id_in_session} from session not found in DB. Flushing session.")
         request.session.flush()
-        messages.error(request, "Kritik sessiya xatoligi. Iltimos, qayta kiring.")
+        messages.error(request, "Sessiya yaroqsiz yoki foydalanuvchi topilmadi. Iltimos, qayta kiring.")
         return redirect(settings.LOGIN_URL)
-    
-    # Dashboardga har kirganda profilni yangilash (agar kerak bo'lsa va interval o'tgan bo'lsa)
-    # Bu foydalanuvchi uchun yuklamani oshirishi mumkin. Celery task afzalroq.
-    # refresh_interval = timezone.timedelta(minutes=getattr(settings, "DASHBOARD_PROFILE_REFRESH_INTERVAL_MINUTES", 30))
-    # last_updated_threshold = timezone.now() - refresh_interval
-
-    # if current_student.updated_at < last_updated_threshold:
-    #     logger.info(f"Student {current_student.username} profile data is older than {refresh_interval}. Attempting refresh.")
-    #     try:
-    #         api_client = HemisAPIClient(api_token=request.session.get('api_token')) # Token sessiyadan olinadi
-    #         student_info_from_api = api_client.get_account_me()
-    #         if student_info_from_api and isinstance(student_info_from_api, dict):
-    #             student_defaults = map_api_data_to_student_model_defaults(student_info_from_api, current_student.username)
-    #             if student_defaults:
-    #                 update_student_instance_with_defaults(current_student, student_defaults)
-    #                 # current_student ni qayta yuklash kerak emas, chunki update_student_instance_with_defaults o'zgartiradi
-    #                 messages.info(request, "Profil ma'lumotlaringiz yangilandi.")
-    #             else:
-    #                 logger.warning(f"Could not map API data for student {current_student.username} during dashboard refresh.")
-    #         else:
-    #             logger.warning(f"No data or invalid data from API for {current_student.username} during dashboard refresh.")
-    #     except APIClientException as e:
-    #         messages.warning(request, f"Profilni API dan yangilab bo'lmadi: {e.args[0]}")
-    #         logger.error(f"APIClientException during dashboard profile refresh for {current_student.username}: {e}", exc_info=True)
-    #     except Exception as e:
-    #         logger.error(f"Unexpected error during dashboard profile refresh for {current_student.username}: {e}", exc_info=True)
-    #         messages.error(request, "Profilni yangilashda kutilmagan xatolik yuz berdi.")
-
 
     context = {
-        'student': current_student, # Endi bu yangilangan bo'lishi mumkin
+        'student': current_student,
         'username_display': str(current_student),
     }
     return render(request, 'auth_app/dashboard.html', context)
