@@ -94,7 +94,7 @@ CSRF_COOKIE_DOMAIN = None  # Agar subdomenlar uchun kerak bo'lsa, domen nomini q
 CSRF_COOKIE_NAME = 'hemis_csrf_token'  # CSRF cookie nomi
 CSRF_USE_SESSIONS = False  # CSRF token sessiyada saqlanmaydi, faqat cookie'da
 CSRF_COOKIE_SAMESITE = 'Lax' # Yoki 'Strict' (ko'proq himoya, lekin ba'zi holatlarda noqulaylik tug'dirishi mumkin)
-CSRF_TRUSTED_ORIGINS = ['https://survey.nspi.uz']
+# CSRF_TRUSTED_ORIGINS = ['https://survey.nspi.uz']
 
 ROOT_URLCONF = 'external_auth_project.urls'
 

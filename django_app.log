@@ -22300,3 +22300,1535 @@ INFO 2025-08-12 08:35:59,016 autoreload 7 139159724936064 Watching for file chan
 INFO 2025-08-12 08:35:59,860 basehttp 7 139159640467136 "GET / HTTP/1.1" 200 43975
 INFO 2025-08-12 08:36:34,277 autoreload 7 140541603158912 Watching for file changes with StatReloader
 INFO 2025-08-12 08:36:37,753 basehttp 7 140541517883072 "GET / HTTP/1.1" 200 40700
+WARNING 2025-08-20 20:34:11,308 log 9 139344433290112 Not Found: /favicon.ico
+WARNING 2025-08-20 20:34:12,315 log 8 139344433290112 Not Found: /static/images/LOGO UNIVERSITET.png
+INFO 2025-08-20 20:34:18,262 views 8 139344433290112 Login attempt for user: 353201107000
+INFO 2025-08-20 20:34:19,197 views 8 139344433290112 Login successful for 353201107000, fetching account data with new token.
+CRITICAL 2025-08-20 20:34:19,483 views 8 139344433290112 Error Log ID: 20250820153418261898_UNEXP - User: 353201107000, Unexpected error in login_view: OperationalError - connection to server at "db" (172.18.0.3), port 5432 failed: FATAL:  password authentication failed for user "survey_user"
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "db" (172.18.0.3), port 5432 failed: FATAL:  password authentication failed for user "survey_user"
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/auth_app/views.py", line 176, in login_view
+    with transaction.atomic():
+  File "/opt/venv/lib/python3.11/site-packages/django/db/transaction.py", line 198, in __enter__
+    if not connection.get_autocommit():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 464, in get_autocommit
+    self.ensure_connection()
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 288, in ensure_connection
+    with self.wrap_database_errors:
+  File "/opt/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: connection to server at "db" (172.18.0.3), port 5432 failed: FATAL:  password authentication failed for user "survey_user"
+
+WARNING 2025-08-20 20:34:19,530 log 9 139344433290112 Not Found: /static/images/LOGO UNIVERSITET.png
+INFO 2025-08-20 20:50:05,528 views 9 139344433290112 Login attempt for user: 353201107000
+INFO 2025-08-20 20:50:06,355 views 9 139344433290112 Login successful for 353201107000, fetching account data with new token.
+CRITICAL 2025-08-20 20:50:06,480 views 9 139344433290112 Error Log ID: 20250820155005527718_UNEXP - User: 353201107000, Unexpected error in login_view: OperationalError - connection to server at "db" (172.18.0.3), port 5432 failed: FATAL:  password authentication failed for user "survey_user"
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "db" (172.18.0.3), port 5432 failed: FATAL:  password authentication failed for user "survey_user"
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/auth_app/views.py", line 176, in login_view
+    with transaction.atomic():
+  File "/opt/venv/lib/python3.11/site-packages/django/db/transaction.py", line 198, in __enter__
+    if not connection.get_autocommit():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 464, in get_autocommit
+    self.ensure_connection()
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 288, in ensure_connection
+    with self.wrap_database_errors:
+  File "/opt/venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 289, in ensure_connection
+    self.connect()
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/base/base.py", line 270, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/db/backends/postgresql/base.py", line 275, in get_new_connection
+    connection = self.Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: connection to server at "db" (172.18.0.3), port 5432 failed: FATAL:  password authentication failed for user "survey_user"
+
+WARNING 2025-08-20 21:09:00,542 log 8 127619858987904 Not Found: /static/images/LOGO UNIVERSITET.png
+INFO 2025-08-20 21:09:06,220 views 8 127619858987904 Login attempt for user: 353201107000
+INFO 2025-08-20 21:09:07,067 views 8 127619858987904 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-08-20 21:09:07,214 views 8 127619858987904 User 353201107000 logged in. Session expiry: 2025-08-21 16:09:07.214272+00:00, API token expiry: 2025-08-21 21:09:07.214246
+INFO 2025-08-20 21:35:51,682 decorators 8 124113439599488 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:35:51,683 decorators 8 124113439599488 is_admin_user: None
+INFO 2025-08-20 21:35:51,684 decorators 8 124113439599488 admin_user_id: None
+INFO 2025-08-20 21:35:51,684 decorators 8 124113439599488 student_db_id: 1
+INFO 2025-08-20 21:35:52,858 decorators 7 124113439599488 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:35:52,858 decorators 7 124113439599488 is_admin_user: None
+INFO 2025-08-20 21:35:52,859 decorators 7 124113439599488 admin_user_id: None
+INFO 2025-08-20 21:35:52,860 decorators 7 124113439599488 student_db_id: 1
+ERROR 2025-08-20 21:35:52,903 log 7 124113439599488 Internal Server Error: /messages/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/decorators.py", line 58, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 882, in student_messages_list_view
+    return render(request, 'auth_app/student_messages_list.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+                    ^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 484, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 703, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' if msg.responsible_person else "Noma'lum"' from 'msg.responsible_person.full_name if msg.responsible_person else "Noma'lum"'
+INFO 2025-08-20 21:36:11,335 decorators 8 124113439599488 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:36:11,336 decorators 8 124113439599488 is_admin_user: None
+INFO 2025-08-20 21:36:11,336 decorators 8 124113439599488 admin_user_id: None
+INFO 2025-08-20 21:36:11,337 decorators 8 124113439599488 student_db_id: 1
+INFO 2025-08-20 21:36:49,475 decorators 8 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:36:49,476 decorators 8 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:36:49,476 decorators 8 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:36:49,477 decorators 8 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:36:51,539 decorators 9 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:36:51,540 decorators 9 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:36:51,541 decorators 9 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:36:51,541 decorators 9 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:36:53,266 decorators 8 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:36:53,267 decorators 8 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:36:53,267 decorators 8 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:36:53,268 decorators 8 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:37:09,084 decorators 9 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:37:09,085 decorators 9 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:37:09,086 decorators 9 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:37:09,087 decorators 9 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:37:49,283 decorators 8 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:37:49,285 decorators 8 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:37:49,285 decorators 8 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:37:49,285 decorators 8 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:37:49,301 decorators 9 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:37:49,302 decorators 9 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:37:49,302 decorators 9 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:37:49,303 decorators 9 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:37:52,080 decorators 7 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:37:52,080 decorators 7 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:37:52,081 decorators 7 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:37:52,082 decorators 7 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:02,127 decorators 8 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:02,128 decorators 8 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:38:02,129 decorators 8 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:38:02,129 decorators 8 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:13,530 decorators 9 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:13,530 decorators 9 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:38:13,531 decorators 9 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:38:13,532 decorators 9 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:16,696 decorators 7 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:16,696 decorators 7 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:38:16,697 decorators 7 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:38:16,697 decorators 7 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:20,062 decorators 9 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:20,063 decorators 9 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:38:20,064 decorators 9 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:38:20,064 decorators 9 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:24,002 decorators 7 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:24,003 decorators 7 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:38:24,003 decorators 7 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:38:24,004 decorators 7 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:34,245 decorators 9 126664658197376 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:34,247 decorators 9 126664658197376 is_admin_user: None
+INFO 2025-08-20 21:38:34,247 decorators 9 126664658197376 admin_user_id: None
+INFO 2025-08-20 21:38:34,248 decorators 9 126664658197376 student_db_id: 1
+INFO 2025-08-20 21:38:36,571 decorators 9 137112441297792 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:36,571 decorators 9 137112441297792 is_admin_user: None
+INFO 2025-08-20 21:38:36,572 decorators 9 137112441297792 admin_user_id: None
+INFO 2025-08-20 21:38:36,572 decorators 9 137112441297792 student_db_id: 1
+INFO 2025-08-20 21:38:37,648 decorators 8 137112441297792 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:37,648 decorators 8 137112441297792 is_admin_user: None
+INFO 2025-08-20 21:38:37,649 decorators 8 137112441297792 admin_user_id: None
+INFO 2025-08-20 21:38:37,649 decorators 8 137112441297792 student_db_id: 1
+INFO 2025-08-20 21:38:40,205 decorators 9 137112441297792 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:38:40,206 decorators 9 137112441297792 is_admin_user: None
+INFO 2025-08-20 21:38:40,206 decorators 9 137112441297792 admin_user_id: None
+INFO 2025-08-20 21:38:40,207 decorators 9 137112441297792 student_db_id: 1
+INFO 2025-08-20 21:40:08,778 decorators 9 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:40:08,778 decorators 9 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:40:08,779 decorators 9 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:40:08,779 decorators 9 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:40:59,713 decorators 9 133274354576256 Decorator called - Session keys: []
+INFO 2025-08-20 21:40:59,714 decorators 9 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:40:59,715 decorators 9 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:40:59,715 decorators 9 133274354576256 student_db_id: None
+WARNING 2025-08-20 21:40:59,912 log 8 133274354576256 Not Found: /static/images/LOGO UNIVERSITET.png
+INFO 2025-08-20 21:41:05,878 views 8 133274354576256 Login attempt for user: 353201107000
+INFO 2025-08-20 21:41:06,777 views 8 133274354576256 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-08-20 21:41:06,930 views 8 133274354576256 User 353201107000 logged in. Session expiry: 2025-08-21 16:41:06.930700+00:00, API token expiry: 2025-08-21 21:41:06.930669
+INFO 2025-08-20 21:41:06,950 decorators 9 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:06,950 decorators 9 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:06,951 decorators 9 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:06,951 decorators 9 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:41:08,772 decorators 9 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:08,772 decorators 9 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:08,773 decorators 9 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:08,773 decorators 9 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:41:19,684 decorators 8 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:19,685 decorators 8 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:19,685 decorators 8 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:19,686 decorators 8 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:41:25,310 decorators 9 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:25,310 decorators 9 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:25,311 decorators 9 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:25,311 decorators 9 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:41:25,335 decorators 8 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:25,335 decorators 8 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:25,336 decorators 8 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:25,336 decorators 8 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:41:29,202 decorators 8 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:29,203 decorators 8 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:29,204 decorators 8 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:29,206 decorators 8 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:41:33,257 decorators 9 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:41:33,258 decorators 9 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:41:33,258 decorators 9 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:41:33,259 decorators 9 133274354576256 student_db_id: 1
+ERROR 2025-08-20 21:41:33,289 log 9 133274354576256 Internal Server Error: /messages/2/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/decorators.py", line 58, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 894, in student_message_detail_view
+    return render(request, 'auth_app/student_message_detail.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 484, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 703, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' if message.responsible_person else "Noma'lum"' from 'message.responsible_person.full_name if message.responsible_person else "Noma'lum"'
+INFO 2025-08-20 21:42:07,383 decorators 8 133274354576256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:07,384 decorators 8 133274354576256 is_admin_user: None
+INFO 2025-08-20 21:42:07,385 decorators 8 133274354576256 admin_user_id: None
+INFO 2025-08-20 21:42:07,385 decorators 8 133274354576256 student_db_id: 1
+INFO 2025-08-20 21:42:09,595 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:09,596 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:09,596 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:09,597 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:11,274 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:11,275 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:11,276 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:11,276 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:13,308 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:13,309 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:13,309 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:13,310 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:17,503 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:17,503 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:17,504 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:17,504 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:17,537 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:17,537 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:17,538 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:17,538 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:18,883 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:18,884 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:18,885 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:18,885 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:19,794 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:19,794 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:19,795 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:19,795 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:21,794 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:21,794 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:21,795 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:21,795 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:21,809 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:21,809 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:21,810 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:21,810 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:22,698 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:22,698 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:22,699 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:22,699 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:23,849 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:23,850 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:23,850 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:23,851 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:25,536 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:25,537 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:25,538 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:25,538 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:25,553 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:25,553 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:25,554 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:25,554 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:26,009 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:26,010 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:26,011 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:26,011 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:27,129 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:27,130 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:27,130 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:27,131 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:29,110 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:29,111 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:29,111 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:29,112 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:29,124 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:29,125 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:29,125 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:29,125 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:30,152 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:30,153 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:30,153 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:30,154 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:32,064 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:32,065 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:32,065 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:32,066 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:34,090 decorators 9 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:34,091 decorators 9 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:34,091 decorators 9 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:34,092 decorators 9 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:34,105 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:34,106 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:34,107 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:34,107 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:34,825 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:34,825 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:34,826 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:34,826 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:36,330 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:36,330 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:36,330 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:36,331 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:42,129 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:42,130 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:42,131 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:42,133 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:44,018 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:44,019 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:44,019 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:44,020 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:45,032 decorators 8 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:45,033 decorators 8 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:45,033 decorators 8 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:45,034 decorators 8 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:42:45,767 decorators 7 127253492984704 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:42:45,768 decorators 7 127253492984704 is_admin_user: None
+INFO 2025-08-20 21:42:45,769 decorators 7 127253492984704 admin_user_id: None
+INFO 2025-08-20 21:42:45,770 decorators 7 127253492984704 student_db_id: 1
+INFO 2025-08-20 21:44:14,064 decorators 7 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:44:14,064 decorators 7 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:44:14,065 decorators 7 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:44:14,065 decorators 7 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:44:14,678 decorators 8 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:44:14,679 decorators 8 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:44:14,679 decorators 8 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:44:14,680 decorators 8 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:44:14,749 decorators 7 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 21:44:14,750 decorators 7 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:44:14,750 decorators 7 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:44:14,751 decorators 7 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:44:42,135 decorators 8 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:44:42,135 decorators 8 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:44:42,136 decorators 8 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:44:42,137 decorators 8 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:45:15,508 decorators 7 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:45:15,509 decorators 7 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:45:15,510 decorators 7 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:45:15,511 decorators 7 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:45:27,382 decorators 7 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:45:27,383 decorators 7 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:45:27,383 decorators 7 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:45:27,384 decorators 7 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:45:40,682 decorators 8 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:45:40,683 decorators 8 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:45:40,683 decorators 8 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:45:40,684 decorators 8 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:45:59,087 decorators 9 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:45:59,088 decorators 9 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:45:59,088 decorators 9 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:45:59,089 decorators 9 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:46:02,194 decorators 7 133383003499392 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:46:02,195 decorators 7 133383003499392 is_admin_user: None
+INFO 2025-08-20 21:46:02,196 decorators 7 133383003499392 admin_user_id: None
+INFO 2025-08-20 21:46:02,196 decorators 7 133383003499392 student_db_id: 1
+INFO 2025-08-20 21:50:02,765 decorators 9 131581097913216 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:50:02,766 decorators 9 131581097913216 is_admin_user: None
+INFO 2025-08-20 21:50:02,767 decorators 9 131581097913216 admin_user_id: None
+INFO 2025-08-20 21:50:02,767 decorators 9 131581097913216 student_db_id: 1
+INFO 2025-08-20 21:50:16,312 decorators 7 131581097913216 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:50:16,313 decorators 7 131581097913216 is_admin_user: None
+INFO 2025-08-20 21:50:16,313 decorators 7 131581097913216 admin_user_id: None
+INFO 2025-08-20 21:50:16,313 decorators 7 131581097913216 student_db_id: 1
+INFO 2025-08-20 21:50:17,395 decorators 9 131581097913216 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:50:17,396 decorators 9 131581097913216 is_admin_user: None
+INFO 2025-08-20 21:50:17,396 decorators 9 131581097913216 admin_user_id: None
+INFO 2025-08-20 21:50:17,396 decorators 9 131581097913216 student_db_id: 1
+INFO 2025-08-20 21:50:22,574 decorators 7 131581097913216 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:50:22,575 decorators 7 131581097913216 is_admin_user: None
+INFO 2025-08-20 21:50:22,575 decorators 7 131581097913216 admin_user_id: None
+INFO 2025-08-20 21:50:22,576 decorators 7 131581097913216 student_db_id: 1
+INFO 2025-08-20 21:50:22,771 decorators 8 131581097913216 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:50:22,771 decorators 8 131581097913216 is_admin_user: None
+INFO 2025-08-20 21:50:22,772 decorators 8 131581097913216 admin_user_id: None
+INFO 2025-08-20 21:50:22,772 decorators 8 131581097913216 student_db_id: 1
+INFO 2025-08-20 21:50:24,857 decorators 9 131581097913216 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:50:24,857 decorators 9 131581097913216 is_admin_user: None
+INFO 2025-08-20 21:50:24,858 decorators 9 131581097913216 admin_user_id: None
+INFO 2025-08-20 21:50:24,858 decorators 9 131581097913216 student_db_id: 1
+INFO 2025-08-20 21:51:40,674 decorators 9 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:51:40,676 decorators 9 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:51:40,676 decorators 9 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:51:40,677 decorators 9 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:51:57,438 decorators 7 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:51:57,438 decorators 7 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:51:57,439 decorators 7 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:51:57,439 decorators 7 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:07,040 decorators 9 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:07,041 decorators 9 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:07,042 decorators 9 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:07,042 decorators 9 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:08,208 decorators 8 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:08,209 decorators 8 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:08,209 decorators 8 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:08,209 decorators 8 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:09,337 decorators 9 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:09,338 decorators 9 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:09,339 decorators 9 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:09,339 decorators 9 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:11,889 decorators 8 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:11,890 decorators 8 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:11,890 decorators 8 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:11,890 decorators 8 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:15,426 decorators 9 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:15,428 decorators 9 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:15,428 decorators 9 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:15,430 decorators 9 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:16,019 decorators 8 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:16,019 decorators 8 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:16,020 decorators 8 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:16,021 decorators 8 138894297959296 student_db_id: 1
+INFO 2025-08-20 21:52:17,184 decorators 7 138894297959296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 21:52:17,184 decorators 7 138894297959296 is_admin_user: None
+INFO 2025-08-20 21:52:17,185 decorators 7 138894297959296 admin_user_id: None
+INFO 2025-08-20 21:52:17,185 decorators 7 138894297959296 student_db_id: 1
+INFO 2025-08-20 22:00:11,689 decorators 8 124524453030784 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:00:11,691 decorators 8 124524453030784 is_admin_user: None
+INFO 2025-08-20 22:00:11,693 decorators 8 124524453030784 admin_user_id: None
+INFO 2025-08-20 22:00:11,694 decorators 8 124524453030784 student_db_id: 1
+INFO 2025-08-20 22:00:13,233 decorators 9 124524453030784 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:00:13,234 decorators 9 124524453030784 is_admin_user: None
+INFO 2025-08-20 22:00:13,234 decorators 9 124524453030784 admin_user_id: None
+INFO 2025-08-20 22:00:13,234 decorators 9 124524453030784 student_db_id: 1
+INFO 2025-08-20 22:00:21,088 decorators 7 124524453030784 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:00:21,088 decorators 7 124524453030784 is_admin_user: None
+INFO 2025-08-20 22:00:21,089 decorators 7 124524453030784 admin_user_id: None
+INFO 2025-08-20 22:00:21,089 decorators 7 124524453030784 student_db_id: 1
+INFO 2025-08-20 22:01:35,323 decorators 7 137774154128256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:01:35,324 decorators 7 137774154128256 is_admin_user: None
+INFO 2025-08-20 22:01:35,324 decorators 7 137774154128256 admin_user_id: None
+INFO 2025-08-20 22:01:35,325 decorators 7 137774154128256 student_db_id: 1
+INFO 2025-08-20 22:01:35,394 decorators 8 137774154128256 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:01:35,395 decorators 8 137774154128256 is_admin_user: None
+INFO 2025-08-20 22:01:35,396 decorators 8 137774154128256 admin_user_id: None
+INFO 2025-08-20 22:01:35,396 decorators 8 137774154128256 student_db_id: 1
+ERROR 2025-08-20 22:03:47,216 log 7 138563906722688 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:03:48,255 log 9 138563906722688 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+INFO 2025-08-20 22:03:58,468 decorators 7 138563906722688 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:03:58,469 decorators 7 138563906722688 is_admin_user: None
+INFO 2025-08-20 22:03:58,470 decorators 7 138563906722688 admin_user_id: None
+INFO 2025-08-20 22:03:58,470 decorators 7 138563906722688 student_db_id: 1
+INFO 2025-08-20 22:04:53,221 decorators 8 138563906722688 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:04:53,222 decorators 8 138563906722688 is_admin_user: None
+INFO 2025-08-20 22:04:53,222 decorators 8 138563906722688 admin_user_id: None
+INFO 2025-08-20 22:04:53,222 decorators 8 138563906722688 student_db_id: 1
+INFO 2025-08-20 22:04:55,411 decorators 7 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:04:55,411 decorators 7 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:04:55,412 decorators 7 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:04:55,412 decorators 7 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:04:56,050 decorators 8 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:04:56,050 decorators 8 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:04:56,051 decorators 8 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:04:56,051 decorators 8 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:05:05,487 decorators 9 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:05:05,488 decorators 9 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:05:05,488 decorators 9 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:05:05,489 decorators 9 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:05:09,077 decorators 8 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:05:09,077 decorators 8 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:05:09,078 decorators 8 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:05:09,078 decorators 8 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:05:11,420 decorators 9 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:05:11,421 decorators 9 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:05:11,421 decorators 9 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:05:11,422 decorators 9 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:05:12,228 decorators 8 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:05:12,228 decorators 8 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:05:12,229 decorators 8 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:05:12,229 decorators 8 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:05:14,653 decorators 9 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:05:14,654 decorators 9 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:05:14,655 decorators 9 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:05:14,655 decorators 9 130371611495296 student_db_id: 1
+INFO 2025-08-20 22:05:19,355 decorators 8 130371611495296 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:05:19,356 decorators 8 130371611495296 is_admin_user: None
+INFO 2025-08-20 22:05:19,356 decorators 8 130371611495296 admin_user_id: None
+INFO 2025-08-20 22:05:19,357 decorators 8 130371611495296 student_db_id: 1
+ERROR 2025-08-20 22:05:21,404 log 7 130371611495296 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:05:23,969 log 9 130371611495296 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:08:28,255 log 7 140142149610368 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:09:03,979 log 8 140142149610368 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:11:30,789 log 7 133105730575232 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 80: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:11:31,813 log 9 133105730575232 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 80: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:12:04,182 log 7 133105730575232 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:12:05,761 log 9 131249468885888 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:12:06,450 log 7 131249468885888 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-08-20 22:13:19,671 log 7 135588516653952 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 354, in dashboard_view
+    return render(request, 'auth_app/admin_dashboard.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 568, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 178: 'endblock'. Did you forget to register or load this tag?
+WARNING 2025-08-20 22:15:48,426 log 8 131258459151232 Not Found: /admin/messages/
+WARNING 2025-08-20 22:17:22,570 log 8 123871836150656 Not Found: /admin/messages/
+WARNING 2025-08-20 22:17:23,310 log 7 123871836150656 Not Found: /admin/messages/
+WARNING 2025-08-20 22:17:23,646 log 9 123871836150656 Not Found: /admin/messages/
+WARNING 2025-08-20 22:17:23,734 log 7 123871836150656 Not Found: /admin/messages/
+WARNING 2025-08-20 22:17:27,730 log 7 123871836150656 Not Found: /admin/messages/
+WARNING 2025-08-20 22:18:59,457 log 8 133717938584448 Not Found: /admin/messages/
+WARNING 2025-08-20 22:19:00,149 log 9 133717938584448 Not Found: /admin/messages/
+WARNING 2025-08-20 22:19:00,185 log 9 133717938584448 Not Found: /admin/messages/
+WARNING 2025-08-20 22:19:02,610 log 8 133717938584448 Not Found: /admin/messages/
+WARNING 2025-08-20 22:21:11,901 log 7 138764304759680 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:19,046 log 8 139976788994944 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:19,312 log 7 139976788994944 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:19,631 log 9 139976788994944 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:19,682 log 7 139976788994944 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:22,414 log 7 139976788994944 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:48,704 log 8 132917189852032 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:49,646 log 9 132917189852032 Not Found: /admin/messages/
+WARNING 2025-08-20 22:23:49,823 log 8 132917189852032 Not Found: /admin/messages/
+INFO 2025-08-20 22:24:26,675 decorators 8 123303338236800 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry', '_auth_user_id', '_auth_user_backend', '_auth_user_hash']
+INFO 2025-08-20 22:24:26,675 decorators 8 123303338236800 is_admin_user: None
+INFO 2025-08-20 22:24:26,676 decorators 8 123303338236800 admin_user_id: None
+INFO 2025-08-20 22:24:26,676 decorators 8 123303338236800 student_db_id: 1
+ERROR 2025-08-20 22:24:31,823 log 7 123303338236800 Internal Server Error: /jumpl/messages/8/
+Traceback (most recent call last):
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/auth_app/views.py", line 932, in admin_message_detail_view
+    return render(request, 'auth_app/admin_message_detail.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 484, in parse
+    raise self.error(token, e)
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.11/site-packages/django/template/base.py", line 703, in __init__
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' if message.student else "Noma'lum"' from 'message.student.short_name_api if message.student else "Noma'lum"'
+INFO 2025-08-20 23:36:45,441 views 8 136034825599872 Login attempt for user: 353201107000
+INFO 2025-08-20 23:36:46,305 views 8 136034825599872 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-08-20 23:36:46,546 views 8 136034825599872 User 353201107000 logged in. Session expiry: 2025-08-21 18:36:46.546062+00:00, API token expiry: 2025-08-21 23:36:46.546037
+INFO 2025-08-20 23:36:54,729 decorators 9 136034825599872 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 23:36:54,730 decorators 9 136034825599872 is_admin_user: None
+INFO 2025-08-20 23:36:54,730 decorators 9 136034825599872 admin_user_id: None
+INFO 2025-08-20 23:36:54,731 decorators 9 136034825599872 student_db_id: 927
+INFO 2025-08-20 23:37:37,314 views 8 136034825599872 Login attempt for user: 353201107000
+INFO 2025-08-20 23:37:38,168 views 8 136034825599872 Login successful for 353201107000, fetching account data with new token.
+INFO 2025-08-20 23:37:38,297 views 8 136034825599872 User 353201107000 logged in. Session expiry: 2025-08-21 18:37:38.297806+00:00, API token expiry: 2025-08-21 23:37:38.297779
+INFO 2025-08-20 23:37:49,849 decorators 7 136034825599872 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 23:37:49,850 decorators 7 136034825599872 is_admin_user: None
+INFO 2025-08-20 23:37:49,850 decorators 7 136034825599872 admin_user_id: None
+INFO 2025-08-20 23:37:49,851 decorators 7 136034825599872 student_db_id: 927
+INFO 2025-08-20 23:38:30,140 decorators 8 136034825599872 Decorator called - Session keys: ['api_token', 'student_db_id', 'username_display', 'api_token_expiry_timestamp', '_session_expiry']
+INFO 2025-08-20 23:38:30,141 decorators 8 136034825599872 is_admin_user: None
+INFO 2025-08-20 23:38:30,141 decorators 8 136034825599872 admin_user_id: None
+INFO 2025-08-20 23:38:30,142 decorators 8 136034825599872 student_db_id: 927
+WARNING 2025-08-20 23:41:17,040 log 9 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+INFO 2025-08-20 23:41:50,884 views 9 124010037070720 PDF hisobot yaratildi: statistika_Laboriosam_tenetur_20250820_184150.pdf (Survey ID: 1079)
+WARNING 2025-08-20 23:43:50,744 log 9 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:43:54,951 log 9 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:43:57,514 log 9 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:43:59,767 log 8 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:06,120 log 7 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:11,865 log 8 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:14,168 log 8 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:21,959 log 7 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:27,646 log 9 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:31,318 log 8 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:44:48,605 log 8 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:45:01,506 log 8 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-08-20 23:45:05,025 log 7 124010037070720 Not Found: /.well-known/appspecific/com.chrome.devtools.json

@@ -6,7 +6,7 @@ django-environ==0.11.2
 asgiref==3.7.2
 sqlparse==0.4.4
 tzdata==2024.1
-
+Faker>=19.0.0
 # --- Ma'lumotlar Bazasi (MySQL) ---
 # Agar PostgreSQL ishlatsangiz, buni "psycopg2-binary" ga almashtiring
 mysqlclient==2.2.7

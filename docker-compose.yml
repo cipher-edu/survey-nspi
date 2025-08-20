@@ -9,8 +9,8 @@ services:
       - .:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/media
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     env_file:
       - ./.env
     depends_on:
@@ -23,10 +23,12 @@ services:
   db:
     image: postgres:15
     container_name: survey_db
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: survey_prod_db
       POSTGRES_USER: survey_user
-      POSTGRES_PASSWORD: your_password_here
+      POSTGRES_PASSWORD: your_password_here  # yoki .env dan olingan qiymat
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -34,9 +36,9 @@ services:
   redis:
     image: redis:7-alpine
     container_name: survey_redis
+    ports:
+      - "6379:6379"
     restart: unless-stopped
-    expose:
-      - "6379"
 
   celery:
     build: .
