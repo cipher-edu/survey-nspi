@@ -489,3 +489,5 @@ class MessageAttachment(models.Model):
         if self.file and hasattr(self.file, 'size'):
             return round(self.file.size / 1024, 2)
         return 0
+
+# MessageToResponsible va MessageAttachment modellari allaqachon mavjud.

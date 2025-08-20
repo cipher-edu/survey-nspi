@@ -338,6 +338,14 @@
                         <ion-icon name="list-outline" class="text-xl"></ion-icon>
                         <span class="ml-1.5">So'rovnomalar</span>
                     </a>
+                    <a href="{% url 'responsible_person_list' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'responsible_person_list' %}nav-link-active{% endif %}">
+                        <ion-icon name="people-outline" class="text-xl"></ion-icon>
+                        <span class="ml-1.5">Mas'ul shaxslar</span>
+                    </a>
+                    <a href="{% url 'student_messages_list' %}" class="nav-link-desktop {% if request.resolver_match.url_name == 'student_messages_list' %}nav-link-active{% endif %}">
+                        <ion-icon name="chatbubbles-outline" class="text-xl"></ion-icon>
+                        <span class="ml-1.5">Xabarlarim</span>
+                    </a>
                     {% endif %}
                     
                     <!-- Admin statistika linki -->
@@ -390,6 +398,14 @@
                                     <a href="{% url 'survey_list' %}" class="user-menu-item">
                                         <ion-icon name="list-outline" class="mr-2.5"></ion-icon>
                                         So'rovnomalar
+                                    </a>
+                                    <a href="{% url 'responsible_person_list' %}" class="user-menu-item">
+                                        <ion-icon name="people-outline" class="mr-2.5"></ion-icon>
+                                        Mas'ul shaxslar
+                                    </a>
+                                    <a href="{% url 'student_messages_list' %}" class="user-menu-item">
+                                        <ion-icon name="chatbubbles-outline" class="mr-2.5"></ion-icon>
+                                        Xabarlarim
                                     </a>
                                     
                                     <!-- Admin statistika menusi -->
@@ -454,6 +470,12 @@
                 <a href="{% url 'survey_list' %}" class="nav-link-mobile {% if request.resolver_match.url_name == 'survey_list' %}nav-link-mobile-active{% endif %}">
                     So'rovnomalar
                 </a>
+                <a href="{% url 'responsible_person_list' %}" class="nav-link-mobile {% if request.resolver_match.url_name == 'responsible_person_list' %}nav-link-mobile-active{% endif %}">
+                    Mas'ul shaxslar
+                </a>
+                <a href="{% url 'student_messages_list' %}" class="nav-link-mobile {% if request.resolver_match.url_name == 'student_messages_list' %}nav-link-mobile-active{% endif %}">
+                    Xabarlarim
+                </a>
                 {% endif %}
                 
                 <!-- Admin statistika mobile linki -->
@@ -486,6 +508,12 @@
                         </a>
                         <a href="{% url 'survey_list' %}" class="nav-link-mobile">
                             So'rovnomalar
+                        </a>
+                        <a href="{% url 'responsible_person_list' %}" class="nav-link-mobile">
+                            Mas'ul shaxslar
+                        </a>
+                        <a href="{% url 'student_messages_list' %}" class="nav-link-mobile">
+                            Xabarlarim
                         </a>
                         
                         <!-- Admin mobile user menu linklar -->

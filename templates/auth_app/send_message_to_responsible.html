@@ -1,0 +1,66 @@
+{% extends "auth_app/base.html" %}
+{% block page_title %}Xabar yuborish{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-card border border-slate-100 p-8">
+        <div class="flex items-center gap-4 mb-6">
+            <ion-icon name="person-circle-outline" class="text-4xl text-primary-500"></ion-icon>
+            <div>
+                <div class="font-bold text-xl">{{ person.full_name }}</div>
+                <div class="text-sm text-slate-500">{{ person.position }}</div>
+                {% if person.office_location %}
+                    <div class="text-xs text-slate-400 mt-1"><ion-icon name="location-outline" class="mr-1"></ion-icon>{{ person.office_location }}</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-6">
+            {% if person.responsibilities_short %}
+                <div class="bg-primary-50 rounded-lg p-3 text-sm text-primary-700 mb-2">
+                    <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
+                    {{ person.responsibilities_short }}
+                </div>
+            {% endif %}
+            <div class="flex gap-4 text-sm text-slate-600">
+                {% if person.email %}
+                    <div class="flex items-center gap-1">
+                        <ion-icon name="mail-outline" class="text-primary-400"></ion-icon>
+                        <span>{{ person.email }}</span>
+                    </div>
+                {% endif %}
+                {% if person.phone_number %}
+                    <div class="flex items-center gap-1">
+                        <ion-icon name="call-outline" class="text-primary-400"></ion-icon>
+                        <span>{{ person.phone_number }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <form method="post" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+            <div>
+                <label for="id_subject" class="block text-sm font-semibold text-slate-700 mb-1">Mavzu</label>
+                {{ form.subject }}
+            </div>
+            <div>
+                <label for="id_content" class="block text-sm font-semibold text-slate-700 mb-1">Xabar matni</label>
+                {{ form.content }}
+            </div>
+            <div>
+                <label for="attachments" class="block text-sm font-semibold text-slate-700 mb-1">Biriktirma (ixtiyoriy)</label>
+                <input type="file" name="attachments" id="attachments" multiple class="form-input border-dashed border-2 border-primary-200 hover:border-primary-400 transition">
+                <span class="text-xs text-slate-400">PDF, JPG, PNG va boshqa fayllar yuklash mumkin.</span>
+            </div>
+            <div class="pt-2">
+                <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2 text-base py-3 font-semibold shadow-soft hover:scale-105 transition">
+                    <ion-icon name="send-outline" class="text-lg"></ion-icon>
+                    Xabar yuborish
+                </button>
+            </div>
+        </form>
+        <div class="mt-8 text-center text-xs text-slate-400">
+            <ion-icon name="shield-checkmark-outline" class="mr-1"></ion-icon>
+            Yuborilgan xabarlar maxfiy saqlanadi va faqat mas'ul shaxslar ko'rishi mumkin.
+        </div>
+    </div>
+</div>
+{% endblock %}

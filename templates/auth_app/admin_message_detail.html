@@ -1,0 +1,66 @@
+{% extends "auth_app/base.html" %}
+{% block page_title %}Xabar tafsilotlari{% endblock %}
+{% block content %}
+<div class="max-w-xl mx-auto">
+    <div class="bg-white rounded-xl shadow-card border border-slate-100 p-6">
+        <div class="mb-2">
+            <span class="font-medium text-slate-700">Mavzu:</span>
+            <span class="ml-2">{{ message.subject }}</span>
+        </div>
+        <div class="mb-2 text-sm text-slate-600">
+            <span class="font-medium">Talaba:</span>
+            {% if message.student %}
+                {{ message.student.short_name_api }}
+            {% else %}
+                Noma'lum
+            {% endif %}
+        </div>
+        <div class="mb-2 text-sm text-slate-600">
+            <span class="font-medium">Mas'ul shaxs:</span>
+            {% if message.responsible_person %}
+                {{ message.responsible_person.full_name }}
+            {% else %}
+                Noma'lum
+            {% endif %}
+        </div>
+        <div class="mb-2 text-xs text-slate-400">
+            Yuborilgan: {{ message.created_at|date:"Y-m-d H:i" }}
+        </div>
+        <div class="mb-4">
+            <span class="font-medium text-slate-700">Xabar matni:</span>
+            <div class="mt-1 text-slate-800 break-words">{{ message.content }}</div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="response_content" class="block text-sm font-medium text-slate-700 mb-1">Javob:</label>
+            <textarea name="response_content" rows="4" class="form-textarea mb-3">{{ message.response_content }}</textarea>
+            <button type="submit" class="btn-primary w-full flex items-center justify-center gap-2">
+                <ion-icon name="send-outline" class="text-lg"></ion-icon>
+                Javob yuborish
+            </button>
+        </form>
+        {% if message.response_content %}
+        <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-3 mt-4">
+            <div class="flex items-center gap-2 mb-1">
+                <ion-icon name="chatbubble-ellipses-outline" class="text-green-500"></ion-icon>
+                <span class="font-semibold text-green-700">Javob:</span>
+            </div>
+            <div class="text-green-800 break-words">{{ message.response_content }}</div>
+            <div class="text-xs text-green-600 mt-1">
+                {% if message.responded_by %}
+                    Javob bergan: {{ message.responded_by.username }}
+                {% endif %}
+                {% if message.responded_at %}
+                    | Javob vaqti: {{ message.responded_at|date:"Y-m-d H:i" }}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="mt-6 flex justify-end">
+            <a href="{% url 'admin_messages_list' %}" class="btn-secondary flex items-center gap-1">
+                <ion-icon name="arrow-back-outline"></ion-icon> Orqaga
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

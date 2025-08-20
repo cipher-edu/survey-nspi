@@ -1,0 +1,84 @@
+{% extends "auth_app/base.html" %}
+{% block page_title %}Talabalardan kelgan murojaatlar{% endblock %}
+{% block content %}
+<div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl font-bold mb-8 text-center text-primary-700">Talabalardan kelgan murojaatlar</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for msg in messages_page %}
+        <div class="flex flex-col bg-white rounded-xl shadow-card border border-indigo-100 p-5 transition hover:shadow-lg h-full">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                    <ion-icon name="person-circle-outline" class="text-xl text-indigo-500"></ion-icon>
+                    <span class="font-semibold break-words">{{ msg.subject }}</span>
+                </div>
+                <span class="status-badge
+                    {% if msg.status == 'answered' %}bg-green-200 text-green-800
+                    {% elif msg.status == 'new' %}bg-yellow-200 text-yellow-800
+                    {% elif msg.status == 'pending' %}bg-blue-200 text-blue-800
+                    {% elif msg.status == 'closed' %}bg-slate-300 text-slate-700
+                    {% else %}status-badge-other{% endif %}">
+                    {{ msg.get_status_display }}
+                </span>
+            </div>
+            <div class="text-sm text-slate-600 mb-2">
+                {% if msg.student %}
+                    <span class="font-medium">{{ msg.student.short_name_api }}</span>
+                {% endif %}
+                {% if msg.responsible_person %}
+                    <span class="text-slate-400">→ {{ msg.responsible_person.full_name }}</span>
+                {% endif %}
+            </div>
+            <div class="mb-2 text-slate-700">
+                <span class="text-xs text-slate-400">Yuborilgan: {{ msg.created_at|date:"Y-m-d H:i" }}</span>
+            </div>
+            <div class="mb-3 flex-1">
+                <span class="font-medium text-slate-700">Xabar matni:</span>
+                <div class="mt-1 text-slate-800 break-words">{{ msg.content }}</div>
+            </div>
+            {% if msg.response_content %}
+            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-3 mt-3">
+                <div class="flex items-center gap-2 mb-1">
+                    <ion-icon name="chatbubble-ellipses-outline" class="text-green-500"></ion-icon>
+                    <span class="font-semibold text-green-700">Javob:</span>
+                </div>
+                <div class="text-green-800 break-words">{{ msg.response_content }}</div>
+                <div class="text-xs text-green-600 mt-1">
+                    {% if msg.responded_by %}
+                        Javob bergan: {{ msg.responded_by.username }}
+                    {% endif %}
+                    {% if msg.responded_at %}
+                        | Javob vaqti: {{ msg.responded_at|date:"Y-m-d H:i" }}
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="mt-4 flex justify-end">
+                <a href="{% url 'admin_message_detail' msg.id %}" class="btn-secondary flex items-center gap-1">
+                    <ion-icon name="eye-outline"></ion-icon> Batafsil
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center text-slate-500">Murojaatlar topilmadi.</div>
+        {% endfor %}
+    </div>
+    <!-- Paginatsiya -->
+    <div class="mt-8 flex justify-center">
+        <nav class="inline-flex rounded-md shadow-sm" aria-label="Pagination">
+            {% if messages_page.has_previous %}
+                <a href="?page={{ messages_page.previous_page_number }}" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">Oldingi</a>
+            {% else %}
+                <span class="px-3 py-2 rounded-l-md border border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed">Oldingi</span>
+            {% endif %}
+            <span class="px-4 py-2 border-t border-b border-gray-300 bg-white text-gray-700 font-semibold">
+                {{ messages_page.number }} / {{ messages_page.paginator.num_pages }}
+            </span>
+            {% if messages_page.has_next %}
+                <a href="?page={{ messages_page.next_page_number }}" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">Keyingi</a>
+            {% else %}
+                <span class="px-3 py-2 rounded-r-md border border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed">Keyingi</span>
+            {% endif %}
+        </nav>
+    </div>
+</div>
+{% endblock %}

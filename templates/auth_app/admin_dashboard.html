@@ -103,6 +103,32 @@
                 </div>
             </div>
 
+            <!-- Murojaatlar Card -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white overflow-hidden shadow rounded-lg flex flex-col">
+                    <div class="p-5 flex items-center">
+                        <ion-icon name="chatbubbles-outline" class="h-8 w-8 text-indigo-500"></ion-icon>
+                        <div class="ml-4 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Jami Murojaatlar</dt>
+                                <dd class="text-lg font-bold text-indigo-700">
+                                    {{ recent_messages|length }}
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-50 px-5 py-3 flex justify-between items-center">
+                        <div class="text-sm text-indigo-700 font-medium">
+                            Batafsil ko'rish
+                        </div>
+                        <a href="{% url 'admin_messages_list' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-1">
+                            <ion-icon name="eye-outline"></ion-icon> Murojaatlar
+                        </a>
+                    </div>
+                </div>
+                <!-- ...you can add another card here if needed... -->
+            </div>
+
             <!-- Quick Actions -->
             <div class="bg-white shadow rounded-lg">
                 <div class="px-4 py-5 sm:p-6">

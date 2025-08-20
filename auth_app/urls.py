@@ -5,6 +5,9 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from . import views 
 from . import api_views # Yangi import
 from .views import SurveyStatisticsAPIView
+
+from django.conf import settings
+from django.conf.urls.static import static
 # Bu mavjud URL manzillaringiz
 urlpatterns = [
     path('login/', views.login_view, name='login'),
@@ -32,6 +35,13 @@ urlpatterns = [
     # path('api/surveys/<int:survey_pk>/submit/<int:question_pk>/number/', views.submit_number_api_view, name='submit_number_api'),
     # path('api/surveys/<int:survey_pk>/submit/<int:question_pk>/scale/', views.submit_scale_api_view, name='submit_scale_api'),
     # path('api/surveys/<int:survey_pk>/submit/<int:question_pk>/yes_no/', views.submit_yes_no_api_view, name='submit_yes_no_api'),
+
+    path('responsible-persons/', views.responsible_person_list_view, name='responsible_person_list'),
+    path('responsible-person/<int:person_id>/send/', views.send_message_to_responsible_view, name='send_message_to_responsible'),
+    path('messages/', views.student_messages_list_view, name='student_messages_list'),
+    path('messages/<int:msg_id>/', views.student_message_detail_view, name='student_message_detail'),
+    path('jumpl/messages/', views.admin_messages_list_view, name='admin_messages_list'),
+    path('jumpl/messages/<int:msg_id>/', views.admin_message_detail_view, name='admin_message_detail'),
 ]
 
 # API uchun yangi URL manzillari
@@ -52,3 +62,9 @@ api_urlpatterns = [
 urlpatterns += [
     path('api/', include(api_urlpatterns)),
 ]
+
+# ...existing code...
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

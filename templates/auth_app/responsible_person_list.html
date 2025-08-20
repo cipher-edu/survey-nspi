@@ -1,0 +1,54 @@
+{% extends "auth_app/base.html" %}
+{% block page_title %}Mas'ul shaxslar{% endblock %}
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8 text-center text-primary-700">Mas'ul shaxslar ro'yxati</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for person in persons %}
+        <div class="flex flex-col bg-white rounded-2xl shadow-card border border-primary-100 p-6 gap-3 hover:shadow-lg transition h-full">
+            <div class="flex items-center gap-3 mb-2">
+                <ion-icon name="person-circle-outline" class="text-4xl text-primary-500 flex-shrink-0"></ion-icon>
+                <div class="flex flex-col min-w-0">
+                    <div class="font-bold text-lg text-slate-900 break-words">{{ person.full_name }}</div>
+                    <div class="text-sm text-primary-600 break-words">{{ person.position }}</div>
+                </div>
+            </div>
+            {% if person.office_location %}
+                <div class="flex items-center gap-1 text-xs text-slate-500 break-words">
+                    <ion-icon name="location-outline" class="mr-1"></ion-icon>
+                    {{ person.office_location }}
+                </div>
+            {% endif %}
+            <div class="flex flex-wrap gap-4 text-sm text-slate-600 mt-2">
+                {% if person.email %}
+                    <div class="flex items-center gap-1 break-words">
+                        <ion-icon name="mail-outline" class="text-primary-400"></ion-icon>
+                        <span>{{ person.email }}</span>
+                    </div>
+                {% endif %}
+                {% if person.phone_number %}
+                    <div class="flex items-center gap-1 break-words">
+                        <ion-icon name="call-outline" class="text-primary-400"></ion-icon>
+                        <span>{{ person.phone_number }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            {% if person.responsibilities_short %}
+                <div class="bg-primary-50 rounded-lg p-2 text-xs text-primary-700 mt-2 break-words">
+                    <ion-icon name="information-circle-outline" class="mr-1"></ion-icon>
+                    {{ person.responsibilities_short }}
+                </div>
+            {% endif %}
+            <div class="mt-4">
+                <a href="{% url 'send_message_to_responsible' person.id %}" class="btn-primary w-full flex items-center justify-center gap-2 text-base py-2 font-semibold shadow-soft hover:scale-105 transition">
+                    <ion-icon name="chatbubbles-outline" class="text-lg"></ion-icon>
+                    Xabar yuborish
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center text-slate-500">Mas'ul shaxslar topilmadi.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

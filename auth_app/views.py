@@ -22,6 +22,13 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required # Yoki bizning custom_login_required
 from .forms import create_answer_form_set # Yangi forma
 
+# Yangi importlar
+from .models import ResponsiblePerson, MessageToResponsible, MessageAttachment
+from .forms import MessageToResponsibleForm
+
+from django.contrib.auth.decorators import user_passes_test
+from django.core.paginator import Paginator
+
 logger = logging.getLogger(__name__)
 REQUESTS_VERIFY_SSL = getattr(settings, 'REQUESTS_VERIFY_SSL', True)
 API_TOKEN_REFRESH_THRESHOLD_SECONDS = getattr(settings, 'API_TOKEN_REFRESH_THRESHOLD_SECONDS', 5 * 60) # default 5 daqiqa
@@ -334,12 +341,16 @@ def dashboard_view(request):
         total_students = Student.objects.count()
         total_surveys = Survey.objects.count()
         total_responses = SurveyResponse.objects.count()
+        recent_messages = MessageToResponsible.objects.select_related('student', 'responsible_person').order_by('-created_at')[:6]
+        recent_surveys = Survey.objects.order_by('-created_at')[:6]
         context = {
             'current_admin': request.user,
             'is_admin': True,
             'total_students': total_students,
             'total_surveys': total_surveys,
             'total_responses': total_responses,
+            'recent_messages': recent_messages,
+            'recent_surveys': recent_surveys,
         }
         return render(request, 'auth_app/admin_dashboard.html', context)
 
@@ -816,3 +827,106 @@ def survey_statistics_pdf_view(request, survey_pk):
         logger.error(f"PDF export'da kutilmagan xatolik: {e}", exc_info=True)
         messages.error(request, "PDF yaratishda kutilmagan xatolik yuz berdi.")
         return redirect('admin_survey_statistics', survey_pk=survey_pk)
+
+# --- YANGI XABAR FUNKSIYALARI VA VIEW'LARI ---
+
+# auth_app/views.py
+
+# ... (mavjud importlar)
+
+# Talabalar uchun mas'ul shaxslarga xabar yuborish, xabarlar ro'yxati va xabar tafsilotlari viewlari
+
+def is_student_user(user):
+    return hasattr(user, 'student') or hasattr(user, 'current_student')
+
+@custom_login_required_with_token_refresh
+def responsible_person_list_view(request):
+    """Talabalar uchun mas'ul shaxslar ro'yxati va xabar yuborish havolasi."""
+    persons = ResponsiblePerson.objects.filter(is_active=True).order_by('last_name', 'first_name')
+    context = {
+        'persons': persons,
+        'student': getattr(request, 'current_student', None),
+        'username_display': request.session.get('username_display'),
+    }
+    return render(request, 'auth_app/responsible_person_list.html', context)
+
+@custom_login_required_with_token_refresh
+def send_message_to_responsible_view(request, person_id):
+    """Talaba mas'ul shaxsga xabar yuboradi."""
+    person = get_object_or_404(ResponsiblePerson, pk=person_id, is_active=True)
+    student = request.current_student
+    form = MessageToResponsibleForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        msg = form.save(commit=False)
+        msg.student = student
+        msg.responsible_person = person
+        msg.save()
+        # Fayl biriktirish (agar formda bo'lsa)
+        for f in request.FILES.getlist('attachments'):
+            MessageAttachment.objects.create(message=msg, file=f, original_filename=f.name)
+        messages.success(request, f"{person.full_name} ({person.position}) ga xabaringiz yuborildi.")
+        return redirect('responsible_person_list')
+    context = {
+        'form': form,
+        'person': person,
+        'student': student,
+        'username_display': str(student),
+    }
+    return render(request, 'auth_app/send_message_to_responsible.html', context)
+
+@custom_login_required_with_token_refresh
+def student_messages_list_view(request):
+    """Talabaning barcha yuborgan xabarlari ro'yxati."""
+    student = request.current_student
+    messages_qs = MessageToResponsible.objects.filter(student=student).select_related('responsible_person').order_by('-created_at')
+    context = {
+        'messages_list': messages_qs,
+        'student': student,
+        'username_display': str(student),
+    }
+    return render(request, 'auth_app/student_messages_list.html', context)
+
+@custom_login_required_with_token_refresh
+def student_message_detail_view(request, msg_id):
+    """Talabaning xabar tafsilotlari va javob ko'rsatish."""
+    student = request.current_student
+    msg = get_object_or_404(MessageToResponsible, pk=msg_id, student=student)
+    context = {
+        'message': msg,
+        'student': student,
+        'username_display': str(student),
+    }
+    return render(request, 'auth_app/student_message_detail.html', context)
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_messages_list_view(request):
+    """Admin uchun barcha kelgan xabarlar ro'yxati (paginatsiya bilan)."""
+    messages_qs = MessageToResponsible.objects.select_related('student', 'responsible_person').order_by('-created_at')
+    paginator = Paginator(messages_qs, 12)  # Har bir sahifada 12 ta xabar
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'messages_page': page_obj,
+        'page_title': "Talabalardan kelgan murojaatlar",
+    }
+    return render(request, 'auth_app/admin_messages_list.html', context)
+
+@user_passes_test(lambda u: u.is_staff)
+def admin_message_detail_view(request, msg_id):
+    """Admin uchun xabar tafsilotlari va javob berish."""
+    msg = get_object_or_404(MessageToResponsible, pk=msg_id)
+    if request.method == 'POST':
+        response_content = request.POST.get('response_content', '').strip()
+        if response_content:
+            msg.response_content = response_content
+            msg.responded_by = request.user
+            msg.responded_at = timezone.now()
+            msg.status = 'answered'
+            msg.save()
+            messages.success(request, "Javob muvaffaqiyatli yuborildi.")
+            return redirect('admin_messages_list')
+    context = {
+        'message': msg,
+        'page_title': "Xabar tafsilotlari",
+    }
+    return render(request, 'auth_app/admin_message_detail.html', context)

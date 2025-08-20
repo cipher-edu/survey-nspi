@@ -1,0 +1,88 @@
+{% extends "auth_app/base.html" %}
+{% block page_title %}Mening xabarlarim{% endblock %}
+{% block content %}
+<div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-center">Mening xabarlarim</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for msg in messages_list %}
+        <div class="flex flex-col bg-white rounded-xl shadow-card border border-slate-100 p-5 transition h-full
+            {% if msg.status == 'answered' %}border-green-200{% elif msg.status == 'new' %}border-yellow-200{% elif msg.status == 'pending' %}border-blue-200{% elif msg.status == 'closed' %}border-slate-300{% endif %}
+            {% if msg.status == 'answered' %}hover:shadow-green-200{% elif msg.status == 'new' %}hover:shadow-yellow-200{% elif msg.status == 'pending' %}hover:shadow-blue-200{% elif msg.status == 'closed' %}hover:shadow-slate-300{% else %}hover:shadow-lg{% endif %}
+        ">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                    <ion-icon name="person-circle-outline" class="text-xl text-primary-500"></ion-icon>
+                    <span class="font-semibold break-words">{{ msg.subject }}</span>
+                </div>
+                <span class="status-badge
+                    {% if msg.status == 'answered' %}status-badge-active
+                    {% elif msg.status == 'new' %}status-badge-inactive
+                    {% elif msg.status == 'pending' %}bg-blue-100 text-blue-800
+                    {% elif msg.status == 'closed' %}bg-slate-200 text-slate-700
+                    {% else %}status-badge-other{% endif %}">
+                    {{ msg.get_status_display }}
+                </span>
+            </div>
+            <div class="text-sm text-slate-600 mb-2">
+                {% if msg.responsible_person %}
+                    <span class="font-medium">{{ msg.responsible_person.full_name }}</span>
+                    <span class="text-slate-400">({{ msg.responsible_person.position }})</span>
+                {% else %}
+                    <span class="text-slate-400">Noma'lum mas'ul shaxs</span>
+                {% endif %}
+            </div>
+            <div class="mb-2 text-slate-700">
+                <span class="text-xs text-slate-400">Yuborilgan: {{ msg.created_at|date:"Y-m-d H:i" }}</span>
+            </div>
+            <div class="mb-3 flex-1">
+                <span class="font-medium text-slate-700">Xabar matni:</span>
+                <div class="mt-1 text-slate-800 break-words">{{ msg.content }}</div>
+            </div>
+            {% if msg.status == 'answered' and msg.response_content %}
+            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-3 mt-3">
+                <div class="flex items-center gap-2 mb-1">
+                    <ion-icon name="chatbubble-ellipses-outline" class="text-green-500"></ion-icon>
+                    <span class="font-semibold text-green-700">Javob:</span>
+                </div>
+                <div class="text-green-800 break-words">{{ msg.response_content }}</div>
+                <div class="text-xs text-green-600 mt-1">
+                    {% if msg.responded_by %}
+                        Javob bergan: {{ msg.responded_by.username }}
+                    {% endif %}
+                    {% if msg.responded_at %}
+                        | Javob vaqti: {{ msg.responded_at|date:"Y-m-d H:i" }}
+                    {% endif %}
+                </div>
+            </div>
+            {% elif msg.status == 'pending' %}
+            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-3 mt-3">
+                <div class="flex items-center gap-2 mb-1">
+                    <ion-icon name="time-outline" class="text-blue-500"></ion-icon>
+                    <span class="font-semibold text-blue-700">Kutilmoqda</span>
+                </div>
+                <div class="text-blue-800">Xabaringiz ko'rib chiqilmoqda. Tez orada javob beriladi.</div>
+            </div>
+            {% elif msg.status == 'closed' %}
+            <div class="bg-slate-100 border-l-4 border-slate-400 rounded-lg p-3 mt-3">
+                <div class="flex items-center gap-2 mb-1">
+                    <ion-icon name="lock-closed-outline" class="text-slate-500"></ion-icon>
+                    <span class="font-semibold text-slate-700">Yopilgan</span>
+                </div>
+                <div class="text-slate-800">Ushbu murojaat bo'yicha jarayon yakunlangan.</div>
+                {% if msg.response_content %}
+                <div class="mt-2 text-slate-700"><strong>Javob:</strong> {{ msg.response_content }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+            <div class="mt-4 flex justify-end">
+                <a href="{% url 'student_message_detail' msg.id %}" class="btn-secondary flex items-center gap-1">
+                    <ion-icon name="eye-outline"></ion-icon> Batafsil
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center text-slate-500">Hech qanday xabar yuborilmadi.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

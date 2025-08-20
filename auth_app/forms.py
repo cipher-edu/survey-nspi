@@ -3,7 +3,7 @@
 import logging
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Student, Survey, Question, Choice, SurveyResponse, Answer
+from .models import Student, Survey, Question, Choice, SurveyResponse, Answer, MessageToResponsible, MessageAttachment
 
 logger = logging.getLogger(__name__)
 
@@ -136,3 +136,15 @@ def create_answer_form_set(survey, student=None, data=None):
         formset = AnswerFormSet(form_kwargs=form_kwargs)
 
     return formset
+
+
+# --- Mas'ul shaxsga xabar yuborish uchun forma ---
+
+class MessageToResponsibleForm(forms.ModelForm):
+    class Meta:
+        model = MessageToResponsible
+        fields = ['subject', 'content']
+        widgets = {
+            'subject': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Mavzu'}),
+            'content': forms.Textarea(attrs={'class': 'form-textarea', 'rows': 5, 'placeholder': 'Xabar matni'}),
+        }
