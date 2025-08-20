@@ -94,7 +94,8 @@ CSRF_COOKIE_DOMAIN = None  # Agar subdomenlar uchun kerak bo'lsa, domen nomini q
 CSRF_COOKIE_NAME = 'hemis_csrf_token'  # CSRF cookie nomi
 CSRF_USE_SESSIONS = False  # CSRF token sessiyada saqlanmaydi, faqat cookie'da
 CSRF_COOKIE_SAMESITE = 'Lax' # Yoki 'Strict' (ko'proq himoya, lekin ba'zi holatlarda noqulaylik tug'dirishi mumkin)
-# CSRF_TRUSTED_ORIGINS = ['https://sizning-domeningiz.com'] # Agar subdomenlardan yoki boshqa trusted originlardan POST so'rovlar kelsa
+CSRF_TRUSTED_ORIGINS = ['https://survey.nspi.uz']
+
 ROOT_URLCONF = 'external_auth_project.urls'
 
 TEMPLATES = [
@@ -164,7 +165,7 @@ DATABASES = {
         'ENGINE': env('DB_ENGINE', default='django.db.backends.postgresql'),
         'NAME': env('DB_NAME', default='survey_prod_db'),
         'USER': env('DB_USER', default='survey_user'),
-        'PASSWORD': env('DB_PASSWORD', default='super_secret_password'),
+        'PASSWORD': env('DB_PASSWORD', default='your_local_password'),  # <-- bu to'g'ri bo'lishi kerak
         'HOST': env('DB_HOST', default='db'),
         'PORT': env('DB_PORT', default='5432'),
     }
