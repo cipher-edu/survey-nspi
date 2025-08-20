@@ -206,3 +206,11 @@ venv.bak/
 # #  refer to https://docs.cursor.com/context/ignore-files
 # .cursorignore
 # .cursorindexingignore
+
+# User requested ignores
+docker-compose.yml
+docker-compose-local.yml
+external_auth_project/settings.py
+README-github-upload.txt
+yes
+yes.pub
